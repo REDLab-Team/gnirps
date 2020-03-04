@@ -1,0 +1,19 @@
+gnirps:
+    common:
+        service-name: "missing:gnirps.common.service-name"
+    acme:
+        terms-of-service-agreed: false
+        endpoint: staging
+        organisation: gnirps
+        contact-mail: nicolas.pittion.ext@gnirps.com
+        account-login-url:
+        keys:
+            user: user-key.pem
+            domain: user-domain.pem
+        domain:
+            name: "missing:gnirps.acme.domain.name"
+            csr-path: domain.csr
+            crt-path: domain.crt
+        keystore:
+            file-path: keystore.jks
+            password: keystore-password

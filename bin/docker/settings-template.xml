@@ -1,0 +1,27 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+
+    <servers>
+        <server>
+            <id>aptar-snapshots</id>
+            <username>admin</username>
+            <password>Aptar2020</password>
+        </server>
+        <server>
+            <id>aptar-releases</id>
+            <username>admin</username>
+            <password>Aptar2020</password>
+        </server>
+    </servers>
+
+    <mirrors>
+        <mirror>
+            <id>aptar</id>
+            <name>aptar</name>
+            <url>http://slvddlk04.aptargroup.loc:9000/repository/aptar/</url>
+            <mirrorOf>*</mirrorOf>
+        </mirror>
+    </mirrors>
+
+</settings>

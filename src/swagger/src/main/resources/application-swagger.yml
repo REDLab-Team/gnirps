@@ -1,0 +1,23 @@
+gnirps:
+    common:
+        base-package: "com.gnirps"
+        service-name: "missing: gnirps.common.service-name"
+    swagger:
+        base-package: ${gnirps.common.base-package}
+        api:
+            title: "missing-property:gnirps.swagger.title"
+            description: "missing-property:gnirps.swagger.description"
+            version: "missing-property:gnirps.common.version"
+            license: "License: MIT"
+            license-url: "https://matias.ma/nsfw/"
+            terms-of-service: "https://matias.ma/nsfw/"
+        maintainer:
+            name: "REDLab"
+            email: "contact@redlab.io"
+            website: "https://www.redlab.io/"
+
+logging:
+    level:
+        root: INFO
+        org.springframework.web: INFO
+        com.gnirps: DEBUG # dis not wurkin yet

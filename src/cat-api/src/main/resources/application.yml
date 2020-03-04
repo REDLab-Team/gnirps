@@ -1,0 +1,12 @@
+gnirps:
+    common:
+        service-name: cat-api
+    swagger:
+        api:
+            title: "Cats-API"
+            description: "Just your average example of API using cats"
+            version: 1.0
+    database:
+        postgresql:
+            default-schema: gnirps
+            hbm2ddl-auto: update

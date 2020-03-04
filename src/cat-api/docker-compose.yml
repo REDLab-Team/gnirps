@@ -1,0 +1,49 @@
+version: '3.7'
+
+secrets:
+    cat-db-name:
+        external: true
+    cat-db-user:
+        external: true
+    cat-db-password:
+        external: true
+
+services:
+    cat-database:
+        image: postgres:11.1-alpine
+        deploy:
+            restart_policy:
+                condition: on-failure
+        ports:
+            - 8081:5432
+        secrets:
+            - cat-db-name
+            - cat-db-user
+            - cat-db-password
+        environment:
+            POSTGRES_DB_FILE: /run/secrets/cat-db-name
+            POSTGRES_USER_FILE: /run/secrets/cat-db-user
+            POSTGRES_PASSWORD_FILE: /run/secrets/cat-db-password
+        volumes:
+            - "cat-volume:/var/lib/postgresql/data"
+
+    cat-api:
+        image: pittinic/gnirps:cat-api
+        ports:
+            - 8080:8080
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 2
+                window: 120s
+        secrets:
+            - cat-db-name
+            - cat-db-user
+            - cat-db-password
+        environment:
+            DATABASE_URL: cat-database:5432
+            DATABASE_NAME: "{DOCKER-SECRET:cat-db-name}"
+            DATABASE_USER: "{DOCKER-SECRET:cat-db-user}"
+            DATABASE_PASSWORD: "{DOCKER-SECRET:cat-db-password}"
+            ENV_SECRETS_DEBUG: "false"
