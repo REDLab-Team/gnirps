@@ -49,7 +49,7 @@
         <docker-maven-plugin.version>1.2.0</docker-maven-plugin.version>
 
         <!-- jackson and jaxb versions -->
-        <jackson-core.version>2.9.8</jackson-core.version>
+        <jackson-core.version>2.9.10.1</jackson-core.version>
         <jackson-kotlin.version>2.9.7</jackson-kotlin.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <jaxb-impl.version>2.3.2</jaxb-impl.version>
