@@ -1,0 +1,8 @@
+gnirps:
+    common:
+        service-name: template-gnirps
+    swagger:
+        api:
+            title: "Kotlin template for REST APIs"
+            description: "An empty API generated using Gnirps's template for SpringBoot APIs."
+            version: 1.0
