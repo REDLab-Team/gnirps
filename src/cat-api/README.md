@@ -52,7 +52,7 @@ Those are:
     │
     ├── pom.xml ......................................... dependencies, building and deployment management
     │
-    └── README.md ....................................... if you're reading this, you should know what it is...
+    └── README.md ....................................... the document you're reading right now
 
 ## How to use
 

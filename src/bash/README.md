@@ -16,6 +16,15 @@
 This ***GNIRPS*** module offers an interface to start and interact with bash scripts - or through bash, any kind of 
 script (or else, since anything is possible through bash).
 
+## Contents
+
+- [Parallel or sequential execution](
+https://github.com/REDLab-Team/gnirps/tree/master/src/bash#parallel-or-sequential-execution)
+- [Input, error and output redirecting](
+https://github.com/REDLab-Team/gnirps/tree/master/src/bash#input,-error,-and-output-redirection)
+- [Config and monitoring properties](
+https://github.com/REDLab-Team/gnirps/tree/master/src/bash#config-and-monitoring-properties)
+    
 ## Parallel or sequential execution
 
 Through the use of a `com.gnirps.bash.service.BashExec` component, we access the possibility of launching scripts in 

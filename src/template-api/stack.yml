@@ -1,0 +1,24 @@
+version: '3.7'
+
+secrets:
+    hana-user:
+        external: true
+    hana-password:
+        external: true
+    hana-url:
+        external: true
+
+services:
+    template-api:
+        image: pittinic/gnirps:template
+        ports:
+            - '9001:8080'
+        secrets:
+            - user
+            - password
+            - url
+        environment:
+            USER: "{DOCKER-SECRET:hana-user}"
+            PASSWORD: "{DOCKER-SECRET:hana-password}"
+            URL: "{DOCKER-SECRET:hana-url}"
+            ENV_SECRETS_DEBUG: "true"

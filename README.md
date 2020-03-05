@@ -26,15 +26,14 @@ This project can be seen as a framework, bringing together and expanding several
 1. [Features](#features)
 2. [Prerequisites](#prerequisites)
 3. [Usage](#usage)
-    1. [With Maven Alone](#with-mave-nalone)
+    1. [With Maven and Docker](#with-maven-and-docker)
     2. [With Docker alone (remote sources)](#with-docker-alone-remote-sources)
-    3. [With Maven and Docker (local sources)](#with-maven-and-docker-local-sources)
+    3. [With Docker alone (local sources)](#with-docker-alone-local-sources)
     4. [With Docker-Compose (local or remote sources)](#with-docker--compose-local-or-remote-sources)
-    5. [To build all of the packages at once using Maven](#to-build-all-of-the-packages-at-once-using-maven)
 4. [Standard project's (layered) architecture](#standard-projects-layered-architecture)
 5. [Nexus Repository](#nexus-repository)
     1. [Deployment](#deployment)
-    2. [Usage](#usage)
+    2. [Nexus usage](#nexus-usage)
 6. [License](#license)
 
 ## Features
@@ -47,70 +46,88 @@ at the root of the project. Each module and its features are documented in their
     * regroup some common dependencies which will be inherited by all children.
     * regroup some common plugins configurations that can be included in any child.
     * allow an easier build-and-deploy on a Maven repository of the whole package.
-- **[acme]()**: allows the use of HTTPS freely thanks to Let's Encrypt auto-generated and validated SSL certificates.
-    - [Properties]()
-    - [SSL certificates generated at startup]()
-    - [Http Challenge]()
-    - [LE Terms of service]()
-- **[bash]()**: offers an easy way to interact with bash scripts (or python, or any script, through bash).
-    - [Parallel or sequential execution]()
-    - [Input, error and output redirecting]()
-    - [Config and monitoring properties]()
-- **[commons]()**: regroups some common parts of other projects to avoid code redundancy and a heavier management of
+- **[acme](https://github.com/REDLab-Team/gnirps/tree/master/src/acme)**: 
+allows the use of HTTPS freely thanks to Let's Encrypt auto-generated and validated SSL certificates.
+    - [Properties](https://github.com/REDLab-Team/gnirps/tree/master/src/acme#properties)
+    - [SSL certificates generated at startup](
+    https://github.com/REDLab-Team/gnirps/tree/master/src/acme#ssl-certificates-generated-at-startup)
+    - [Http Challenge](https://github.com/REDLab-Team/gnirps/tree/master/src/acme#http-challenge)
+    - [LE Terms of service](https://github.com/REDLab-Team/gnirps/tree/master/src/acme#le-terms-of-service)
+- **[bash](https://github.com/REDLab-Team/gnirps/tree/master/src/bash)**: 
+offers an easy way to interact with bash scripts (or python, or any script, through bash).
+    - [Parallel or sequential execution](
+    https://github.com/REDLab-Team/gnirps/tree/master/src/bash#parallel-or-sequential-execution)
+    - [Input, error and output redirecting](
+    https://github.com/REDLab-Team/gnirps/tree/master/src/bash#input,-error,-and-output-redirection)
+    - [Config and monitoring properties](
+    https://github.com/REDLab-Team/gnirps/tree/master/src/bash#config-and-monitoring-properties)
+- **[commons](https://github.com/REDLab-Team/gnirps/tree/master/src/commons)**: 
+regroups some common parts of other projects to avoid code redundancy and a heavier management of
 dependencies.
-    - [Properties sourcing]()
-    - [Loggers injection]()
-    - [Centralised definitions]():
-        - [Errors and exceptions]()
-        - [Models and dtos]()
-        - [PageRequest]()
-        - [BashRunner]()
-- **[postgresql-database]()**: offers a basic configuration to connect to a secured PostgreSQL database with custom naming 
-strategies.
-    - [Implementation]()
-    - [Properties]()
-- **[swagger]()**: allows the creation of a spring API, integrating a Swagger documentation and a Docker support through 
-maven.
-    - [SpringBoot]()
-    - [Docker secrets]()
-    - [Swagger]()
-    - [Cross Origin Request Sharing]()
-    - [Error and Exceptions Interceptor]()
-    - [Logger Interceptor]()
-    - [Root redirection to documentation]()
-- **[template-api]()**: an empty shell meant to be used as a starting point.
+    - [Properties sourcing](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#properties-sourcing)
+    - [Loggers injection](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#loggers-injection)
+    - [Centralised definitions](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#centralised-definitions):
+        - [Errors and exceptions](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#errors-and-exceptions)
+        - [Models and dtos](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#models-and-dtos)
+        - [PageRequest](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#pagerequest)
+        - [ExecutionTimer](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#executiontimer)
+- **[postgresql-database](https://github.com/REDLab-Team/gnirps/tree/master/src/postgresql-database)**: 
+offers a basic configuration to connect to a secured PostgreSQL database with custom 
+naming strategies.
+    - [Implementation](https://github.com/REDLab-Team/gnirps/tree/master/src/postgresql-database#implementation)
+    - [Properties](https://github.com/REDLab-Team/gnirps/tree/master/src/postgresql-database#properties)
+- **[swagger](https://github.com/REDLab-Team/gnirps/tree/master/src/swagger)**: 
+allows the creation of a spring API, integrating a Swagger documentation and a Docker support through maven.
+    - [SpringBoot](https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#springboot)
+    - [Docker secrets](https://github.com/REDLab-Team/gnirps/tree/master/src/swaggerdocker-secrets)
+    - [Swagger](https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#swagger)
+    - [Cross Origin Request Sharing](
+    https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#cross-origin-request-sharing)
+    - [Errors and Exceptions Interceptor](
+    https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#errors-and-exceptions-interceptor)
+    - [Logger Interceptor](https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#logger-interceptor)
+    - [Root redirection to documentation](
+    https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#root-redirection-to-documentation)
+- **[template-api](https://github.com/REDLab-Team/gnirps/tree/master/src/template-api)**: an empty shell meant to be 
+used as a starting point.
+    - [Application settings](https://github.com/REDLab-Team/gnirps/tree/master/src/template-api#application-settings)
+    - [Docker settings](https://github.com/REDLab-Team/gnirps/tree/master/src/template-api#docker-settings)
 
-An example can be found at **[cat-api]()**: both a POC and an example of how to put together an API with this framework, 
-it demonstrates the use of several tools such as Swagger and PostgreSQL.
+A working example can be found at **[cat-api](https://github.com/REDLab-Team/gnirps/tree/master/src/cat-api)**: 
+both a POC and an example of how to put together an API with this framework, it demonstrates the use of several tools 
+such as Swagger and PostgreSQL.
 
 
 ## Prerequisites
 
 * ***Maven***:
-    * To build a WAR file.
-    * To run a WAR file.
+    * To build locally.
 * ***Docker***:
+    * To build in a container without needing **Maven** on the host machine.
     * To build a local image.
     * To pull a remote image from DockerHub.
     * To deploy an image.
     * To allow the use of secrets through a stack.
-* ***Docker-Compose***:
-    * To do what Docker offers to do, but in a more convenient fashion.
 
 
 ## Usage
 
-The following sections describe how to build a project with Maven and, for the suitable projects, deploy a Spring-Boot API through Maven or Docker.
+The following sections describe how to build a project with Maven and, for the suitable projects, deploy a Spring-Boot 
+API through Maven or Docker.
 
-### With Maven alone (local sources)
+### With Maven and Docker
 
-* ***Build*** a war file: 
+* ***Build*** a war file and a docker image: 
     ```
-    mvn clean package
+    bash bin/build_locally.sh [module] [-d [modules-with-docker-image]]
     ```
 * ***Run*** the application: 
     ```
     mvn spring-boot:run
+    ```
+    ou 
+    ```
+    bash bin/run.sh
     ```
 
 ### With Docker alone (remote sources)
@@ -124,38 +141,19 @@ The following sections describe how to build a project with Maven and, for the s
     docker run pittinic/gnirps:kotlin-api
     ```
 
-### With Maven and Docker (local sources)
-
-* ***Build*** a war file and a local docker image: 
-    ```
-    mvn clean package docker:build
-    ```
-* ***Run*** the application (prefix, name and tag are defined in *pom.xml*) : 
-    ```
-    docker run pittinic/gnirps:kotlin-api
-    ```
-
-### With Docker-Compose (local or remote sources)
+### With Docker alone (local sources)
 
 * ***Build*** a war file and a local docker image, then run it: 
     ```
-    mvn clean package docker:build
+    bash bin/build_in_docker.sh [module] [-d [modules-with-docker-image]]
     ```
     ```
-    docker-compose up kotlin-api-local-build
+    bash bin/run.sh
     ```
 * ***Pull*** and ***run*** the image from DockerHub: 
     ```
-    docker-compose up kotlin-api-from-docker
-    ```
-
-### To build all of the packages at once using Maven
-
-* Some ***bash*** scripts is available at the root of the bin directory:
-    ```
-    bash bin/build.sh
     bash bin/run.sh
-    ``` 
+    ```
 
 ## Standard project's (layered) architecture
 
@@ -227,7 +225,7 @@ allowing both releases and snapshots versions proxying the following url: *http:
 
 It can thereafter be used by following two simple steps:
 
-### Usage
+### Nexus usage
 
 First, one has to update its **~/.m2/settings.xml** file (or create it if it doesn't exist) with the following setup:
 

@@ -18,6 +18,11 @@ This simple module offers an out-of-the-box secure connection to a PostgreSQL da
 through the `application.yml` (or by default `postgresql-application.yml`) file. It also defines a custom naming 
 strategy to be used as an example if someone ever needed to enforce custom conventions.
 
+## Contents
+
+- [Implementation](https://github.com/REDLab-Team/gnirps/tree/master/src/postgresql-database#implementation)
+- [Properties](https://github.com/REDLab-Team/gnirps/tree/master/src/postgresql-database#properties)
+    
 ## Implementation
 
 The tools chosen to manage this connection in fitting way for Spring are JPA and its implementation Hibernate. Creating 

@@ -20,6 +20,19 @@ This module is the actual base of the whole framework - *it all started here*. T
 
 Other tools and functionality came in later, as well as a finer tuning of the original ones.
 
+## Contents
+
+- [SpringBoot](https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#springboot)
+- [Docker secrets](https://github.com/REDLab-Team/gnirps/tree/master/src/swaggerdocker-secrets)
+- [Swagger](https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#swagger)
+- [Cross Origin Request Sharing](
+https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#cross-origin-request-sharing)
+- [Errors and Exceptions Interceptor](
+https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#errors-and-exceptions-interceptor)
+- [Logger Interceptor](https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#logger-interceptor)
+- [Root redirection to documentation](
+https://github.com/REDLab-Team/gnirps/tree/master/src/swagger#root-redirection-to-documentation)
+
 ## SpringBoot
 
 Spring offer powerful tools to set up APIs, and SpringBoot offers basic settings to get an API running even faster. 
@@ -112,7 +125,7 @@ It was an implementation choice to allow requests from any origin by default. Sh
 make those settings importable from the configuration file or offer alternative beans. The current settings are defined 
 by the class `com.gnirps.swagger.config.CorsFilterConfiguration`.
 
-## Error and Exceptions Interceptor
+## Errors and Exceptions Interceptor
 
 Three classes are used to set up an interceptor for any error that may happen within the API:
 - `com.gnirps.swagger.controller.ExceptionHandlerController`: allows a global handling of any exception or error in the 

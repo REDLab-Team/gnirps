@@ -15,6 +15,16 @@
 This ***GNIRPS*** module regroups some of the most-used and must-use features of the framework, to avoid code 
 redundancy or heavy disparities between children projects. The most noticing ones are the following.
 
+## Contents
+
+- [Properties sourcing](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#properties-sourcing)
+- [Loggers injection](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#loggers-injection)
+- [Centralised definitions](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#centralised-definitions):
+    - [Errors and exceptions](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#errors-and-exceptions)
+    - [Models and dtos](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#models-and-dtos)
+    - [PageRequest](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#pagerequest)
+    - [ExecutionTimer](https://github.com/REDLab-Team/gnirps/tree/master/src/commons#executiontimer)
+    
 ## Properties sourcing
 
 The automated properties sourcing allows an out-of-the-box configuration for any new project, and relies on two things:
@@ -75,8 +85,12 @@ As of now, the only tool (apart from the ones mentionned in two first sections o
 between several projects is the PageRequest generator `com.gnirps.commons.utils.CustomPageRequest`. Its job is to allow 
 the use of the Pageable objects easily in any controller or repository, for example.
 
-#### BashRunner
-Considering how great bash is, and in an attempt to encourage people at using it more, we will also include this tool 
-which offers methods to run bash scripts (concurrently, sequentially, etc.) from kotlin code. In a micro-service 
-context, it could easily be triggered from a request received by a controller, for example. Beware, though, of the 
-security flaws that it could bring in an unsecure environment.
+#### ExecutionTimer
+
+Inline function allowing a most convenient feature to measure program's efficiency by offering the possibility to time 
+the execution of a block of code as follows:
+```
+val executionTime: Long = measureTimeMillis {
+    ...
+}
+```
