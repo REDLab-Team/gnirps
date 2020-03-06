@@ -134,6 +134,26 @@ application.
 errors - those thrown by an HTTP request within the API.
 - `com.gnirps.swagger.config.RestTemplateConfiguration`: allows the previous one to be used.
 
+The exception handling is most easily extendable (at some point, it looked like this):
+```
+@ExceptionHandler(Exception::class)
+fun handleAll(exception: Exception): ResponseEntity<Any> {
+    return when (exception) {
+        is JpaObjectRetrievalFailureException,
+        is EntityNotFoundException          -> logAndFormat(exception, HttpStatus.NOT_FOUND)
+        is EntityExistsException            -> logAndFormat(exception, HttpStatus.SEE_OTHER)
+        is ConstraintViolationException,
+        is MissingServletRequestParameterException,
+        is MethodArgumentNotValidException  -> logAndFormat(exception, HttpStatus.BAD_REQUEST)
+        is ResourceAccessException          -> logAndFormat(exception, HttpStatus.BAD_GATEWAY)
+        is AccessDeniedException            -> logAndFormat(exception, HttpStatus.UNAUTHORIZED)
+        is HttpException                    -> logAndFormat(exception, exception.status)
+        is BashException                    -> logAndFormat(exception, HttpStatus.INTERNAL_SERVER_ERROR)
+        else                                -> logAndFormat(exception, HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+}
+```
+
 ## Logger Interceptor
 
 Very much in the way of Aspect-Oriented Programming, a mechanism meant to allow the logging of http requests was 

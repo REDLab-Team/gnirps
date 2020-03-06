@@ -1,6 +1,7 @@
 package com.gnirps.bash.service
 
 import com.gnirps.bash.model.ProcessOutput
+import com.gnirps.commons.exceptions.BashException
 import com.gnirps.commons.utils.measureTimeMillis
 import java.io.*
 import java.util.concurrent.TimeUnit
@@ -45,6 +46,10 @@ class Process(
             }
         }
         execTime=time
+        if (exitValue != 0) {
+            val message: String = if (errorString.isNotEmpty()) errorString else ""
+            throw BashException(exitCode = exitValue, message = message)
+        }
     }
 
     fun summary(): String {
