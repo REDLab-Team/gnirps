@@ -19,7 +19,7 @@
         <mirror>
             <id>gnirps</id>
             <name>gnirps</name>
-            <url>${NEXUS_URL}:${NEXUS_PORT}/repository/aptar/</url>
+            <url>${NEXUS_URL}:${NEXUS_PORT}/repository/gnirps/</url>
             <mirrorOf>*</mirrorOf>
         </mirror>
     </mirrors>

@@ -55,7 +55,10 @@
         <jaxb-impl.version>2.3.2</jaxb-impl.version>
         <jaxb-core.version>2.3.0.1</jaxb-core.version>
 
-        <!-- spring-apis versions -->
+        <!-- jetty version-->
+        <jetty.version>9.4.27.v20200227</jetty.version>
+
+        <!-- spring versions -->
         <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
         <spring.version>5.1.6.RELEASE</spring.version>
         <spring-security.version>5.1.5.RELEASE</spring-security.version>
@@ -178,6 +181,13 @@
                 <version>${jaxb-core.version}</version>
             </dependency>
 
+            <!-- jetty -->
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-server</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+
             <!-- jpa and databases -->
             <dependency>
                 <groupId>org.postgresql</groupId>
@@ -248,6 +258,17 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.security.oauth.boot</groupId>
                 <artifactId>spring-security-oauth2-autoconfigure</artifactId>
                 <version>${spring-boot.version}</version>
@@ -280,20 +301,20 @@
     <!-- to download from our nexus (which forwards to maven central if need be) -->
     <repositories>
         <repository>
-            <id>aptar</id>
-            <url>http://slvddlk04.aptargroup.loc:9000/repository/aptar/</url>
+            <id>gnirps</id>
+            <url>http://slvddlk04.aptargroup.loc:9000/repository/gnirps/</url>
         </repository>
     </repositories>
 
     <!-- to upload towards our nexus -->
     <distributionManagement>
         <snapshotRepository>
-            <id>aptar-snapshots</id>
-            <url>http://slvddlk04.aptargroup.loc:9000/repository/aptar-snapshots/</url>
+            <id>gnirps-snapshots</id>
+            <url>http://slvddlk04.aptargroup.loc:9000/repository/gnirps-snapshots/</url>
         </snapshotRepository>
         <repository>
-            <id>aptar-releases</id>
-            <url>http://slvddlk04.aptargroup.loc:9000/repository/aptar-releases/</url>
+            <id>gnirps-releases</id>
+            <url>http://slvddlk04.aptargroup.loc:9000/repository/gnirps-releases/</url>
         </repository>
     </distributionManagement>
 
