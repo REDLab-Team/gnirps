@@ -57,9 +57,9 @@ abstract class AbstractLogger: Logger {
                             "message: \"${content.localizedMessage}'\"" +
                     "}"
                 }
-                is String -> if (content.isValidJson()) content else "{$content}"
-                null -> "{}"
-                else -> "{$content}"
+                is String -> "{$content}"
+                null -> "null"
+                else -> "$content"
             }
         }
     }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.client.ResourceAccessException
+import org.springframework.web.util.NestedServletException
 import javax.persistence.EntityExistsException
 import javax.persistence.EntityNotFoundException
 import javax.validation.ConstraintViolationException
@@ -32,7 +33,8 @@ class ExceptionHandlerController(private val logger: Logger) {
             is MethodArgumentNotValidException  -> logAndFormat(exception, HttpStatus.BAD_REQUEST)
             is ResourceAccessException          -> logAndFormat(exception, HttpStatus.BAD_GATEWAY)
             is AccessDeniedException            -> logAndFormat(exception, HttpStatus.UNAUTHORIZED)
-            is BashException                    -> logAndFormat(exception, HttpStatus.INTERNAL_SERVER_ERROR)
+            is BashException                    -> logAndFormatBashException(exception)
+            is NestedServletException           -> logAndFormatNestedException(exception)
             else                                -> logAndFormat(exception, HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
@@ -40,5 +42,28 @@ class ExceptionHandlerController(private val logger: Logger) {
     private fun logAndFormat(exception: Exception, status: HttpStatus): ResponseEntity<Any> {
         logger.error(exception)
         return ResponseEntity(exception.localizedMessage, HttpHeaders(), status)
+    }
+
+    private fun logAndFormatBashException(exception: BashException): ResponseEntity<Any> {
+        logger.error(exception)
+        return if (exception.exitCode == 124) {
+            ResponseEntity(exception.localizedMessage, HttpHeaders(), HttpStatus.REQUEST_TIMEOUT)
+        } else {
+            ResponseEntity(exception.localizedMessage, HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    private fun logAndFormatNestedException(exception: Exception): ResponseEntity<Any> {
+        val token = "nested exception is "
+        val rawMsg = exception.localizedMessage
+        val nestedMsg = rawMsg.substring(rawMsg.indexOf(token) + token.length)
+        val splitMsg = nestedMsg.split(":")
+        val msg = when {
+            splitMsg.size == 2 -> "{class: ${splitMsg[0]}, msg: ${splitMsg.drop(1).joinToString()}}"
+            nestedMsg.isNotEmpty() -> nestedMsg
+            else -> rawMsg
+        }
+        logger.error(msg)
+        return ResponseEntity(msg, HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR)
     }
 }

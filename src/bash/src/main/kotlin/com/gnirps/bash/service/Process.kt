@@ -29,7 +29,9 @@ class Process(
             val proc = processBuilder.start()
             BufferedWriter(OutputStreamWriter(proc.outputStream)).write(inputStream?: "")
 
-            proc.waitFor(timeout, TimeUnit.SECONDS)
+            if (!proc.waitFor(timeout, TimeUnit.SECONDS)) {
+                throw BashException(exitCode = 124, message = "script '$cmd' timed out")
+            }
 
             pid = proc.pid()
             exitValue = proc.exitValue()
@@ -45,7 +47,8 @@ class Process(
                 throw ioe
             }
         }
-        execTime=time
+        execTime = time
+
         if (exitValue != 0) {
             val message: String = if (errorString.isNotEmpty()) errorString else ""
             throw BashException(exitCode = exitValue, message = message)
@@ -74,6 +77,6 @@ class Process(
         )
                 .filter { it.isNotEmpty() }
                 .joinToString()
-        return "{bashScript: {$fields}}"
+        return "bashScript: {$fields}"
     }
 }
