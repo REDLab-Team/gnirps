@@ -20,32 +20,25 @@ class Process(
         var errorString: String = "",
         var execTime: Long? = null
 ) {
+    @Throws(BashException::class, IOException::class)
     fun run() {
         val processBuilder = ProcessBuilder(cmd.split(" "))
                 .directory(File(workDir))
                 .redirectOutput(output.value)
                 .redirectError(error.value)
+
         val time = measureTimeMillis {
             val proc = processBuilder.start()
             BufferedWriter(OutputStreamWriter(proc.outputStream)).write(inputStream?: "")
 
-            if (!proc.waitFor(timeout, TimeUnit.SECONDS)) {
+            if (!proc.waitFor(timeout, TimeUnit.SECONDS))
                 throw BashException(exitCode = 124, message = "script '$cmd' timed out")
-            }
 
             pid = proc.pid()
             exitValue = proc.exitValue()
 
-            try {
-                if (output == ProcessOutput.STRING) {
-                    outputString = proc.inputStream.bufferedReader().readText()
-                }
-                if (error == ProcessOutput.STRING) {
-                    errorString = proc.errorStream.bufferedReader().readText()
-                }
-            } catch (ioe: IOException) {
-                throw ioe
-            }
+            if (output == ProcessOutput.STRING) outputString = proc.inputStream.bufferedReader().readText()
+            if (error == ProcessOutput.STRING) errorString = proc.errorStream.bufferedReader().readText()
         }
         execTime = time
 
@@ -55,28 +48,13 @@ class Process(
         }
     }
 
-    fun summary(): String {
-        val outputField: String =
-                if (outputString.isNotEmpty())
-                    "output_string: '${this.outputString}'"
-                else
-                    ""
-        val errorField: String =
-                if (errorString.isNotEmpty())
-                    "error_string: '${this.errorString}'"
-                else
-                    ""
-        val fields = listOf(
-                "pid: $pid",
-                "exitValue: $exitValue",
-                "workDir: '$workDir'",
-                "cmd: '$cmd'",
-                "execTime: '$execTime'",
-                outputField,
-                errorField
-        )
-                .filter { it.isNotEmpty() }
-                .joinToString()
-        return "bashScript: {$fields}"
+    override fun toString(): String {
+        return "{" +
+                "\"cmd\": \"$workDir/$cmd\"" +
+                if (outputString.isNotEmpty()) ", \"output\": \"$outputString\"" else "" +
+                if (errorString.isNotEmpty()) ", \"error\": \"$errorString\"" else "" +
+                ", \"exit_value\": $exitValue" +
+                ", \"exec_time\": $execTime" +
+                "}"
     }
 }

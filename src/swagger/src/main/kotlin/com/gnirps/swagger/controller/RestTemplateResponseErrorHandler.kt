@@ -1,11 +1,11 @@
 package com.gnirps.swagger.controller
 
 import com.gnirps.commons.exceptions.HttpException
-import com.gnirps.commons.logging.service.AbstractLogger
 import org.springframework.http.client.ClientHttpResponse
 import org.springframework.stereotype.Component
 import org.springframework.web.client.ResponseErrorHandler
 import org.springframework.http.HttpStatus.Series
+import java.io.BufferedReader
 import java.io.IOException
 
 
@@ -27,11 +27,22 @@ class RestTemplateResponseErrorHandler: ResponseErrorHandler {
                     throw HttpException(
                         statusCodeSeries,
                         response.statusCode,
-                        AbstractLogger.formatMessage(response)
+                        formatMessage(response)
                     )
                 }
                 else -> return
             }
         }
     }
+
+    private fun formatMessage(response: ClientHttpResponse): String =
+        "{" +
+                "\"code\": ${response.statusCode}, " +
+                "\"status\": \"${response.statusText}\", " +
+                "\"body\": \"" + response
+                        .body
+                        .bufferedReader()
+                        .use(BufferedReader::readText) +
+                        "\"" +
+        "}"
 }

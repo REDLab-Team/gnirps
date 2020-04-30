@@ -9,82 +9,72 @@ import java.io.BufferedReader
 import java.sql.SQLException
 
 abstract class AbstractLogger: Logger {
-    companion object {
-        fun formatMessage(content: Any? = null, eventType: Logger.EventType? = null): String {
-            val formattedType: String = eventType?.name ?: inferType(content)
-            val formattedContent: String = formatContent(content)
-            return "{type: $formattedType, content: $formattedContent}"
-        }
+    override fun formatMessage(content: Any?, eventType: Logger.EventType?): String {
+        val formattedType: String = eventType?.name ?: inferType(content)
+        val formattedContent: String = formatContent(content)
+        return "{\"type\": $formattedType, \"content\": $formattedContent}"
+    }
 
-        private fun inferType(content: Any?): String {
-            return when (content) {
-                is Exception, is Error -> Logger.EventType.ERROR
-                is ClientHttpResponse -> Logger.EventType.HTTP_RESPONSE
-                is ClientHttpRequest -> Logger.EventType.HTTP_REQUEST
-                else -> Logger.EventType.MISSING
-            }.name
-        }
+    private fun inferType(content: Any?): String {
+        return when (content) {
+            is Exception, is Error -> Logger.EventType.ERROR
+            is ClientHttpResponse -> Logger.EventType.HTTP_RESPONSE
+            is ClientHttpRequest -> Logger.EventType.HTTP_REQUEST
+            else -> Logger.EventType.MISSING
+        }.name
+    }
 
-        private fun formatContent(content: Any?): String {
-           return when (content) {
-                is HttpException -> {
-                    "{" +
-                            "class: ${content.javaClass.simpleName}, " +
-                            "message: \"${content.localizedMessage}'\", " +
-                            "status: ${content.status}" +
-                    "}"
-                }
-                is MethodArgumentNotValidException -> {
-                    "{" +
-                            "class: ${content.javaClass.simpleName}, " +
-                            "message: \"${content.bindingResult.fieldErrors[0].defaultMessage}\"" +
-                    "}"
-                }
-                is ClientHttpResponse -> {
-                    "{" +
-                            "code: ${content.statusCode}, " +
-                            "status: ${content.statusText}, " +
-                            "body: \"" + content
-                                    .body
-                                    .bufferedReader()
-                                    .use(BufferedReader::readText) +
-                            "\"" +
-                    "}"
-                }
-                is Exception -> {
-                    "{" +
-                            "class: ${content.javaClass.simpleName}, " +
-                            "message: \"${content.localizedMessage}'\"" +
-                    "}"
-                }
-                is String -> "{$content}"
-                null -> "null"
-                else -> "$content"
+    private fun formatContent(content: Any?): String {
+       return when (content) {
+            is HttpException -> {
+                "{" +
+                        "\"class\": \"${content.javaClass.simpleName}\", " +
+                        "\"message\": \"${content.localizedMessage}\", " +
+                        "\"status\": \"${content.status}\"" +
+                "}"
             }
+            is MethodArgumentNotValidException -> {
+                "{" +
+                        "\"class\": \"${content.javaClass.simpleName}\", " +
+                        "\"message\": \"${content.bindingResult.fieldErrors[0].defaultMessage}\"" +
+                "}"
+            }
+            is ClientHttpResponse -> {
+                "{" +
+                        "\"code\": ${content.statusCode}, " +
+                        "\"status\": \"${content.statusText}\", " +
+                        "\"body\": \"" + content
+                                .body
+                                .bufferedReader()
+                                .use(BufferedReader::readText) +
+                        "\"" +
+                "}"
+            }
+            is Exception -> {
+                "{" +
+                        "\"class\": \"${content.javaClass.simpleName}\", " +
+                        "\"message\": \"${content.localizedMessage}\"" +
+                "}"
+            }
+            null -> "null"
+            else -> "$content"
         }
     }
 
-    override fun cleanError(throwable: Throwable) {
+    override fun printCleanStack(throwable: Throwable) {
         rootCause(throwable).let {
             it.stackTrace = ourCodeOnly(it).toTypedArray()
             error(it)
         }
     }
 
-    override fun formatMessage(content: Any?, eventType: Logger.EventType): String {
-        return AbstractLogger.formatMessage(content, eventType)
-    }
-
     private fun ourCodeOnly(t: Throwable): List<StackTraceElement> {
         var enteredOurCode = false
         return t.stackTrace.filter {
             if (it.className.startsWith("com.gnirps")) {
-                if (!enteredOurCode) {
-                    enteredOurCode = true
-                }
+                if (!enteredOurCode) enteredOurCode = true
                 true
-            }
-            else !enteredOurCode
+            } else !enteredOurCode
         }
     }
 
@@ -94,9 +84,7 @@ abstract class AbstractLogger: Logger {
         while (current !== cause) {
             cause = current
             val nextCause = current.cause
-            if (nextCause !== null) {
-                current = nextCause
-            }
+            if (nextCause !== null) current = nextCause
         }
         return if (cause is SQLException)
             unwrapSqlException(cause)

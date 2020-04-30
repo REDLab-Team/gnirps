@@ -10,43 +10,40 @@ import kotlin.streams.toList
 class BashExec(private val logger: Logger) {
     fun run(
         cmd: String,
-        workDir: String = "/",
+        workDir: String = "",
         output: ProcessOutput = ProcessOutput.STDOUT,
         error: ProcessOutput = ProcessOutput.STDOUT,
         timeout: Long = 300,
         inputStream: String? = null
-    ): Process {
-        val process = Process(
+    ): Process = run(
+            Process(
                 cmd = cmd,
                 workDir = workDir,
                 output = output,
                 error = error,
                 timeout = timeout,
                 inputStream = inputStream
-        )
-        return run(process)
-    }
+            )
+    )
 
     fun run(process: Process): Process {
-        logger.info("run: '${process.cmd}'", Logger.EventType.OPERATION)
         process.run()
         if (process.exitValue != 0) {
-            logger.error(process.summary())
+            logger.error(process)
         } else {
-            logger.info(process.summary(), Logger.EventType.OPERATION)
+            logger.debug(process, Logger.EventType.OPERATION)
         }
         return process
     }
 
     fun sequential(stopOnError: Boolean = true, vararg processes: Process): List<Process> {
         processes.forEach {
-            logger.info("run: '${it.cmd}'", Logger.EventType.OPERATION)
             it.run()
             if (it.exitValue != 0) {
-                logger.error("interrupt: ${it.summary()}")
+                logger.error(it)
                 return emptyList()
             }
-            logger.info(it.summary(), Logger.EventType.OPERATION)
+            logger.debug(it, Logger.EventType.OPERATION)
         }
         return processes.toList()
     }
@@ -54,12 +51,11 @@ class BashExec(private val logger: Logger) {
     fun parallel(vararg processes: Process): List<Process> {
         return runBlocking {
             processes.toList().parallelStream().map {
-                logger.info("run: '${it.cmd}'", Logger.EventType.OPERATION)
                 it.run()
                 if (it.exitValue != 0) {
-                    logger.error(it.summary())
+                    logger.error(it)
                 } else {
-                    logger.info(it.summary(), Logger.EventType.OPERATION)
+                    logger.trace(it, Logger.EventType.OPERATION)
                 }
                 it
             }

@@ -9,12 +9,12 @@ interface Logger {
         MISSING("")
     }
 
-    fun trace(content: Any? = null, eventType: EventType = EventType.MISSING)
-    fun debug(content: Any? = null, eventType: EventType = EventType.ERROR)
-    fun info(content: Any? = null, eventType: EventType = EventType.MISSING)
-    fun warn(content: Any? = null, eventType: EventType = EventType.MISSING)
-    fun error(content: Any? = null, eventType: EventType = EventType.ERROR)
+    fun trace(content: Any? = null, eventType: EventType? = null)
+    fun debug(content: Any? = null, eventType: EventType? = null)
+    fun info(content: Any? = null, eventType: EventType? = null)
+    fun warn(content: Any? = null, eventType: EventType? = null)
+    fun error(content: Any? = null, eventType: EventType? = EventType.ERROR)
 
-    fun formatMessage(content: Any? = null, eventType: EventType = EventType.MISSING): String
-    fun cleanError(throwable: Throwable)
+    fun formatMessage(content: Any? = null, eventType: EventType? = null): String
+    fun printCleanStack(throwable: Throwable)
 }

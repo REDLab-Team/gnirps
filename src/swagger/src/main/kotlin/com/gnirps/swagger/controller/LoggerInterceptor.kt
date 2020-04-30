@@ -37,7 +37,7 @@ class LoggerInterceptor(private val logger: Logger): HandlerInterceptorAdapter()
             in 400..499 -> logger.warn(content, Logger.EventType.HTTP_RESPONSE)
             in 500..599 -> exception
                     ?.fillInStackTrace()
-                    ?.let { logger.cleanError(throwable = it) }
+                    ?.let { logger.printCleanStack(throwable = it) }
                     ?: logger.error(content, Logger.EventType.HTTP_RESPONSE)
             else -> logger.info(content, Logger.EventType.HTTP_RESPONSE)
         }
