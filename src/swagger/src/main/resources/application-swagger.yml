@@ -2,6 +2,7 @@ gnirps:
     common:
         base-package: "com.gnirps"
         service-name: "missing: gnirps.common.service-name"
+        time-zone: "Europe/Paris"
     swagger:
         base-package: ${gnirps.common.base-package}
         api:
