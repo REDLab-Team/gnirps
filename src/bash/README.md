@@ -45,7 +45,7 @@ String object.
 
 ## Config and monitoring properties
 
-A process can be prepared and run in two distinct steps thanks to the `com.gnirps.bash.service.Process` class.
+A process can be prepared and run in two distinct steps thanks to the `com.gnirps.bash.model.Process` class.
 
 Some of its properties handle its setup:
 ```

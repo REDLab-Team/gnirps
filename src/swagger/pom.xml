@@ -8,7 +8,7 @@
     <name>swagger</name>
     <artifactId>swagger</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <!-- inherit settings and dependencies from parent -->
     <parent>
@@ -25,7 +25,7 @@
         <docker.image.tag>swagger</docker.image.tag>
 
         <!-- versions -->
-        <gnirps-commons.version>1.0</gnirps-commons.version>
+        <gnirps-commons.version>1.0.1-SNAPSHOT</gnirps-commons.version>
     </properties>
 
     <dependencies>
@@ -72,6 +72,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
         <!-- gnirps -->

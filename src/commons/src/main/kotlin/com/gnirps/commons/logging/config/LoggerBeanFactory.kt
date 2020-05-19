@@ -19,6 +19,10 @@ class LoggerBeanFactory {
     }
 }
 
+inline fun <reified  T: Any> T.defaultLogger(): Logger {
+    return slf4jLogger()
+}
+
 inline fun <reified T : Any> T.slf4jLogger(): Logger {
     this::class.let{
         val logger = LoggerFactory.getLogger(

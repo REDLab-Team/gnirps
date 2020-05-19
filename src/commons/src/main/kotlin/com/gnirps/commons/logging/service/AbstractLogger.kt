@@ -1,12 +1,16 @@
 package com.gnirps.commons.logging.service
 
+import com.gnirps.commons.exceptions.BashException
 import com.gnirps.commons.exceptions.HttpException
-import com.gnirps.commons.utils.isValidJson
 import org.springframework.http.client.ClientHttpRequest
 import org.springframework.http.client.ClientHttpResponse
 import org.springframework.web.bind.MethodArgumentNotValidException
 import java.io.BufferedReader
+import java.io.IOException
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.sql.SQLException
+
 
 abstract class AbstractLogger: Logger {
     override fun formatMessage(content: Any?, eventType: Logger.EventType?): String {
@@ -26,56 +30,72 @@ abstract class AbstractLogger: Logger {
 
     private fun formatContent(content: Any?): String {
        return when (content) {
-            is HttpException -> {
-                "{" +
-                        "\"class\": \"${content.javaClass.simpleName}\", " +
-                        "\"message\": \"${content.localizedMessage}\", " +
-                        "\"status\": \"${content.status}\"" +
-                "}"
-            }
-            is MethodArgumentNotValidException -> {
-                "{" +
-                        "\"class\": \"${content.javaClass.simpleName}\", " +
-                        "\"message\": \"${content.bindingResult.fieldErrors[0].defaultMessage}\"" +
-                "}"
-            }
-            is ClientHttpResponse -> {
-                "{" +
-                        "\"code\": ${content.statusCode}, " +
-                        "\"status\": \"${content.statusText}\", " +
-                        "\"body\": \"" + content
-                                .body
-                                .bufferedReader()
-                                .use(BufferedReader::readText) +
-                        "\"" +
-                "}"
-            }
-            is Exception -> {
-                "{" +
-                        "\"class\": \"${content.javaClass.simpleName}\", " +
-                        "\"message\": \"${content.localizedMessage}\"" +
-                "}"
-            }
-            null -> "null"
-            else -> "$content"
+           is BashException -> {
+               "{" +
+                       "\"class\": \"${content.javaClass.simpleName}\", " +
+                       "\"message\": \"${content.localizedMessage}\", " +
+                       "\"exitCode\": \"${content.exitCode}\"" +
+               "}"
+           }
+           is HttpException -> {
+               "{" +
+                       "\"class\": \"${content.javaClass.simpleName}\", " +
+                       "\"message\": \"${content.localizedMessage}\", " +
+                       "\"status\": \"${content.status}\"" +
+               "}"
+           }
+           is MethodArgumentNotValidException -> {
+               "{" +
+                       "\"class\": \"${content.javaClass.simpleName}\", " +
+                       "\"message\": \"${content.bindingResult.fieldErrors[0].defaultMessage}\"" +
+               "}"
+           }
+           is ClientHttpResponse -> {
+               "{" +
+                       "\"code\": ${content.statusCode}, " +
+                       "\"status\": \"${content.statusText}\", " +
+                       "\"body\": \"" + content
+                               .body
+                               .bufferedReader()
+                               .use(BufferedReader::readText) +
+                       "\"" +
+               "}"
+           }
+           is Exception -> {
+               "{" +
+                       "\"class\": \"${content.javaClass.simpleName}\", " +
+                       "\"message\": \"${content.localizedMessage}\"" +
+               "}"
+           }
+           null -> "null"
+           else -> "$content"
+       }
+    }
+
+    override fun getCleanStack(throwable: Throwable): String {
+        try {
+            StringWriter().use { sw -> PrintWriter(sw).use { pw ->
+                ourCodeOnly(rootCause(throwable)).printStackTrace(pw)
+                return sw.toString()
+            }}
+        } catch (ioe: IOException) {
+            throw IllegalStateException(ioe)
         }
     }
 
     override fun printCleanStack(throwable: Throwable) {
-        rootCause(throwable).let {
-            it.stackTrace = ourCodeOnly(it).toTypedArray()
-            error(it)
-        }
+        error(content = "{${getCleanStack(throwable)}}", eventType = Logger.EventType.STACK_TRACE)
     }
 
-    private fun ourCodeOnly(t: Throwable): List<StackTraceElement> {
+    private fun ourCodeOnly(t: Throwable, prefix: String = "com.gnirps"): Throwable {
         var enteredOurCode = false
-        return t.stackTrace.filter {
-            if (it.className.startsWith("com.gnirps")) {
+        t.stackTrace = t.stackTrace.filter {
+            if (it.className.startsWith(prefix)) {
                 if (!enteredOurCode) enteredOurCode = true
                 true
             } else !enteredOurCode
-        }
+        }.toTypedArray()
+        return t
     }
 
     private fun rootCause(t: Throwable): Throwable {

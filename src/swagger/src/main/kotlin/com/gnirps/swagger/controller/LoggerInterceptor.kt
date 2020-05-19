@@ -28,17 +28,15 @@ class LoggerInterceptor(private val logger: Logger): HandlerInterceptorAdapter()
     ) {
         filteredURI.forEach { if (request.requestURI.startsWith(it)) return }
 
-        val content: String =
-                        "method: ${request.method}, " +
-                        "uri: ${request.requestURI}, " +
-                        "status: ${response.status}"
+        val content: String = "{" +
+                "method: ${request.method}, " +
+                "uri: ${request.requestURI}, " +
+                "status: ${response.status}" +
+                "}"
 
         when (response.status) {
             in 400..499 -> logger.warn(content, Logger.EventType.HTTP_RESPONSE)
-            in 500..599 -> exception
-                    ?.fillInStackTrace()
-                    ?.let { logger.printCleanStack(throwable = it) }
-                    ?: logger.error(content, Logger.EventType.HTTP_RESPONSE)
+            in 500..599 -> logger.error(content, Logger.EventType.HTTP_RESPONSE)
             else -> logger.info(content, Logger.EventType.HTTP_RESPONSE)
         }
     }

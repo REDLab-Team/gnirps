@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "################### execution of $1 [start] ###################"
-
 : "${ENV_SECRETS_DEBUG:=false}"
 : ${DOCKER_SECRETS_TEMPLATE:="{DOCKER-SECRET:\([^}]\+\)}$"}
 : "${ENV_SECRETS_DIR:=/run/secrets}"
@@ -42,5 +40,3 @@ env_secrets_expand() {
 }
 
 env_secrets_expand
-
-echo "################### execution of $1 [end] ###################"

@@ -14,11 +14,27 @@ gnirps:
             terms-of-service: "https://matias.ma/nsfw/"
         maintainer:
             name: "REDLab"
-            email: "contact@redlab.io"
+            email: "nicolas.pittion@redlab.io"
             website: "https://www.redlab.io/"
+    mail-sender:
+        debug: false
+        service-name: ${gnirps.common.service-name}
+        host: smtp.gmail.com
+        username: gnirps.noreply@gmail.com
+        password: Gnirp$n0reply
+        recipients: ${gnirps.swagger.maintainer.email}
+        transport:
+            protocol: smtp
+        smtp:
+            port: 587
+            auth: true
+            starttls:
+                enable: true
+                required: true
 
 logging:
     level:
         root: INFO
+        com.gnirps: ALL
         org.springframework.web: INFO
-        com.gnirps: DEBUG # dis not wurkin yet
+        org.springframework.mail: WARN
