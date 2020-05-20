@@ -352,7 +352,7 @@
     <repositories>
         <repository>
             <id>gnirps</id>
-            <url>http://slvddlk04.aptargroup.loc:9000/repository/gnirps/</url>
+            <url>http://ns340976.ip-176-31-224.eu:9000/repository/gnirps/</url>
         </repository>
     </repositories>
 
@@ -360,11 +360,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>gnirps-snapshots</id>
-            <url>http://slvddlk04.aptargroup.loc:9000/repository/gnirps-snapshots/</url>
+            <url>http://ns340976.ip-176-31-224.eu:9000/repository/gnirps-snapshots/</url>
         </snapshotRepository>
         <repository>
             <id>gnirps-releases</id>
-            <url>http://slvddlk04.aptargroup.loc:9000/repository/gnirps-releases/</url>
+            <url>http://ns340976.ip-176-31-224.eu:9000/repository/gnirps-releases/</url>
         </repository>
     </distributionManagement>
 
