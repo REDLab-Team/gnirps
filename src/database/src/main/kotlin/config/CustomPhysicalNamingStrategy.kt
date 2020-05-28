@@ -1,4 +1,4 @@
-package com.gnirps.database.postgresql.config
+package config
 
 import org.hibernate.boot.model.naming.Identifier
 import org.hibernate.boot.model.naming.PhysicalNamingStrategy

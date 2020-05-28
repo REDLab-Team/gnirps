@@ -1,8 +1,8 @@
 version: '3.7'
 
 volumes:
-    nexus-volume:
-        external: true
+#    nexus-volume:
+#        external: true
     cat-volume:
         external: true
 
@@ -15,12 +15,12 @@ secrets:
         external: true
 
 services:
-    nexus:
-        image: sonatype/nexus3
-        ports:
-            - 9000:8081
-        volumes:
-            - "nexus-volume:/nexus-data"
+#    nexus:
+#        image: sonatype/nexus3
+#        ports:
+#            - 9000:8081
+#        volumes:
+#            - "nexus-volume:/nexus-data"
 
     template:
         image: pittinic/gnirps:template

@@ -1,0 +1,5 @@
+gnirps:
+    database:
+        url: jdbc:mysql://${DATABASE_URL}/${DATABASE_NAME}
+        driver-class-name: 'com.mysql.cj.jdbc.Driver'
+        dialect: 'org.hibernate.dialect.MySQL8Dialect'

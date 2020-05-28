@@ -12,12 +12,18 @@
 
     <!-- children -->
     <modules>
+        <!-- extensions -->
         <module>acme</module>
         <module>bash</module>
-        <module>cat-api</module>
         <module>commons</module>
+        <module>jwt</module>
+        <module>database</module>
+        <module>mysql-database</module>
         <module>postgresql-database</module>
         <module>swagger</module>
+        <!-- apis -->
+        <module>auth-api</module>
+        <module>cat-api</module>
         <module>template-api</module>
     </modules>
 
@@ -58,10 +64,14 @@
         <!-- jetty version-->
         <jetty.version>9.4.27.v20200227</jetty.version>
 
+        <!-- jjwt version -->
+        <jjwt.version>0.9.1</jjwt.version>
+
         <!-- spring versions -->
         <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
+        <spring-boot-security.version>2.2.6.RELEASE</spring-boot-security.version>
         <spring.version>5.1.6.RELEASE</spring.version>
-        <spring-security.version>5.1.5.RELEASE</spring-security.version>
+        <spring-security.version>5.2.2.RELEASE</spring-security.version>
 
         <!-- persistence versions -->
         <postgresql.version>42.2.5</postgresql.version>
@@ -110,6 +120,21 @@
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-coroutines-core</artifactId>
             <version>${kotlin.coroutines.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
         </dependency>
     </dependencies>
 
@@ -201,6 +226,13 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-http</artifactId>
                 <version>${jetty.version}</version>
+            </dependency>
+
+            <!-- jwt -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
             </dependency>
 
 
@@ -323,6 +355,11 @@
                 <artifactId>spring-boot-starter-mail</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-boot-security.version}</version>
+            </dependency>
 
             <!-- swagger -->
             <dependency>
@@ -441,31 +478,5 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.jetbrains.kotlin</groupId>-->
-<!--                <artifactId>kotlin-maven-plugin</artifactId>-->
-<!--                <version>${kotlin.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>compile</id>-->
-<!--                        <phase>compile</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>compile</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                    <execution>-->
-<!--                        <id>test-compile</id>-->
-<!--                        <phase>test-compile</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>test-compile</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--                <configuration>-->
-<!--                    <jvmTarget>${java.version}</jvmTarget>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
     </build>
 </project>

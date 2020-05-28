@@ -8,8 +8,8 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.time.ZonedDateTime
 import java.util.*
-import javax.persistence.EntityNotFoundException
 import javax.persistence.EntityExistsException
+import javax.persistence.EntityNotFoundException
 
 @Service
 class CatService(
