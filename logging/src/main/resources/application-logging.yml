@@ -1,0 +1,8 @@
+logging:
+    level:
+        root: ${LOG_LEVEL_ROOT}
+        com.gnirps: ${LOG_LEVEL_GNIRPS}
+        org.springframework: ${LOG_LEVEL_SPRING}
+        org.hibernate: ERROR
+        org.apache.catalina: ERROR
+        springfox.documentation: WARN

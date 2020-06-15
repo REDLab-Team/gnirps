@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>postgresql-database</name>
+    <artifactId>postgresql-database</artifactId>
+    <packaging>jar</packaging>
+    <version>1.2.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>com.gnirps</groupId>
+        <artifactId>gnirps-origin</artifactId>
+        <version>1.2.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <!-- versions -->
+        <gnirps-database.version>1.2.0-SNAPSHOT</gnirps-database.version>
+    </properties>
+
+    <dependencies>
+        <!-- gnirps -->
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>database</artifactId>
+            <version>${gnirps-database.version}</version>
+        </dependency>
+
+        <!-- persistence -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+
+        <plugins>
+            <!-- kotlin maven -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

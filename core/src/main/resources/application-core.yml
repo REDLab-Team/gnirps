@@ -1,0 +1,25 @@
+gnirps:
+    core:
+        jetty:
+            idle-timeout: 300000
+        time-zone:
+            name: "Europe/Paris"
+        mail-sender:
+            debug: false
+            service-name: ${gnirps.commons.service-name}
+            host: smtp.gmail.com
+            username: gnirps.noreply@gmail.com
+            password: Gnirp$n0reply
+            recipients: ${gnirps.swagger.maintainer.email}
+            transport:
+                protocol: smtp
+            smtp:
+                port: 587
+                auth: true
+                starttls:
+                    enable: true
+                    required: true
+
+spring:
+    autoconfigure:
+        exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration

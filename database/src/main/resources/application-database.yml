@@ -1,0 +1,15 @@
+gnirps:
+    database:
+        url: ${DATABASE_URL}
+        username: ${DATABASE_USER}
+        password: ${DATABASE_PASSWORD}
+        driver-class-name: "gnirps.database.driver: missing"
+        default-schema: gnirps
+        dialect: "gnirps.database.dialect: missing"
+        naming-strategy: 'org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl'
+        hbm2ddl-auto: update
+        use-sql-comments: true
+
+spring:
+    autoconfigure:
+        exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration

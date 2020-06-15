@@ -1,0 +1,18 @@
+gnirps:
+    swagger:
+        base-package: com.gnirps
+        api:
+            title: "missing-property:gnirps.swagger.title"
+            description: "missing-property:gnirps.swagger.description"
+            version: "missing-property:gnirps.common.version"
+            license: "License: MIT"
+            license-url: "https://matias.ma/nsfw/"
+            terms-of-service: "https://matias.ma/nsfw/"
+        maintainer:
+            name: "REDLab"
+            email: "nicolas.pittion@redlab.io"
+            website: "https://www.redlab.io/"
+
+spring:
+    autoconfigure:
+        exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration

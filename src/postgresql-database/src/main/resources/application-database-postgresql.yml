@@ -1,5 +1,0 @@
-gnirps:
-    database:
-        url: jdbc:postgresql://${DATABASE_URL}/${DATABASE_NAME}
-        driver-class-name: 'org.postgresql.Driver'
-        database-dialect: 'org.hibernate.dialect.PostgreSQLDialect'

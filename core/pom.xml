@@ -1,0 +1,144 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>core</name>
+    <artifactId>core</artifactId>
+    <packaging>jar</packaging>
+    <version>1.2.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>com.gnirps</groupId>
+        <artifactId>gnirps-origin</artifactId>
+        <version>1.2.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <!-- docker image settings -->
+        <docker.image.prefix>pittinic</docker.image.prefix>
+        <docker.image.name>gnirps</docker.image.name>
+        <docker.image.tag>core</docker.image.tag>
+
+        <!-- versions -->
+        <gnirps-logging.version>1.2.0-SNAPSHOT</gnirps-logging.version>
+    </properties>
+
+    <dependencies>
+        <!-- gnirps -->
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>logging</artifactId>
+            <version>${gnirps-logging.version}</version>
+        </dependency>
+
+        <!-- docker -->
+        <dependency>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+        </dependency>
+
+        <!-- jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+        </dependency>
+
+        <!-- jetty -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+        </dependency>
+
+        <!-- hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
+        <!-- spring-boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- define some build variables -->
+        <finalName>${api-jar-name}</finalName>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <resources><resource><directory>src/main/resources</directory></resource></resources>
+
+        <!-- set up and use the following plugins -->
+        <plugins>
+            <!-- kotlin maven -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- springboot -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- main class used as springboot entry point -->
+                    <mainClass>com.gnirps.swagger.SpringBootEntryPoint</mainClass>
+                    <!-- make the project usable as a dependency in another project -->
+                    <classifier>exec</classifier>
+                </configuration>
+            </plugin>
+
+            <!-- docker image -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
