@@ -1,4 +1,4 @@
-package com.gnirps.swagger.controller
+package com.gnirps.core.controller
 
 import com.gnirps.logging.exceptions.BashException
 import com.gnirps.logging.exceptions.HttpException

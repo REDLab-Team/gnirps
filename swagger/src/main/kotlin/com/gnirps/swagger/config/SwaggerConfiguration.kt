@@ -26,7 +26,7 @@ class SwaggerConfiguration(val swaggerProperties: SwaggerProperties) {
                 .apiInfo(apiInfo())
     }
 
-    private fun apiInfo(): ApiInfo {
+    fun apiInfo(): ApiInfo {
         return ApiInfo(
             swaggerProperties.api.title,
             swaggerProperties.api.description,

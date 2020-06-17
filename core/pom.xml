@@ -128,7 +128,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <!-- main class used as springboot entry point -->
-                    <mainClass>com.gnirps.swagger.SpringBootEntryPoint</mainClass>
+                    <mainClass>com.gnirps.core.SpringBootEntryPoint</mainClass>
                     <!-- make the project usable as a dependency in another project -->
                     <classifier>exec</classifier>
                 </configuration>

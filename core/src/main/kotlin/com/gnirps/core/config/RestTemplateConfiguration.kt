@@ -1,6 +1,6 @@
 package com.gnirps.core.config
 
-import com.gnirps.swagger.controller.RestTemplateResponseErrorHandler
+import com.gnirps.core.controller.RestTemplateResponseErrorHandler
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

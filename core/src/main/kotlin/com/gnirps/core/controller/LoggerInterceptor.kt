@@ -1,4 +1,4 @@
-package com.gnirps.swagger.controller
+package com.gnirps.core.controller
 
 import com.gnirps.logging.service.Logger
 import org.springframework.stereotype.Component
@@ -8,7 +8,7 @@ import java.lang.Exception
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@Component("LoggerInterceptorBean")
+@Component
 class LoggerInterceptor(private val logger: Logger): HandlerInterceptorAdapter() {
     companion object {
         val filteredURI: List<String> = listOf(

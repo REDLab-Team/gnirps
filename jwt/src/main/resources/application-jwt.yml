@@ -1,0 +1,17 @@
+gnirps:
+    jwt:
+        private-key: "The$uperKe!For$uperD@t@"
+        endpoints:
+            unsecure-post: ""
+            unsecure-get: ""
+            unsecure-put: ""
+            unsecure-delete: ""
+        url: "localhost"
+        admin:
+            email: admin@b.c
+            password: admin
+        resources: /error, /swagger**, /swagger-resources/**, /springfox**, /webjars/springfox-swagger-ui/**, /v2/api-docs**
+
+spring:
+    main:
+        allow-bean-definition-overriding: true

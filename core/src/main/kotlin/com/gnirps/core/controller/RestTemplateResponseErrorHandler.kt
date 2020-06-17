@@ -1,4 +1,4 @@
-package com.gnirps.swagger.controller
+package com.gnirps.core.controller
 
 import com.gnirps.logging.exceptions.HttpException
 import org.springframework.http.client.ClientHttpResponse
