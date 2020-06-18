@@ -1,8 +1,8 @@
 package com.gnirps.jwt.config
 
+import com.gnirps.jwt.util.TokenManager
 import com.gnirps.logging.config.defaultLogger
 import com.gnirps.logging.service.Logger
-import com.gnirps.jwt.util.TokenManager
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.SignatureException
 import org.springframework.security.authentication.AuthenticationManager
@@ -43,27 +43,27 @@ class JWTAuthorizationFilter(
         var username: String? = null
         val authToken: String
         if (header == null || !header.startsWith(SecurityConstants.TOKEN_PREFIX)) {
-            LOGGER.warn("couldn't find bearer string, will ignore the header")
             chain.doFilter(req, res)
             return
-        } else {
-            authToken = header.replace(SecurityConstants.TOKEN_PREFIX, "")
-            try {
-                username = tokenManager.getUsernameFromToken(authToken)
-            } catch (iae: IllegalArgumentException) {
-                LOGGER.error(iae)
-            } catch (eje: ExpiredJwtException) {
-                LOGGER.warn(eje)
-            } catch (se: SignatureException) {
-                LOGGER.error("authentication Failed. Username or Password not valid.")
-            }
         }
-        if (username != null && SecurityContextHolder.getContext().authentication == null) {
+
+        authToken = header.replace(SecurityConstants.TOKEN_PREFIX, "")
+        try {
+            username = tokenManager.getUsernameFromToken(authToken)
+        } catch (iae: IllegalArgumentException) {
+            LOGGER.error(iae)
+        } catch (eje: ExpiredJwtException) {
+            LOGGER.warn(eje)
+        } catch (se: SignatureException) {
+            LOGGER.error("authentication Failed. Username or Password not valid.")
+        }
+
+        if (username != null) {
             try {
                 val userDetails: UserDetails = userService.loadUserByUsername(username)
                 if (tokenManager.validateToken(authToken, userDetails)) {
                     val authentication: UsernamePasswordAuthenticationToken = tokenManager.getAuthentication(
-                            authToken, SecurityContextHolder.getContext().authentication, userDetails
+                            authToken, userDetails
                     )
                     authentication.details = WebAuthenticationDetailsSource().buildDetails(req)
                     LOGGER.debug("user $username authenticated, setting security context...")
@@ -73,6 +73,7 @@ class JWTAuthorizationFilter(
                 LOGGER.warn("email $username extracted from jwt token has no match in db")
             }
         }
+
         chain.doFilter(req, res)
     }
 }

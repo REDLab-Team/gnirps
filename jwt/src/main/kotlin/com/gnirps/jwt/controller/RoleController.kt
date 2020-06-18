@@ -1,9 +1,9 @@
 package com.gnirps.jwt.controller
 
-import com.gnirps.logging.service.Logger
 import com.gnirps.jwt.annotations.AdminAccess
 import com.gnirps.jwt.model.Role
 import com.gnirps.jwt.service.RoleService
+import com.gnirps.logging.service.Logger
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.Authorization
 import org.springframework.http.HttpStatus

@@ -8,7 +8,7 @@ request () {
   echo "-- send user request --"
   echo "---- using token: $token"
   curl -s \
-    -X GET "http://localhost:8080/cats" \
+    -X POST "http://localhost:8080/cats/random" \
     -H "accept: */*" \
     -H "$token"
 }

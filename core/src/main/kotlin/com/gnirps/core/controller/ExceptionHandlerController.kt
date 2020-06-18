@@ -1,10 +1,9 @@
 package com.gnirps.core.controller
 
+import com.gnirps.core.config.properties.MailSenderProperties
 import com.gnirps.logging.exceptions.BashException
 import com.gnirps.logging.exceptions.HttpException
 import com.gnirps.logging.service.Logger
-import com.gnirps.core.config.properties.MailSenderProperties
-import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -14,6 +13,7 @@ import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingServletRequestParameterException
+import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.client.ResourceAccessException
 import org.springframework.web.util.NestedServletException

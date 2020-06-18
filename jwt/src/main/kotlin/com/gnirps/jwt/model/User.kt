@@ -30,7 +30,7 @@ data class User(
         val description: String?
 ) : UserDetails {
 
-    open override fun getAuthorities(): MutableCollection<out GrantedAuthority?>? {
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority?>? {
         return roles
                 .stream()
                 .map { role -> SimpleGrantedAuthority("ROLE_" + role?.name) }

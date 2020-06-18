@@ -2,7 +2,6 @@ package com.gnirps.acme.service
 
 import com.gnirps.logging.service.Logger
 import org.shredzone.acme4j.*
-import java.time.Instant
 import org.shredzone.acme4j.challenge.Http01Challenge
 import org.shredzone.acme4j.exception.AcmeException
 import org.shredzone.acme4j.util.CSRBuilder
@@ -11,6 +10,7 @@ import java.io.File
 import java.io.FileWriter
 import java.security.KeyPair
 import java.security.KeyStore
+import java.time.Instant
 
 // https://shredzone.org/maven/acme4j/usage/order.html
 @Component

@@ -1,10 +1,10 @@
 package com.gnirps.core.controller
 
 import com.gnirps.logging.exceptions.HttpException
+import org.springframework.http.HttpStatus.Series
 import org.springframework.http.client.ClientHttpResponse
 import org.springframework.stereotype.Component
 import org.springframework.web.client.ResponseErrorHandler
-import org.springframework.http.HttpStatus.Series
 import java.io.BufferedReader
 
 @Component

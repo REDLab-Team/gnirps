@@ -6,5 +6,5 @@ import org.springframework.security.access.prepost.PreAuthorize
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
-@PreAuthorize("hasRole(${SecurityConstants.ADMIN})")
+@PreAuthorize("hasRole('${SecurityConstants.ADMIN}')")
 annotation class AdminAccess

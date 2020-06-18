@@ -47,7 +47,7 @@ class CatController(
 
     @AdminAccess
     @PostMapping("/random")
-    @ApiOperation(value = "Store a new random cat.")
+    @ApiOperation(value = "Store a new random cat.", authorizations = [Authorization(value = "Bearer")])
     @ApiResponses(ApiResponse(code = 201, message = "Cat created"))
     @ResponseStatus(HttpStatus.CREATED)
     fun createRandom(): CatResponse {
@@ -57,7 +57,7 @@ class CatController(
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Retrieve a cat.")
+    @ApiOperation(value = "Retrieve a cat.", authorizations = [Authorization(value = "Bearer")])
     @ApiResponses(
             ApiResponse(code = 200, message = "Cat retrieved"),
             ApiResponse(code = 400, message = "Access denied or validation failed"),
@@ -70,7 +70,7 @@ class CatController(
     }
 
     @GetMapping("")
-    @ApiOperation(value = "Retrieve all cats.")
+    @ApiOperation(value = "Retrieve all cats.", authorizations = [Authorization(value = "Bearer")])
     @ApiResponses(ApiResponse(code = 200, message = "Cats retrieved"))
     @ResponseStatus(HttpStatus.OK)
     fun findAll(
@@ -106,7 +106,8 @@ class CatController(
     @DeleteMapping("/{id}")
     @ApiOperation(
             value = "Delete a cat.",
-            notes = "Requires an Admin level token"
+            notes = "Requires an Admin level token",
+            authorizations = [Authorization(value = "Bearer")]
     )
     @ApiResponses(
             ApiResponse(code = 204, message = "Cat deleted"),

@@ -1,16 +1,16 @@
 package com.gnirps.acme.service
 
-import org.shredzone.acme4j.util.KeyPairUtils
 import com.gnirps.acme.config.properties.AcmeProperties
 import com.gnirps.logging.service.Logger
 import org.shredzone.acme4j.*
-import java.io.*
-import java.security.KeyPair
-import org.shredzone.acme4j.AccountBuilder
-import java.io.FileWriter
-import org.shredzone.acme4j.Login
+import org.shredzone.acme4j.util.KeyPairUtils
 import org.springframework.stereotype.Service
+import java.io.File
+import java.io.FileReader
+import java.io.FileWriter
+import java.io.IOException
 import java.net.URL
+import java.security.KeyPair
 
 
 @Service

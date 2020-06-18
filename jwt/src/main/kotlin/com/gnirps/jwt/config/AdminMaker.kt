@@ -1,11 +1,11 @@
 package com.gnirps.jwt.config
 
 import com.gnirps.jwt.config.properties.JWTProperties
-import com.gnirps.logging.service.Logger
 import com.gnirps.jwt.model.Role
 import com.gnirps.jwt.model.User
 import com.gnirps.jwt.service.RoleService
 import com.gnirps.jwt.service.UserService
+import com.gnirps.logging.service.Logger
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.DependsOn

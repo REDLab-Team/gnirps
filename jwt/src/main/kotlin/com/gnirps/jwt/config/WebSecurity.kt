@@ -20,7 +20,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 /**
  * Implements a security layer on incoming http requests by determining the protected routes and filters to be applied.
  */
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @EnableWebSecurity
 @ComponentScan("com.gnirps.jwt")
 class WebSecurity(

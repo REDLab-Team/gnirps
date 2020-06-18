@@ -5,6 +5,7 @@ import com.gnirps.jwt.dto.LoginRequest
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
+import io.swagger.annotations.Authorization
 import org.springframework.http.MediaType
 import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.PostMapping
@@ -26,7 +27,7 @@ class AuthenticationController {
         throw IllegalStateException("missing Spring Security's authentication handling")
     }
 
-    @ApiOperation(value = SecurityConstants.LOGOUT_ENDPOINT)
+    @ApiOperation(value = SecurityConstants.LOGOUT_ENDPOINT, authorizations = [Authorization(value = "Bearer")])
     @ApiResponses(ApiResponse(code = 200, message = ""))
     @PostMapping(value = [SecurityConstants.LOGOUT_ENDPOINT])
     fun logout() {

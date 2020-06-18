@@ -15,7 +15,7 @@ class LoggerBeanFactory {
     fun logger(injectionPoint: InjectionPoint): Logger {
         val clazz = injectionPoint.methodParameter?.containingClass//constructor
                 ?: injectionPoint.field?.declaringClass            // field
-        return WrappedSlf4jLogger(LoggerFactory.getLogger(clazz?.simpleName))
+        return WrappedSlf4jLogger(LoggerFactory.getLogger(clazz?.name))
     }
 }
 
@@ -27,9 +27,9 @@ inline fun <reified T : Any> T.slf4jLogger(): Logger {
     this::class.let {
         val logger = LoggerFactory.getLogger(
                 if (it.isCompanion)
-                    it.java.enclosingClass.simpleName
+                    it.java.enclosingClass.name
                 else
-                    it.java.simpleName
+                    it.java.name
         )
         return WrappedSlf4jLogger(logger)
     }

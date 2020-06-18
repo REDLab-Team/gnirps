@@ -1,13 +1,13 @@
 package com.gnirps.jwt.controller
 
 import com.gnirps.jwt.annotations.AdminAccess
-import com.gnirps.logging.service.Logger
 import com.gnirps.jwt.config.SecurityConstants
 import com.gnirps.jwt.dto.UserRequest
 import com.gnirps.jwt.dto.UserResponse
 import com.gnirps.jwt.mapper.UserMapper
 import com.gnirps.jwt.model.User
 import com.gnirps.jwt.service.UserService
+import com.gnirps.logging.service.Logger
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.Authorization
 import org.springframework.http.HttpStatus

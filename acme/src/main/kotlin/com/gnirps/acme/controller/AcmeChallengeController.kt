@@ -2,7 +2,10 @@ package com.gnirps.acme.controller
 
 import com.gnirps.acme.service.AcmeService
 import com.gnirps.logging.service.Logger
-import io.swagger.annotations.*
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiResponse
+import io.swagger.annotations.ApiResponses
 import org.shredzone.acme4j.exception.AcmeException
 import org.springframework.context.annotation.DependsOn
 import org.springframework.core.Ordered

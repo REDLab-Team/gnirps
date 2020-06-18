@@ -11,7 +11,3 @@ gnirps:
             email: admin@b.c
             password: admin
         resources: /error, /swagger**, /swagger-resources/**, /springfox**, /webjars/springfox-swagger-ui/**, /v2/api-docs**
-
-spring:
-    main:
-        allow-bean-definition-overriding: true

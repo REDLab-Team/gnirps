@@ -1,8 +1,8 @@
 package com.gnirps.jwt.config
 
-import com.gnirps.logging.service.Logger
 import com.gnirps.jwt.model.Role
 import com.gnirps.jwt.service.RoleService
+import com.gnirps.logging.service.Logger
 import org.springframework.context.annotation.Configuration
 import javax.annotation.PostConstruct
 

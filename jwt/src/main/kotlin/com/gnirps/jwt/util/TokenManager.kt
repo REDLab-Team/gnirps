@@ -65,7 +65,7 @@ class TokenManager(private val jwtProperties: JWTProperties) {
     }
 
     fun getAuthentication(
-            token: String, existingAuth: Authentication, userDetails: UserDetails
+            token: String, userDetails: UserDetails
     ): UsernamePasswordAuthenticationToken {
         val claims: Claims = Jwts
                 .parser()
