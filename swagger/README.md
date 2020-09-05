@@ -123,7 +123,7 @@ documentation, for example as follows:
  
 It was an implementation choice to allow requests from any origin by default. Should one decide otherwise, he could 
 make those settings importable from the configuration file or offer alternative beans. The current settings are defined 
-by the class `com.gnirps.swagger.config.CorsFilterConfiguration`.
+by the class `com.gnirps.swagger.com.gnirps.keycloak.config.CorsFilterConfiguration`.
 
 ## Errors and Exceptions Interceptor
 
@@ -132,7 +132,7 @@ Three classes are used to set up an interceptor for any error that may happen wi
 application.
 - `com.gnirps.swagger.controller.RestTemplateResponseErrorHandler`: allows a global handling for a specific subset of 
 errors - those thrown by an HTTP request within the API.
-- `com.gnirps.swagger.config.RestTemplateConfiguration`: allows the previous one to be used.
+- `com.gnirps.swagger.com.gnirps.keycloak.config.RestTemplateConfiguration`: allows the previous one to be used.
 
 The exception handling is most easily extendable (at some point, it looked like this):
 ```

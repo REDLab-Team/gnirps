@@ -2,16 +2,20 @@ gnirps:
     swagger:
         base-package: com.gnirps
         api:
-            title: "missing-property:gnirps.swagger.title"
-            description: "missing-property:gnirps.swagger.description"
-            version: "missing-property:gnirps.common.version"
-            license: "License: MIT"
-            license-url: "https://matias.ma/nsfw/"
-            terms-of-service: "https://matias.ma/nsfw/"
+            title: ${SWAGGER_TITLE:missing-property:gnirps.swagger.title}
+            description: ${SWAGGER_DESCRIPTION:missing-property:gnirps.swagger.description}
+            version: ${SWAGGER_VERSION:missing-property:gnirps.common.version}
+            license: ${SWAGGER_LICENSE:License:MIT}
+            license-url: ${SWAGGER_LICENSE_URL:https://matias.ma/nsfw/}
+            terms-of-service: ${SWAGGER_TITLE:https://matias.ma/nsfw/}
         maintainer:
             name: "REDLab"
             email: "nicolas.pittion@redlab.io"
             website: "https://www.redlab.io/"
+    core:
+        mail-sender:
+            service-name: cat-api
+            recipients: ${gnirps.swagger.maintainer.email}
 
 spring:
     autoconfigure:

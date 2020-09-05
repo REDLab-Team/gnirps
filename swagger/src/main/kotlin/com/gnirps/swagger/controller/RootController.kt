@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest
 @Api(
         tags = ["Root Controller"],
         value = "Root Controller",
-        description = " "
+        description = ""
 )
 @Controller
 @RequestMapping(RootController.ROOT_PATH)
@@ -26,8 +26,8 @@ class RootController {
     }
 
     @ResponseStatus(HttpStatus.PERMANENT_REDIRECT)
-    @GetMapping("")
-    @ApiOperation("Redirect towards spring-ui.")
+    @GetMapping
+    @ApiOperation("Redirect towards swagger-ui.")
     @ApiResponses(value = [ApiResponse(code = 308, message = "Permanent Redirect")])
     fun redirectToDoc(request: HttpServletRequest): ModelAndView {
         request.setAttribute(View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.PERMANENT_REDIRECT)

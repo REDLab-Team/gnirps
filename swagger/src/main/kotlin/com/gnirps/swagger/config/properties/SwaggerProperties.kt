@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConstructorBinding
 import org.springframework.validation.annotation.Validated
 import javax.validation.constraints.Email
 
-
+@Validated
 @ConstructorBinding
 @ConfigurationProperties(prefix = "gnirps.swagger")
 data class SwaggerProperties(
@@ -13,8 +13,6 @@ data class SwaggerProperties(
         val api: Api,
         val maintainer: Maintainer
 ) {
-    @ConstructorBinding
-    @ConfigurationProperties(prefix = "gnirps.swagger.api")
     data class Api(
             val title: String,
             val description: String,
@@ -24,9 +22,6 @@ data class SwaggerProperties(
             val termsOfService: String
     )
 
-    @Validated
-    @ConstructorBinding
-    @ConfigurationProperties(prefix = "gnirps.swagger.maintainer")
     data class Maintainer(
             val name: String,
             @Email val email: String,
