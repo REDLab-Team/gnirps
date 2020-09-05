@@ -1,6 +1,6 @@
 gnirps:
     jwt:
-        private-key: "The$uperKe!For$uperD@t@"
+        private-key: ${JWT_PRIVATE_KEY:The$uperKe!For$uperD@t@}
         endpoints:
             unsecure-post: ""
             unsecure-get: ""

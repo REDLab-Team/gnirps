@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*
  */
 @RestController
 @RequestMapping("/roles")
-class RoleController (
-        private val logger : Logger,
+class RoleController(
+        private val logger: Logger,
         private val roleService: RoleService
 ) {
     @ResponseStatus(HttpStatus.CREATED)

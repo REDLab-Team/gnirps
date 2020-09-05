@@ -20,25 +20,25 @@ import kotlin.collections.HashSet
 @Configuration
 @ConfigurationPropertiesScan(basePackages = ["com.gnirps.jwt.config.properties"])
 @DependsOn("RoleMaker")
-class AdminMaker (
-        private val logger : Logger,
+class AdminMaker(
+        private val logger: Logger,
         private val jwtProperties: JWTProperties,
         private val roleService: RoleService,
         private val userService: UserService
-){
+) {
     @PostConstruct
     fun create() {
         if (!userService.existsByEmail(jwtProperties.admin.email)) {
-            val newRoles = HashSet<Role?>()
+            val newRoles = HashSet<Role>()
             newRoles.add(roleService.findByName(SecurityConstants.ADMIN))
             val admin = User(
-                id = UUID.randomUUID(),
-                email = jwtProperties.admin.email,
-                password = WebSecurity.passwordEncoder.encode(jwtProperties.admin.password),
-                roles = newRoles,
-                firstName = "",
-                lastName = "",
-                description = ""
+                    id = UUID.randomUUID(),
+                    email = jwtProperties.admin.email,
+                    password = WebSecurity.passwordEncoder.encode(jwtProperties.admin.password),
+                    roles = newRoles,
+                    firstName = "",
+                    lastName = "",
+                    description = ""
             )
             userService.createUser(admin)
             logger.info("user " + admin.toString() + " created")

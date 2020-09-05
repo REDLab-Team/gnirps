@@ -35,7 +35,7 @@ class TokenManager(private val jwtProperties: JWTProperties) {
     }
 
     private fun getAllClaimsFromToken(token: String): Claims {
-            return Jwts.parser()
+        return Jwts.parser()
                 .setSigningKey(jwtProperties.privateKey)
                 .parseClaimsJws(token)
                 .body

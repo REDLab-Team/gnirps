@@ -15,12 +15,12 @@ import javax.transaction.Transactional
 class RoleService(
         val roleRepository: RoleRepository
 ) {
-    fun findAll(): List<Role>? {
+    fun findAll(): List<Role> {
         return roleRepository.findAll()
     }
 
-    fun findByName(name: String): Role? {
-        return roleRepository.findByName(name)
+    fun findByName(name: String): Role {
+        return roleRepository.findByName(name) ?: throw EntityNotFoundException("role $name not found")
     }
 
     @Throws(EntityExistsException::class)

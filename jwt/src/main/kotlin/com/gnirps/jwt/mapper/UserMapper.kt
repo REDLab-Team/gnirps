@@ -3,7 +3,6 @@ package com.gnirps.jwt.mapper
 import com.gnirps.jwt.config.WebSecurity
 import com.gnirps.jwt.dto.UserRequest
 import com.gnirps.jwt.dto.UserResponse
-import com.gnirps.jwt.model.Role
 import com.gnirps.jwt.model.User
 import java.util.*
 
@@ -31,7 +30,7 @@ class UserMapper {
                     lastName = user.lastName,
                     email = user.email,
                     description = user.description,
-                    roles = user.roles as Set<Role>
+                    roles = user.roles
             )
         }
     }

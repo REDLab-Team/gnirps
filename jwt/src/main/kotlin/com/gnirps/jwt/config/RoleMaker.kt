@@ -10,10 +10,10 @@ import javax.annotation.PostConstruct
  * Manages the creation of the two basic roles for using the API, an administrator and a simple user.
  */
 @Configuration("RoleMaker")
-class RoleMaker (
-        private val logger : Logger,
+class RoleMaker(
+        private val logger: Logger,
         private val roleService: RoleService
-){
+) {
     @PostConstruct
     fun create() {
         if (!roleService.existsByName(SecurityConstants.ADMIN)) {

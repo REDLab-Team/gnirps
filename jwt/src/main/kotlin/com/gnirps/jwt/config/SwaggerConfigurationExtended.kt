@@ -10,7 +10,8 @@ import java.util.*
 
 @Configuration
 class SwaggerConfigurationExtended {
-    @Primary @Bean
+    @Primary
+    @Bean
     fun securitySchemesExtended(): ArrayList<out SecurityScheme> {
         val apiKeys: ArrayList<ApiKey> = ArrayList<ApiKey>()
         apiKeys.add(ApiKey("Bearer", "Authorization", "header"))

@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse
  * the filter will let him pass. If not, an error will be sent to the user and a LOGGER message will be displayed.
  */
 class JWTAuthorizationFilter(
-        authManager : AuthenticationManager,
+        authManager: AuthenticationManager,
         private val tokenManager: TokenManager,
         private val userService: UserDetailsService
 ) : BasicAuthenticationFilter(authManager) {

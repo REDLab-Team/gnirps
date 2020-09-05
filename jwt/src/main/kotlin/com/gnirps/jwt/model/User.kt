@@ -23,7 +23,7 @@ data class User(
         @NotBlank val email: String,
 
         @ManyToMany
-        @NotBlank val roles: Set<Role?>,
+        @NotBlank val roles: Set<Role>,
 
         val firstName: String?,
         val lastName: String?,
@@ -59,6 +59,11 @@ data class User(
 
     override fun getPassword(): String {
         return password
+    }
+
+    override fun toString(): String {
+        // TODO remove (bcryted) password
+        return super.toString()
     }
 }
 

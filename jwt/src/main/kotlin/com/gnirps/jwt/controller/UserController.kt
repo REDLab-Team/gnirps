@@ -20,9 +20,9 @@ import java.util.*
  */
 @RestController
 @RequestMapping("/users")
-class UserController (
+class UserController(
         private val logger: Logger,
-        private val userService : UserService
+        private val userService: UserService
 ) {
     @AdminAccess
     @ResponseStatus(HttpStatus.OK)
@@ -40,7 +40,7 @@ class UserController (
     @ApiOperation(value = "Create a new user.", authorizations = [Authorization(value = "Bearer")])
     fun create(@RequestBody userRequest: UserRequest): UserResponse {
         val user: User = userService.createUser(UserMapper.fromRequest(userRequest))
-        logger.info(user.toString() + " created")
+        logger.info("$user created")
         return UserMapper.toResponse(user)
     }
 
