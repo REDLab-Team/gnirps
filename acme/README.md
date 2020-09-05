@@ -55,7 +55,7 @@ runtime, at the startup of the service.
 However, considering that it generates new files (a certificate request at 
 first, and a certificate itself when the request is validated) on the hard-drive which have to be loaded in Spring's 
 context when the BeansPostProcessors are called, the application needs to be restarted once a certificate has been 
-created. This is done by `com.gnirps.acme.config.ApplicationStart` **only when needed** - which is to say when no 
+created. This is done by `com.gnirps.acme.com.gnirps.keycloak.config.ApplicationStart` **only when needed** - which is to say when no 
 certificate exist, or when the existing certificate is obsolete.
 
 ## Http Challenge

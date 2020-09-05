@@ -15,10 +15,10 @@ import java.security.KeyPair
 
 @Service
 class AcmeService(
-    private val properties: AcmeProperties,
-    private val orderManager: OrderManager,
-    private val challengeStore: ChallengeStore,
-    private val logger: Logger
+        private val properties: AcmeProperties,
+        private val orderManager: OrderManager,
+        private val challengeStore: ChallengeStore,
+        private val logger: Logger
 ) {
     companion object {
         private const val KEY_SIZE = 2048
@@ -39,40 +39,40 @@ class AcmeService(
             logger.info("keystore file not found, creating one", Logger.EventType.OPERATION)
 
             val order: Order = orderManager.createOrder(
-                account = account,
-                domains = mutableListOf(properties.domain.name)
+                    account = account,
+                    domains = mutableListOf(properties.domain.name)
             )
             logger.info("order created")
 
             orderManager.processAuthorization(
-                order = order,
-                challengeStore = challengeStore
+                    order = order,
+                    challengeStore = challengeStore
             )
             logger.info("authorization processed")
 
             orderManager.signCertificate(
-                order = order,
-                domains = mutableListOf(properties.domain.name),
-                organisation = properties.organisation,
-                keyPair = domainKeyPair
+                    order = order,
+                    domains = mutableListOf(properties.domain.name),
+                    organisation = properties.organisation,
+                    keyPair = domainKeyPair
             )
             logger.info("certificate signed")
 
             val certificate: Certificate = orderManager.getCertificate(order)
             orderManager.createKeyStore(
-                certificate = certificate,
-                alias = properties.organisation,
-                fileName = properties.keystore.filePath,
-                password = properties.keystore.password
+                    certificate = certificate,
+                    alias = properties.organisation,
+                    fileName = properties.keystore.filePath,
+                    password = properties.keystore.password
             )
 
             System.setProperty(
-                "javax.net.ssl.keyStore",
-                properties.keystore.filePath
+                    "javax.net.ssl.keyStore",
+                    properties.keystore.filePath
             )
             System.setProperty(
-                "javax.net.ssl.keyStorePassword",
-                properties.keystore.password
+                    "javax.net.ssl.keyStorePassword",
+                    properties.keystore.password
             )
         } else {
             logger.info("keystore file found at '${properties.keystore.filePath}'")
@@ -94,14 +94,14 @@ class AcmeService(
     }
 
     private final fun getOrCreateAccount(
-        keyPair: KeyPair = this.userKeyPair,
-        session: Session = this.session,
-        accountLocationUrl: String? = null
+            keyPair: KeyPair = this.userKeyPair,
+            session: Session = this.session,
+            accountLocationUrl: String? = null
     ): Login {
         // get already existing account
         if (accountLocationUrl != null) {
             logger.info(
-                "retrieving already existing account '$accountLocationUrl'"
+                    "retrieving already existing account '$accountLocationUrl'"
             )
             return session.login(URL(accountLocationUrl), keyPair)
         }

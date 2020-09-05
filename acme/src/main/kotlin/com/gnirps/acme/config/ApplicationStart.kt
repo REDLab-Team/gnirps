@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @ConfigurationPropertiesScan(basePackages = ["com.gnirps.acme.config.properties"])
 class ApplicationStart(
-    private val acmeService: AcmeService,
-    private val logger: Logger
+        private val acmeService: AcmeService,
+        private val logger: Logger
 
-):
+) :
         ApplicationListener<ApplicationReadyEvent> {
     override fun onApplicationEvent(
-        applicationReadyEvent: ApplicationReadyEvent
+            applicationReadyEvent: ApplicationReadyEvent
     ) {
         try {
             acmeService.generateCertificate()

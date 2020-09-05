@@ -21,10 +21,10 @@ class OrderManager(private val logger: Logger) {
     }
 
     fun createOrder(
-        account: Account,
-        domains: MutableCollection<String>,
-        notBefore: Instant? = null,
-        notAfter: Instant? = null
+            account: Account,
+            domains: MutableCollection<String>,
+            notBefore: Instant? = null,
+            notAfter: Instant? = null
     ): Order {
         var orderBuilder: OrderBuilder = account.newOrder().domains(domains)
         if (notBefore != null) orderBuilder = orderBuilder.notBefore(notBefore)
@@ -34,40 +34,42 @@ class OrderManager(private val logger: Logger) {
     }
 
     fun processAuthorization(order: Order, challengeStore: ChallengeStore) {
-        order.authorizations.stream().filter { it.status !== Status
-                .VALID }
+        order.authorizations.stream().filter {
+            it.status !== Status
+                    .VALID
+        }
                 .forEach { auth ->
                     auth.findChallenge<Http01Challenge>(
-                        Http01Challenge.TYPE
+                            Http01Challenge.TYPE
                     )?.let { challenge ->
                         logger.info(
-                            "Storing challenge (token: " +
-                                    "'${challenge.token}', authorization: " +
-                                    "'${challenge.authorization}')",
+                                "Storing challenge (token: " +
+                                        "'${challenge.token}', authorization: " +
+                                        "'${challenge.authorization}')",
                                 Logger.EventType.OPERATION
                         )
                         challengeStore.put(
-                            challenge.token,
-                            challenge.authorization
+                                challenge.token,
+                                challenge.authorization
                         )
                         logger.info("triggering challenge")
                         challenge.trigger()
                         val maxAttempts = 3
                         var attempt = 0
-                        while(
+                        while (
                                 auth.status != Status.VALID &&
                                 attempt++ < maxAttempts
                         ) {
                             Thread.sleep(3000L)
                             logger.info(
-                                "updating authorization... (attempt " +
-                                        "[$attempt/$maxAttempts])"
+                                    "updating authorization... (attempt " +
+                                            "[$attempt/$maxAttempts])"
                             )
                             auth.update()
                         }
                         if (auth.status != Status.VALID) {
                             throw AcmeException(
-                                "authorization failed: ${challenge.json}"
+                                    "authorization failed: ${challenge.json}"
                             )
                         }
                     }
@@ -75,11 +77,11 @@ class OrderManager(private val logger: Logger) {
     }
 
     fun signCertificate(
-        order: Order,
-        domains: MutableCollection<String>,
-        organisation: String,
-        keyPair: KeyPair,
-        fileName: String = "domain.csr"
+            order: Order,
+            domains: MutableCollection<String>,
+            organisation: String,
+            keyPair: KeyPair,
+            fileName: String = "domain.csr"
     ) {
         File(fileName).let {
             if (it.exists()) {
@@ -101,8 +103,8 @@ class OrderManager(private val logger: Logger) {
     }
 
     fun getCertificate(
-        order: Order,
-        fileName: String = "domain.crt"
+            order: Order,
+            fileName: String = "domain.crt"
     ): Certificate {
         order.update()
         val maxAttempts = 10
@@ -113,16 +115,16 @@ class OrderManager(private val logger: Logger) {
             }
             Thread.sleep(3000L)
             logger.info(
-                "sending challenge request to provider: " +
-                        "attempt " +
-                        "[$attempt/$maxAttempts]",
+                    "sending challenge request to provider: " +
+                            "attempt " +
+                            "[$attempt/$maxAttempts]",
                     Logger.EventType.OPERATION
             )
             order.update()
         }
 
         val certificate: Certificate = order.certificate ?: throw AcmeException(
-            "could not obtain certificate, status: ${order.status}"
+                "could not obtain certificate, status: ${order.status}"
         )
 
         certificate.writeCertificate(FileWriter(fileName))
@@ -130,10 +132,10 @@ class OrderManager(private val logger: Logger) {
     }
 
     fun createKeyStore(
-        certificate: Certificate,
-        alias: String = DEFAULT_ALIAS,
-        fileName: String = "keystore.jks",
-        password: String
+            certificate: Certificate,
+            alias: String = DEFAULT_ALIAS,
+            fileName: String = "keystore.jks",
+            password: String
     ) {
         // create empty keystore
         val keyStore: KeyStore = KeyStore.getInstance(DEFAULT_KEYSTORE_TYPE)

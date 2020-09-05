@@ -16,28 +16,28 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 class AcmeExceptionHandlerController(
-    private val logger: Logger
+        private val logger: Logger
 ) {
     // TODO Handle each exception in a different way
     @ExceptionHandler(AcmeException::class)
     fun handleAcmeException(
-        exception: AcmeException
+            exception: AcmeException
     ): ResponseEntity<Any> {
         return logAndFormat(
-            exception,
-            HttpStatus.INTERNAL_SERVER_ERROR
+                exception,
+                HttpStatus.INTERNAL_SERVER_ERROR
         )
     }
 
     private fun logAndFormat(
-        exception: Exception,
-        status: HttpStatus
+            exception: Exception,
+            status: HttpStatus
     ): ResponseEntity<Any> {
         logger.error(exception)
         return ResponseEntity(
-            logger.formatMessage(exception),
-            HttpHeaders(),
-            status
+                logger.formatMessage(exception),
+                HttpHeaders(),
+                status
         )
     }
 }
