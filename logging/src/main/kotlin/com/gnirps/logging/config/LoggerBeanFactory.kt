@@ -12,11 +12,12 @@ import org.springframework.context.annotation.Scope
 class LoggerBeanFactory {
     @Bean("injectedSlf4jLogger")
     @Scope("prototype")
-    fun logger(injectionPoint: InjectionPoint): Logger {
-        val clazz = injectionPoint.methodParameter?.containingClass//constructor
-                ?: injectionPoint.field?.declaringClass            // field
-        return WrappedSlf4jLogger(LoggerFactory.getLogger(clazz?.name))
-    }
+    fun logger(injectionPoint: InjectionPoint): Logger =
+            WrappedSlf4jLogger(LoggerFactory.getLogger(
+                    injectionPoint.methodParameter?.containingClass?.name  //constructor
+                            ?: injectionPoint.field?.declaringClass?.name        // field
+                            ?: injectionPoint.declaredType.name
+            ))
 }
 
 inline fun <reified T : Any> T.defaultLogger(): Logger {

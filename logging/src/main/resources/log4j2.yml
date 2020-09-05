@@ -1,0 +1,31 @@
+Configuration:
+    Appenders:
+        Console:
+            name: Console
+            target: SYSTEM_OUT
+                # https://logging.apache.org/log4j/2.x/manual/layouts.html
+            PatternLayout:
+                disableAnsi: false
+                pattern: "%style{%d{ISO8601_OFFSET_DATE_TIME_HHMM}}{black} %highlight{%-5level }[%style{%t}{bright,blue}] %highlight{%c}: %msg%n%throwable"
+        RollingFile:
+            name: RollingFile
+            fileName: "./logs/spring-boot-logger-log4j2.log"
+            filePattern: "./logs/$${date:yyyy-MM}/%d{yyyy-MM-dd}_%i.log.gz"
+            PatternLayout:
+                pattern: "%d %p %C{1.} [%t] %m%n"
+            Policies:
+                # rollover on startup, daily and when the file reaches 10 MegaBytes
+                OnStartupTriggeringPolicy:
+                    minSize: 0 B
+                SizeBasedTriggeringPolicy:
+                    size: 10 MB
+                TimeBasedTriggeringPolicy:
+                    interval: 24
+                    modulate: true
+    Loggers:
+        # LOG everything at INFO level
+        Root:
+            level: info
+            AppenderRef:
+                - ref: Console
+                - ref: RollingFile

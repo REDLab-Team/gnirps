@@ -86,7 +86,7 @@ abstract class AbstractLogger : Logger {
     }
 
     override fun printCleanStack(throwable: Throwable) {
-        error(content = "{${getCleanStack(throwable)}}", eventType = Logger.EventType.STACK_TRACE)
+        debug(content = "{${getCleanStack(throwable)}}", eventType = Logger.EventType.STACK_TRACE)
     }
 
     private fun ourCodeOnly(t: Throwable, prefix: String = "com.gnirps"): Throwable {
