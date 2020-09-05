@@ -1,0 +1,11 @@
+gnirps:
+    ssl:
+        port: ${SSL_HTTPS_PORT:8443}
+        key-store:
+            type: ${SSL_KEYSTORE_TYPE:P12}
+            path: ${SSL_KEYSTORE_PATH:key-store.p12}
+            password: ${SSL_KEYSTORE_PASSWORD:password}
+        trust-store:
+            type: ${SSL_TRUSTSTORE_TYPE}
+            path: ${SSL_TRUSTSTORE_PATH}
+            password: ${SSL_TRUSTSTORE_PASSWORD}
