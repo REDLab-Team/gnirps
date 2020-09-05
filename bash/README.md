@@ -23,7 +23,7 @@ https://github.com/REDLab-Team/gnirps/tree/master/src/bash#parallel-or-sequentia
 - [Input, error and output redirecting](
 https://github.com/REDLab-Team/gnirps/tree/master/src/bash#input,-error,-and-output-redirection)
 - [Config and monitoring properties](
-https://github.com/REDLab-Team/gnirps/tree/master/src/bash#config-and-monitoring-properties)
+https://github.com/REDLab-Team/gnirps/tree/master/src/bash#com.gnirps.keycloak.config-and-monitoring-properties)
     
 ## Parallel or sequential execution
 
