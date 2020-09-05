@@ -3,7 +3,7 @@
 source bin/util/toolbox.sh
 source bin/util/docker-secrets.sh
 
-main () {
+main() {
   local force=''
   local secrets=()
 
@@ -11,15 +11,15 @@ main () {
   while [[ $# -gt 0 ]]; do
     key="$1"
     case $key in
-      -h|--help)
-        print '[HELP]: not implemented, oopsie doopsie...'
-        return 0
+    -h | --help)
+      print '[HELP]: not implemented, oopsie doopsie...'
+      return 0
       ;;
-      -f|--force)
-        force='--force'
+    -f | --force)
+      force='--force'
       ;;
-      *)
-        secrets+=("$1")
+    *)
+      secrets+=("$1")
       ;;
     esac
     shift

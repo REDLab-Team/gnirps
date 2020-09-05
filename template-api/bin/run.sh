@@ -2,7 +2,7 @@
 
 source bin/util/toolbox.sh
 
-main () {
+main() {
   local secrets=()
 
   # choose stack name here
@@ -14,22 +14,22 @@ main () {
   while [[ $# -gt 0 ]]; do
     key="$1"
     case $key in
-      -h|--help)
-        print '[HELP]: not implemented, oopsie doopsie...'
-        return 0
+    -h | --help)
+      print '[HELP]: not implemented, oopsie doopsie...'
+      return 0
       ;;
-      -n|--name)
-        shift
-        name="$1"
+    -n | --name)
+      shift
+      name="$1"
       ;;
-      -n=*|--name=*)
-        name="${key#*=}"
+    -n=* | --name=*)
+      name="${key#*=}"
       ;;
-      -f|--force)
-        force='--force'
+    -f | --force)
+      force='--force'
       ;;
-      *)
-        secrets+=("$1")
+    *)
+      secrets+=("$1")
       ;;
     esac
     shift

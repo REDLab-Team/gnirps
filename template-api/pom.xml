@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -19,7 +19,7 @@
 
     <properties>
         <!-- versions -->
-        <gnirps-swagger.version>1.2.0-SNAPSHOT</gnirps-swagger.version>
+        <gnirps.version>1.2.0-SNAPSHOT</gnirps.version>
 
         <!-- docker -->
         <docker.image.prefix>pittinic</docker.image.prefix>
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.gnirps</groupId>
             <artifactId>swagger</artifactId>
-            <version>${gnirps-swagger.version}</version>
+            <version>${gnirps.version}</version>
         </dependency>
     </dependencies>
 
@@ -40,6 +40,7 @@
         <!-- define some build variables -->
         <finalName>${api-jar-name}</finalName>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
 
         <!-- set up and use the following plugins -->
         <plugins>
@@ -65,4 +66,16 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- nexus connection -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>gnirps-snapshots</id>
+            <url>http://ns340976.ip-176-31-224.eu:9000/repository/gnirps-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>gnirps-releases</id>
+            <url>http://ns340976.ip-176-31-224.eu:9000/repository/gnirps-releases/</url>
+        </repository>
+    </distributionManagement>
 </project>

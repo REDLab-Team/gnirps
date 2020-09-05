@@ -1,3 +1,6 @@
+spring:
+    profiles: current
+
 gnirps:
     commons:
         service-name: template-gnirps
@@ -6,3 +9,11 @@ gnirps:
             title: "Kotlin template for REST APIs"
             description: "An empty API generated using Gnirps's template for SpringBoot APIs."
             version: 1.2.0-SNAPSHOT
+        maintainer:
+            email: "nicolas.pittion@redlab.io"
+
+---
+
+spring:
+    profiles:
+        include: logging, core, swagger, current
