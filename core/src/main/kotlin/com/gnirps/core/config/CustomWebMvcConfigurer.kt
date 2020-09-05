@@ -6,9 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter
 
 @Configuration
-class WebMvcConfiguration(
-    private val loggerInterceptor: HandlerInterceptorAdapter
-): WebMvcConfigurer {
+class CustomWebMvcConfigurer(private val loggerInterceptor: HandlerInterceptorAdapter) : WebMvcConfigurer {
     override fun addInterceptors(registry: InterceptorRegistry) {
         registry.addInterceptor(loggerInterceptor)
     }

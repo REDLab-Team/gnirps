@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class LoggerInterceptor(private val logger: Logger): HandlerInterceptorAdapter() {
+class LoggerInterceptor(private val logger: Logger) : HandlerInterceptorAdapter() {
     companion object {
         val filteredURI: List<String> = listOf(
                 "/oauth/check_token",
@@ -19,10 +19,10 @@ class LoggerInterceptor(private val logger: Logger): HandlerInterceptorAdapter()
     }
 
     override fun afterCompletion(
-        request: HttpServletRequest,
-        response: HttpServletResponse,
-        handler: Any,
-        exception: Exception?
+            request: HttpServletRequest,
+            response: HttpServletResponse,
+            handler: Any,
+            exception: Exception?
     ) {
         filteredURI.forEach { if (request.requestURI.startsWith(it)) return }
 

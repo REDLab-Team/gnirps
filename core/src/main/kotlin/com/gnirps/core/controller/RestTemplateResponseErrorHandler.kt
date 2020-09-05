@@ -8,7 +8,7 @@ import org.springframework.web.client.ResponseErrorHandler
 import java.io.BufferedReader
 
 @Component
-class RestTemplateResponseErrorHandler: ResponseErrorHandler {
+class RestTemplateResponseErrorHandler : ResponseErrorHandler {
     override fun hasError(httpResponse: ClientHttpResponse): Boolean {
         return httpResponse.statusCode.series() === Series.CLIENT_ERROR ||
                 httpResponse.statusCode.series() === Series.SERVER_ERROR
@@ -19,9 +19,9 @@ class RestTemplateResponseErrorHandler: ResponseErrorHandler {
             when (statusCodeSeries) {
                 Series.CLIENT_ERROR, Series.SERVER_ERROR -> {
                     throw HttpException(
-                        statusCodeSeries,
-                        response.statusCode,
-                        formatMessage(response)
+                            statusCodeSeries,
+                            response.statusCode,
+                            formatMessage(response)
                     )
                 }
                 else -> return
@@ -30,13 +30,13 @@ class RestTemplateResponseErrorHandler: ResponseErrorHandler {
     }
 
     private fun formatMessage(response: ClientHttpResponse): String =
-        "{" +
-                "\"code\": ${response.statusCode}, " +
-                "\"status\": \"${response.statusText}\", " +
-                "\"body\": \"" + response
-                        .body
-                        .bufferedReader()
-                        .use(BufferedReader::readText) +
-                        "\"" +
-        "}"
+            "{" +
+                    "\"code\": ${response.statusCode}, " +
+                    "\"status\": \"${response.statusText}\", " +
+                    "\"body\": \"" + response
+                    .body
+                    .bufferedReader()
+                    .use(BufferedReader::readText) +
+                    "\"" +
+                    "}"
 }
