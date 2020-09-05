@@ -1,0 +1,30 @@
+spring:
+    profiles: keycloak-server
+    liquibase:
+        enabled: false
+
+gnirps:
+    core:
+        mail-sender:
+            service-name: keycloak-server
+            recipients: ${gnirps.swagger.maintainer.email}
+    swagger:
+        api:
+            title: "Keycloak-Server"
+            description: "A keycloak server embedded within a Spring-Boot application"
+            version: 1.2.0-SNAPSHOT
+    database:
+        hbm2ddl-auto: update
+    keycloak:
+        server:
+            context-path: /auth
+            master-realm:
+                admin-username: ${KEYCLOAK_MASTER_ADMIN_USERNAME:admin}
+                admin-password: ${KEYCLOAK_MASTER_ADMIN_PASSWORD:password}
+            realms-from-json: "neuroo-realm.json"
+
+---
+
+spring:
+    profiles:
+        include: logging, core, swagger, utils, database, postgresql, keycloak-server

@@ -1,0 +1,33 @@
+version: '3.7'
+
+volumes:
+    keycloak-volume:
+
+services:
+    keycloak-database:
+        image: postgres:11.1-alpine
+        deploy:
+            restart_policy:
+                condition: on-failure
+        ports:
+            - 8081:5432
+        environment:
+            POSTGRES_DB: keycloak-db-name
+            POSTGRES_USER: keycloak-db-user
+            POSTGRES_PASSWORD: keycloak-db-password
+        volumes:
+            - "keycloak-volume:/var/lib/postgresql/data"
+
+    keycloak-server:
+        image: pittinic/gnirps:keycloak-server
+        ports:
+            - 8080:8080
+        environment:
+            DATABASE_URL: keycloak-database:5432
+            DATABASE_NAME: keycloak-db-name
+            DATABASE_USER: keycloak-db-user
+            DATABASE_PASSWORD: keycloak-db-password
+            LOG_LEVEL_ROOT: ERROR
+            LOG_LEVEL_SPRING: ERROR
+            LOG_LEVEL_SPRING_SECURITY: INFO
+            LOG_LEVEL_GNIRPS: DEBUG
