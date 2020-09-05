@@ -30,13 +30,13 @@ redundancy or heavy disparities between children projects. The most noticing one
 The automated properties sourcing allows an out-of-the-box configuration for any new project, and relies on two things:
 - Spring's property sourcing mechanism and its priority system, which will allow the loading of each module's defaults 
 settings before overwriting them with the user's ones (found in 
-`com.gnirps.commons.config.properties.CustomPropertySources`)
+`com.gnirps.commons.com.gnirps.keycloak.config.properties.CustomPropertySources`)
 - The use of several `{module-name}-application.yml` and one optional `application.yml` file, properly parsed thanks to 
-a custom `com.gnirps.commons.config.properties.YamlPropertySourceFactory`, meant to evolve quite a bit in the 
+a custom `com.gnirps.commons.com.gnirps.keycloak.config.properties.YamlPropertySourceFactory`, meant to evolve quite a bit in the 
 future to remove some leftover boilerplate from Spring in Java which won't stay in Kotlin.
 
 As per convention, any module which will load properties from such files will use a 
-`basePackage.config.{module-name}Properties` class to do so. This could most likely be someday centralised in a single 
+`basePackage.com.gnirps.keycloak.config.{module-name}Properties` class to do so. This could most likely be someday centralised in a single 
 properties loader which would parse all files - but it isn't yet.
 
 ## Loggers injection
@@ -82,7 +82,7 @@ be shared at some point and find their place here.
 
 #### PageRequest
 As of now, the only tool (apart from the ones mentionned in two first sections of this document) that really is shared 
-between several projects is the PageRequest generator `com.gnirps.commons.utils.CustomPageRequest`. Its job is to allow 
+between several projects is the PageRequest generator `com.gnirps.utils.CustomPageRequest`. Its job is to allow 
 the use of the Pageable objects easily in any controller or repository, for example.
 
 #### ExecutionTimer
