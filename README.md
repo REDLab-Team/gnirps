@@ -60,7 +60,7 @@ offers an easy way to interact with bash scripts (or python, or any script, thro
     - [Input, error and output redirecting](
     https://github.com/REDLab-Team/gnirps/tree/master/src/bash#input,-error,-and-output-redirection)
     - [Config and monitoring properties](
-    https://github.com/REDLab-Team/gnirps/tree/master/src/bash#config-and-monitoring-properties)
+    https://github.com/REDLab-Team/gnirps/tree/master/src/bash#com.gnirps.keycloak.config-and-monitoring-properties)
 - **[commons](https://github.com/REDLab-Team/gnirps/tree/master/src/commons)**: 
 regroups some common parts of other projects to avoid code redundancy and a heavier management of
 dependencies.
@@ -163,7 +163,7 @@ API through Maven or Docker.
     │   │   ├── java
     │   │   ├── kotlin
     │   │   │   └─ com.gnirps.project-package
-    │   │   │      ├── config ........................... configuration
+    │   │   │      ├── com.gnirps.keycloak.config ........................... configuration
     │   │   │      ├── controller ....................... endpoints
     │   │   │      ├── dto .............................. data transfer objects (reading and writing)
     │   │   │      ├── exception ........................ custom exceptions
@@ -179,7 +179,7 @@ API through Maven or Docker.
     │       ├── java
     │       ├── kotlin
     │       │   └─ com.gnirps.project-package
-    │       │      ├── config ........................... configuration
+    │       │      ├── com.gnirps.keycloak.config ........................... configuration
     │       │      ├── controller ....................... endpoints
     │       │      ├── mapper ........................... dto to/from model converter 
     │       │      └── service .......................... core logic's operations definition

@@ -2,9 +2,8 @@
 
 source bin/util/toolbox.sh
 
-hash_password () {
-  if [ -z "$(command -v htpasswd)" ]
-  then
+hash_password() {
+  if [ -z "$(command -v htpasswd)" ]; then
     ERROR "missing command htpasswd."
     TRACE "Install apache2-utils package to get it."
     exit 1

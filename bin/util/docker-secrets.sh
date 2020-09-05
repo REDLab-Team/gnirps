@@ -14,24 +14,24 @@ create_secret() {
   while [[ $# -gt 1 ]]; do
     key="$2"
     case $key in
-      -f|--force)
-        force="$key"
+    -f | --force)
+      force="$key"
       ;;
-      -h|--hash)
-        hash='true'
+    -h | --hash)
+      hash='true'
       ;;
-      -s|--secret)
-        secret="$key"
+    -s | --secret)
+      secret="$key"
       ;;
-      *)
-        value="$key"
+    *)
+      value="$key"
       ;;
     esac
     shift
   done
 
   # remove already existing secret if need be
-  if docker secret ls --format="{{ .Name }}" | grep -q "$name";then
+  if docker secret ls --format="{{ .Name }}" | grep -q "$name"; then
     if [ -z "$force" ]; then
       TRACE "secret $name already exists"
       return 0

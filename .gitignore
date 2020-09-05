@@ -1,4 +1,6 @@
 .idea
 *.iml
-src/*/*.iml
-src/*/target
+logs
+.DS_Store
+target
+out

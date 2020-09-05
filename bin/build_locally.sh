@@ -2,7 +2,7 @@
 
 source bin/util/toolbox.sh
 
-find_modules () {
+find_modules() {
   local modules=()
   if [[ -f "src/pom.xml" ]]; then
     modules+=('')
@@ -15,7 +15,7 @@ find_modules () {
   echo "${modules[@]}"
 }
 
-find_docker () {
+find_docker() {
   local docker=()
   for dir in src/*/; do
     if [[ -f "$dir/pom.xml" && -f "$dir/Dockerfile" ]]; then
@@ -25,39 +25,39 @@ find_docker () {
   echo "${docker[@]}"
 }
 
-deploy_root () {
+deploy_root() {
   error_message="parent package failed to build."
   success_message="parent package built and deployed."
   cmd="cd src && mvn clean deploy $1-N"
   INFO "deploy non-recursively the parent project on maven" &&
-  eval_command -f "$error_message" -s "$success_message" "$cmd"
+    eval_command -f "$error_message" -s "$success_message" "$cmd"
 }
 
-deploy_package () {
+deploy_package() {
   error_message="package $1 failed to build."
   success_message="package $1 cleaned, built and deployed."
   cmd="cd src/$1 && mvn clean package deploy"
   INFO "mvn clean package deploy $2 '$1'" &&
-  eval_command -f "$error_message" -s "$success_message" "$cmd"
+    eval_command -f "$error_message" -s "$success_message" "$cmd"
 }
 
-build_docker_image () {
+build_docker_image() {
   error_message="docker image for package $1 failed to build."
   success_message="docker image for package $1 built."
   cmd="cd src/$1 && mvn docker:build"
   INFO "mvn $2 docker:build '$1'" &&
-  eval_command -f "$error_message" -s "$success_message" "$cmd"
+    eval_command -f "$error_message" -s "$success_message" "$cmd"
 }
 
-push_docker_image () {
+push_docker_image() {
   error_message="docker image for package $1 couldn't be pushed."
   success_message="docker image for package $1 pushed."
   cmd="cd src/$1 && mvn docker:push"
   INFO "mvn docker:push '$1'" &&
-  eval_command -f "$error_message" -s "$success_message" "$cmd"
+    eval_command -f "$error_message" -s "$success_message" "$cmd"
 }
 
-build () {
+build() {
   declare -a packages=()
   declare -a docker=()
   local var_name="packages"
@@ -69,32 +69,32 @@ build () {
       update="-U"
     fi
     deploy_root "$update"
-    IFS=" " read -r -a packages <<< "$(find_modules)"
-    IFS=" " read -r -a docker <<< "$(find_docker)"
+    IFS=" " read -r -a packages <<<"$(find_modules)"
+    IFS=" " read -r -a docker <<<"$(find_docker)"
   else
     while [[ $# -gt 0 ]]; do
       key="$1"
       case $key in
-        -U)
-          update="-U "
+      -U)
+        update="-U "
         ;;
-        --push)
-          push="-p"
+      --push)
+        push="-p"
         ;;
-        gnirps|root|parent)
-          deploy_root "$update"
+      gnirps | root | parent)
+        deploy_root "$update"
         ;;
-        -p|--package)
-          var_name="packages"
+      -p | --package)
+        var_name="packages"
         ;;
-        -d|--docker)
-          var_name="docker"
+      -d | --docker)
+        var_name="docker"
         ;;
-        *)
-          packages+=("$1")
-          if [[ "$var_name" == "docker" ]]; then
-            docker+=("$1")
-          fi
+      *)
+        packages+=("$1")
+        if [[ "$var_name" == "docker" ]]; then
+          docker+=("$1")
+        fi
         ;;
       esac
       shift
