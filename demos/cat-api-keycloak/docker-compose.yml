@@ -1,0 +1,70 @@
+version: '3.7'
+
+volumes:
+    cat:
+    sso:
+
+networks:
+    cat:
+
+services:
+    cat-database:
+        image: postgres:11.1-alpine
+        ports:
+            - 5432
+        networks:
+            - cat
+        environment:
+            POSTGRES_DB: cat-db-name
+            POSTGRES_USER: cat-db-user
+            POSTGRES_PASSWORD: cat-db-password
+        volumes:
+            - "cat:/var/lib/postgresql/data"
+
+    api:
+        image: pittinic/gnirps:cat-api-keycloak
+        ports:
+            - 8080:8080
+        networks:
+            - cat
+        environment:
+            KEYCLOAK_SERVER_URL: http://sso:8081
+            KEYCLOAK_AUTH_SUFFIX: /auth
+            KEYCLOAK_REALM: test
+            KEYCLOAK_CLIENT_ID: cat
+            KEYCLOAK_CLIENT_SECRET: 7c1aba7f-1b5f-4a4b-abfb-f2c6a631331e
+            KEYCLOAK_SSL_REQUIRED: NONE
+            DATABASE_URL: cat-database:5432
+            DATABASE_NAME: cat-db-name
+            DATABASE_USER: cat-db-user
+            DATABASE_PASSWORD: cat-db-password
+
+    sso-database:
+        image: postgres:11.1-alpine
+        ports:
+            - 5432
+        networks:
+            - cat
+        environment:
+            POSTGRES_DB: sso-db-name
+            POSTGRES_USER: sso-db-user
+            POSTGRES_PASSWORD: sso-db-password
+        volumes:
+            - "sso:/var/lib/postgresql/data"
+
+    sso:
+        image: jboss/keycloak:11.0.0
+        ports:
+            - 8081:8080
+        networks:
+            - cat
+        volumes:
+            - "./realm-test.json:/tmp/realm-test.json"
+        environment:
+            KEYCLOAK_USER: admin
+            KEYCLOAK_PASSWORD: admin
+            DB_VENDOR: POSTGRES
+            DB_ADDR: sso-database:5432
+            DB_DATABASE: sso-db-name
+            DB_USER: sso-db-user
+            DB_PASSWORD: sso-db-password

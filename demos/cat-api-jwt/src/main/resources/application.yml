@@ -1,0 +1,21 @@
+spring:
+    profiles: cat
+
+gnirps:
+    core:
+        mail-sender:
+            service-name: cat-api-jwt
+            recipients: ${gnirps.swagger.maintainer.email}, dana.olivier@redlab.io
+    swagger:
+        api:
+            title: "Cats-API"
+            description: "Just your average example of API using cats"
+            version: 1.2.0-SNAPSHOT
+    database:
+        hbm2ddl-auto: update
+
+---
+
+spring:
+    profiles:
+        include: logging, core, swagger, jwt, utils, database, postgresql, cat
