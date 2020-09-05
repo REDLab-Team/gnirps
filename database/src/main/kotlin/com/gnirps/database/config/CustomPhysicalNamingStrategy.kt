@@ -5,38 +5,38 @@ import org.hibernate.boot.model.naming.PhysicalNamingStrategy
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment
 
 
-class CustomPhysicalNamingStrategy: PhysicalNamingStrategy {
+class CustomPhysicalNamingStrategy : PhysicalNamingStrategy {
     override fun toPhysicalCatalogName(
-        identifier: Identifier,
-        jdbcEnv: JdbcEnvironment
+            identifier: Identifier,
+            jdbcEnv: JdbcEnvironment
     ): Identifier {
         return convertToSnakeCase(identifier)
     }
 
     override fun toPhysicalColumnName(
-        identifier: Identifier,
-        jdbcEnv: JdbcEnvironment
+            identifier: Identifier,
+            jdbcEnv: JdbcEnvironment
     ): Identifier {
         return convertToSnakeCase(identifier)
     }
 
     override fun toPhysicalSchemaName(
-        identifier: Identifier,
-        jdbcEnv: JdbcEnvironment
+            identifier: Identifier,
+            jdbcEnv: JdbcEnvironment
     ): Identifier {
         return convertToSnakeCase(identifier)
     }
 
     override fun toPhysicalSequenceName(
-        identifier: Identifier,
-        jdbcEnv: JdbcEnvironment
+            identifier: Identifier,
+            jdbcEnv: JdbcEnvironment
     ): Identifier {
         return convertToSnakeCase(identifier)
     }
 
     override fun toPhysicalTableName(
-        identifier: Identifier,
-        jdbcEnv: JdbcEnvironment
+            identifier: Identifier,
+            jdbcEnv: JdbcEnvironment
     ): Identifier {
         return convertToSnakeCase(identifier)
     }

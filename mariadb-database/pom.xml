@@ -4,8 +4,8 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>database</name>
-    <artifactId>database</artifactId>
+    <name>mariadb-database</name>
+    <artifactId>mariadb-database</artifactId>
     <packaging>jar</packaging>
     <version>1.2.0-SNAPSHOT</version>
 
@@ -18,18 +18,21 @@
 
     <properties>
         <!-- versions -->
-        <gnirps-core.version>1.2.0-SNAPSHOT</gnirps-core.version>
+        <gnirps-database.version>1.2.0-SNAPSHOT</gnirps-database.version>
     </properties>
 
     <dependencies>
+        <!-- gnirps -->
         <dependency>
             <groupId>com.gnirps</groupId>
-            <artifactId>core</artifactId>
-            <version>${gnirps-core.version}</version>
+            <artifactId>database</artifactId>
+            <version>${gnirps-database.version}</version>
         </dependency>
+
+        <!-- persistence -->
         <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
         </dependency>
     </dependencies>
 

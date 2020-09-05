@@ -9,6 +9,7 @@ gnirps:
         naming-strategy: 'org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl'
         hbm2ddl-auto: update
         use-sql-comments: true
+        hibernate-additional-properties: {none:}
 
 spring:
     autoconfigure:

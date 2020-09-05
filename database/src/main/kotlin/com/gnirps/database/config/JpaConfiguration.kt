@@ -28,7 +28,9 @@ class JpaConfiguration(
         private val properties: DatabaseProperties
 
 ) {
-    companion object { const val MODEL_PATH = "com.gnirps" }
+    companion object {
+        const val MODEL_PATH = "com.gnirps"
+    }
 
     @Bean
     @Primary
@@ -40,7 +42,7 @@ class JpaConfiguration(
         dataSource.password = properties.password
         logger.debug(
                 "datasource_url: ${properties.url}, " +
-                "datasource_username: ${properties.username}"
+                        "datasource_username: ${properties.username}"
         )
         return dataSource
     }
@@ -50,7 +52,7 @@ class JpaConfiguration(
     fun entityManagerFactoryBean(
             dataSource: DataSource,
             vendorAdapter: JpaVendorAdapter
-    ): LocalContainerEntityManagerFactoryBean? {
+    ): LocalContainerEntityManagerFactoryBean {
         val jpaProperties = HashMap<String, Any>()
         jpaProperties["hibernate.hbm2ddl.auto"] = properties.hbm2ddlAuto
         jpaProperties["hibernate.dialect"] = properties.dialect
@@ -59,11 +61,12 @@ class JpaConfiguration(
         jpaProperties["hibernate.temp.use_jdbc_metadata_defaults"] = "false"
         jpaProperties["hibernate.hbm2dll.create_namespaces"] = "true"
         jpaProperties["hibernate.physical_naming_strategy"] = properties.namingStrategy
+        for (property in properties.hibernateAdditionalProperties) jpaProperties[property.key] = property.value
         val entityManagerFactoryBean = LocalContainerEntityManagerFactoryBean()
         entityManagerFactoryBean.dataSource = dataSource
         entityManagerFactoryBean.jpaVendorAdapter = vendorAdapter
         entityManagerFactoryBean.setPackagesToScan(MODEL_PATH)
-        entityManagerFactoryBean.setJpaPropertyMap(jpaProperties)
+        entityManagerFactoryBean.jpaPropertyMap = jpaProperties
         entityManagerFactoryBean.afterPropertiesSet()
         logger.debug(jpaProperties)
         return entityManagerFactoryBean

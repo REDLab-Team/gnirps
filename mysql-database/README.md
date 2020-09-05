@@ -78,4 +78,4 @@ code objects and is often used during the development times.
 and performant JDBC DataSource implementation).
 
 If other properties become important in the future, they can be added in both the configuration file and the class 
-loading them: `com.gnirps.database.postgresql.config.JpaConfiguration`.
+loading them: `com.gnirps.database.postgresql.com.gnirps.keycloak.config.JpaConfiguration`.
