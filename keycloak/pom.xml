@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>keycloak</name>
+    <artifactId>keycloak</artifactId>
+    <packaging>jar</packaging>
+    <version>1.2.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>com.gnirps</groupId>
+        <artifactId>gnirps-origin</artifactId>
+        <version>1.2.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <!-- versions -->
+        <gnirps-core.version>1.2.0-SNAPSHOT</gnirps-core.version>
+        <gnirps-swagger.version>1.2.0-SNAPSHOT</gnirps-swagger.version>
+    </properties>
+
+    <dependencies>
+        <!-- gnirps -->
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>core</artifactId>
+            <version>${gnirps-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>swagger</artifactId>
+            <version>${gnirps-swagger.version}</version>
+        </dependency>
+
+        <!-- logging -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- keycloak -->
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.keycloak.bom</groupId>
+                <artifactId>keycloak-adapter-bom</artifactId>
+                <version>${keycloak-adapter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+
+        <plugins>
+            <!-- kotlin maven -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
