@@ -2,8 +2,10 @@ spring:
     profiles: current
 
 gnirps:
-    commons:
-        service-name: template-gnirps
+    core:
+        mail-sending:
+            service-name: template-gnirps
+            recipients: ${gnirps.swagger.maintainer.email}
     swagger:
         api:
             title: "Kotlin template for REST APIs"

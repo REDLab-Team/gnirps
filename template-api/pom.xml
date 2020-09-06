@@ -34,6 +34,11 @@
             <artifactId>swagger</artifactId>
             <version>${gnirps.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>utils</artifactId>
+            <version>${gnirps.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
