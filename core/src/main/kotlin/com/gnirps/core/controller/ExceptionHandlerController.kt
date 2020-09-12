@@ -26,6 +26,7 @@ import java.util.concurrent.TimeoutException
 import javax.persistence.EntityExistsException
 import javax.persistence.EntityNotFoundException
 import javax.validation.ConstraintViolationException
+import javax.ws.rs.BadRequestException
 
 // TODO consider defining specific ExceptionHandler methods for all cases
 //      to allow overriding through other ControllerAdvices with higher
@@ -93,7 +94,8 @@ class ExceptionHandlerController(
             is EntityExistsException -> HttpStatus.SEE_OTHER
             is ConstraintViolationException,
             is MissingServletRequestParameterException,
-            is MethodArgumentNotValidException -> HttpStatus.BAD_REQUEST
+            is MethodArgumentNotValidException,
+            is BadRequestException -> HttpStatus.BAD_REQUEST
             is ClientProtocolException -> HttpStatus.BAD_GATEWAY
             is ResourceAccessException -> HttpStatus.BAD_GATEWAY
             is AccessDeniedException -> HttpStatus.FORBIDDEN

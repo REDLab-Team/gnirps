@@ -34,4 +34,7 @@ class CoreRestTemplateCustomizer(
             return execution.execute(request, body)
         }
     }
+
+    @Bean
+    fun restTemplate(): RestTemplate = RestTemplateBuilder().build()
 }

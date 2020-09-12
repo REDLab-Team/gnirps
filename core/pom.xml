@@ -104,6 +104,12 @@
                 <artifactId>kotlin-maven-plugin</artifactId>
             </plugin>
 
+            <!-- source and javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
             <!-- springboot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
