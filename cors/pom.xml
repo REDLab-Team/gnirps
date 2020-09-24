@@ -1,0 +1,81 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>cors</name>
+    <artifactId>cors</artifactId>
+    <packaging>jar</packaging>
+    <version>1.2.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>com.gnirps</groupId>
+        <artifactId>gnirps-origin</artifactId>
+        <version>1.2.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <!-- docker image settings -->
+        <docker.image.prefix>pittinic</docker.image.prefix>
+        <docker.image.name>gnirps</docker.image.name>
+        <docker.image.tag>cors</docker.image.tag>
+
+        <!-- versions -->
+        <gnirps.version>1.2.0-SNAPSHOT</gnirps.version>
+    </properties>
+
+    <dependencies>
+        <!-- gnirps -->
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>core</artifactId>
+            <version>${gnirps.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- define some build variables -->
+        <finalName>${api-jar-name}</finalName>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <!-- set up and use the following plugins -->
+        <plugins>
+            <!-- kotlin maven -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- source and javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
+            <!-- springboot -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- main class used as springboot entry point -->
+                    <mainClass>com.gnirps.core.SpringBootEntryPoint</mainClass>
+                    <!-- make the project usable as a dependency in another project -->
+                    <classifier>exec</classifier>
+                </configuration>
+            </plugin>
+
+            <!-- docker image -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

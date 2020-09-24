@@ -32,10 +32,9 @@ class CatService(
     }
 
     fun deleteById(id: UUID): Cat {
-        val cat = catRepository.findById(id)
-        if (!cat.isPresent) throw EntityNotFoundException("cat $id not found")
+        val cat = catRepository.findById(id).orElseThrow { throw EntityNotFoundException("cat $id not found") }
         catRepository.deleteById(id)
-        return cat.get()
+        return cat
     }
 
     fun randomCat(): Cat {

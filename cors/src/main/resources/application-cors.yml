@@ -1,0 +1,15 @@
+gnirps:
+    cors:
+        access-control-allow-origin: ""
+        access-control-allow-credentials: "false"
+        access-control-allow-methods: "POST, PUT, GET, OPTIONS, DELETE"
+        access-control-allow-headers: "Authorization, Content-Type"
+        access-control-max-age: "3600"
+
+spring:
+    autoconfigure:
+        exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+
+logging:
+    level:
+        org.eclipse.jetty: ${LOG_LEVEL_JETTY:WARN}
