@@ -49,8 +49,6 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src/main/kotlin</sourceDirectory>
-
         <plugins>
             <!-- kotlin maven -->
             <plugin>
