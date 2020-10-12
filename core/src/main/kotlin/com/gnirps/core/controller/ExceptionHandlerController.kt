@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.client.ResourceAccessException
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 import org.springframework.web.util.NestedServletException
+import java.io.FileNotFoundException
 import java.lang.reflect.UndeclaredThrowableException
 import java.util.concurrent.TimeoutException
 import javax.persistence.EntityExistsException
@@ -90,7 +91,8 @@ class ExceptionHandlerController(
         return when (exception) {
             is HttpException -> exception.status
             is JpaObjectRetrievalFailureException,
-            is EntityNotFoundException -> HttpStatus.NOT_FOUND
+            is EntityNotFoundException,
+            is FileNotFoundException -> HttpStatus.NOT_FOUND
             is EntityExistsException -> HttpStatus.SEE_OTHER
             is ConstraintViolationException,
             is MissingServletRequestParameterException,
