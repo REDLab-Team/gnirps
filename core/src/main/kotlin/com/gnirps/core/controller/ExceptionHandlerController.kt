@@ -7,6 +7,7 @@ import com.gnirps.logging.service.Logger
 import org.apache.http.client.ClientProtocolException
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
