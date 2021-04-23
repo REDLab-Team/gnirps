@@ -102,6 +102,7 @@ class ExceptionHandlerController(
             is ResourceAccessException -> HttpStatus.BAD_GATEWAY
             is AccessDeniedException -> HttpStatus.FORBIDDEN
             is TimeoutException -> HttpStatus.REQUEST_TIMEOUT
+            is DataIntegrityViolationException -> HttpStatus.BAD_REQUEST
             is BashException ->
                 when (exception.exitCode) {
                     124 -> HttpStatus.GATEWAY_TIMEOUT
