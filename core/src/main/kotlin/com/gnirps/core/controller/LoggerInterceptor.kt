@@ -3,6 +3,7 @@ package com.gnirps.core.controller
 import com.gnirps.logging.service.Logger
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter
+import org.springframework.web.util.ContentCachingRequestWrapper
 import java.io.BufferedReader
 import java.util.*
 import javax.servlet.http.HttpServletRequest
@@ -22,19 +23,23 @@ class LoggerInterceptor(private val logger: Logger) : HandlerInterceptorAdapter(
     }
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        val inputString: String = request.inputStream.bufferedReader().use(BufferedReader::readText).let {
-            if (it.isNotEmpty()) ",\ninputString: {$it}" else ""
-        }
-        logger.debug(
-                "{" +
-                "\nmethod: ${request.method}" +
-                ",\nURI: ${request.requestURI}${getParameters(request)}" +
-                ",\nrequestClass: {${request.javaClass.simpleName}" +
-                ",\ncontentType: {${request.contentType}}" +
-                ",\ncontentSize: {${request.contentLength}}" +
-                inputString +
-                "\n}"
-        )
+//        val requestCacheWrapperObject: HttpServletRequest = ContentCachingRequestWrapper(request)
+//        requestCacheWrapperObject.parameterMap
+//        val inputString: String = requestCacheWrapperObject
+//                .inputStream
+//                .bufferedReader()
+//                .use(BufferedReader::readText)
+//                .let { if (it.isNotEmpty()) ",\ninputString: {$it}" else "" }
+//        logger.debug(
+//                "{" +
+//                "\nmethod: ${request.method}" +
+//                ",\nURI: ${request.requestURI}${getParameters(request)}" +
+//                ",\nrequestClass: {${request.javaClass.simpleName}" +
+//                ",\ncontentType: {${request.contentType}}" +
+//                ",\ncontentSize: {${request.contentLength}}" +
+//                inputString +
+//                "\n}"
+//        )
         return true
     }
 
