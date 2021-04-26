@@ -65,7 +65,7 @@
 
         <!-- commons -->
         <commons-csv.version>1.8</commons-csv.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
 
         <!-- docker -->
         <docker.image.prefix>pittinic</docker.image.prefix>
