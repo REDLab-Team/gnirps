@@ -7,6 +7,7 @@ import com.gnirps.logging.service.Logger
 import org.apache.http.client.ClientProtocolException
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -102,6 +103,7 @@ class ExceptionHandlerController(
             is ResourceAccessException -> HttpStatus.BAD_GATEWAY
             is AccessDeniedException -> HttpStatus.FORBIDDEN
             is TimeoutException -> HttpStatus.REQUEST_TIMEOUT
+            is DataIntegrityViolationException -> HttpStatus.BAD_REQUEST
             is BashException ->
                 when (exception.exitCode) {
                     124 -> HttpStatus.GATEWAY_TIMEOUT
