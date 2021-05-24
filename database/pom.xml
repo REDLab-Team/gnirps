@@ -7,18 +7,18 @@
     <name>database</name>
     <artifactId>database</artifactId>
     <packaging>jar</packaging>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>0.1.0-RC</version>
 
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>1.2.0-SNAPSHOT</version>
+        <version>0.1.0-RC</version>
         <relativePath/>
     </parent>
 
     <properties>
         <!-- versions -->
-        <gnirps-core.version>1.2.0-SNAPSHOT</gnirps-core.version>
+        <gnirps-core.version>0.1.0-RC</gnirps-core.version>
     </properties>
 
     <dependencies>
