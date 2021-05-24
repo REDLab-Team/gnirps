@@ -7,6 +7,7 @@ import com.gnirps.logging.service.Logger
 import org.apache.http.client.ClientProtocolException
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -21,11 +22,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.client.ResourceAccessException
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 import org.springframework.web.util.NestedServletException
+import java.io.FileNotFoundException
 import java.lang.reflect.UndeclaredThrowableException
 import java.util.concurrent.TimeoutException
 import javax.persistence.EntityExistsException
 import javax.persistence.EntityNotFoundException
 import javax.validation.ConstraintViolationException
+import javax.ws.rs.BadRequestException
 
 // TODO consider defining specific ExceptionHandler methods for all cases
 //      to allow overriding through other ControllerAdvices with higher
@@ -89,15 +92,18 @@ class ExceptionHandlerController(
         return when (exception) {
             is HttpException -> exception.status
             is JpaObjectRetrievalFailureException,
-            is EntityNotFoundException -> HttpStatus.NOT_FOUND
+            is EntityNotFoundException,
+            is FileNotFoundException -> HttpStatus.NOT_FOUND
             is EntityExistsException -> HttpStatus.SEE_OTHER
             is ConstraintViolationException,
             is MissingServletRequestParameterException,
-            is MethodArgumentNotValidException -> HttpStatus.BAD_REQUEST
+            is MethodArgumentNotValidException,
+            is BadRequestException -> HttpStatus.BAD_REQUEST
             is ClientProtocolException -> HttpStatus.BAD_GATEWAY
             is ResourceAccessException -> HttpStatus.BAD_GATEWAY
             is AccessDeniedException -> HttpStatus.FORBIDDEN
             is TimeoutException -> HttpStatus.REQUEST_TIMEOUT
+            is DataIntegrityViolationException -> HttpStatus.BAD_REQUEST
             is BashException ->
                 when (exception.exitCode) {
                     124 -> HttpStatus.GATEWAY_TIMEOUT

@@ -12,6 +12,7 @@ gnirps:
             name: "REDLab"
             email: "nicolas.pittion@redlab.io"
             website: "https://www.redlab.io/"
+        root-redirect: "swagger-ui.html"
     core:
         mail-sender:
             service-name: cat-api

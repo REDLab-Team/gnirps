@@ -7,12 +7,12 @@
     <name>logging</name>
     <artifactId>logging</artifactId>
     <packaging>jar</packaging>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>0.1.0-RC</version>
 
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>1.2.0-SNAPSHOT</version>
+        <version>0.1.0-RC</version>
         <relativePath/>
     </parent>
 

@@ -1,17 +1,16 @@
-package com.gnirps.core.config
+package com.gnirps.cors.config
 
-import com.gnirps.core.config.properties.CorsProperties
-import org.springframework.core.Ordered
-import org.springframework.core.annotation.Order
+import com.gnirps.cors.config.properties.CorsProperties
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan
+import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
-import org.springframework.stereotype.Component
 import java.io.IOException
 import javax.servlet.*
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Configuration
+@ConfigurationPropertiesScan(basePackageClasses = [CorsProperties::class])
 class CorsFilterConfiguration(private val corsProperties: CorsProperties) : Filter {
     @Throws(IOException::class, ServletException::class)
     override fun doFilter(
@@ -24,6 +23,7 @@ class CorsFilterConfiguration(private val corsProperties: CorsProperties) : Filt
         response.setHeader("Access-Control-Allow-Methods", corsProperties.accessControlAllowMethods)
         response.setHeader("Access-Control-Allow-Headers", corsProperties.accessControlAllowHeaders)
         response.setHeader("Access-Control-Max-Age", corsProperties.accessControlMaxAge)
+        response.setHeader("Access-Control-Allow-Credentials", corsProperties.accessControlAllowCredentials)
         if (HttpMethod.OPTIONS.name.equals((servletRequest as HttpServletRequest).method, ignoreCase = true)) {
             response.status = HttpServletResponse.SC_OK
         } else {

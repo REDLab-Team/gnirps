@@ -7,19 +7,19 @@
     <name>cat-api</name>
     <artifactId>cat-api</artifactId>
     <packaging>jar</packaging>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>0.1.0-RC</version>
 
     <!-- inherit from our parent project -->
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>1.2.0-SNAPSHOT</version>
+        <version>0.1.0-RC</version>
         <relativePath/>
     </parent>
 
     <properties>
         <!-- versions -->
-        <gnirps.version>1.2.0-SNAPSHOT</gnirps.version>
+        <gnirps.version>0.1.0-RC</gnirps.version>
 
         <!-- docker -->
         <docker.image.prefix>pittinic</docker.image.prefix>
@@ -52,9 +52,11 @@
     </dependencies>
 
     <build>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+<!--        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>-->
+
         <!-- define some build variables -->
         <finalName>${api-jar-name}</finalName>
-        <sourceDirectory>src/main/kotlin</sourceDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -63,6 +65,12 @@
 
         <!-- set up and use the following plugins -->
         <plugins>
+            <!-- kotlin maven -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+
             <!-- springboot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -76,12 +84,6 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-            </plugin>
-
-            <!-- kotlin maven -->
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

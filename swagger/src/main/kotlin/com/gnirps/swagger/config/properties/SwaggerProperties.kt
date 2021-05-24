@@ -11,7 +11,8 @@ import javax.validation.constraints.Email
 data class SwaggerProperties(
         val basePackage: String,
         val api: Api,
-        val maintainer: Maintainer
+        val maintainer: Maintainer,
+        val rootRedirect: String
 ) {
     data class Api(
             val title: String,

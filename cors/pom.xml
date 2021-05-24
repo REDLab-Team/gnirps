@@ -4,12 +4,11 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>cat-api-keycloak</name>
-    <artifactId>cat-api-keycloak</artifactId>
+    <name>cors</name>
+    <artifactId>cors</artifactId>
     <packaging>jar</packaging>
     <version>0.1.0-RC</version>
 
-    <!-- inherit from our parent project -->
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
@@ -18,43 +17,24 @@
     </parent>
 
     <properties>
-        <!-- versions -->
-        <gnirps.version>0.1.0-RC</gnirps.version>
-
-        <!-- docker -->
+        <!-- docker image settings -->
         <docker.image.prefix>pittinic</docker.image.prefix>
         <docker.image.name>gnirps</docker.image.name>
-        <docker.image.tag>cat-api-keycloak</docker.image.tag>
+        <docker.image.tag>cors</docker.image.tag>
+
+        <!-- versions -->
+        <gnirps.version>0.1.0-RC</gnirps.version>
     </properties>
 
     <dependencies>
         <!-- gnirps -->
         <dependency>
             <groupId>com.gnirps</groupId>
-            <artifactId>swagger</artifactId>
-            <version>${gnirps.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.gnirps</groupId>
-            <artifactId>utils</artifactId>
-            <version>${gnirps.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.gnirps</groupId>
-            <artifactId>postgresql-database</artifactId>
-            <version>${gnirps.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.gnirps</groupId>
-            <artifactId>keycloak</artifactId>
-            <version>${gnirps.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.gnirps</groupId>
-            <artifactId>cat-commons</artifactId>
+            <artifactId>core</artifactId>
             <version>${gnirps.version}</version>
         </dependency>
     </dependencies>
+
     <build>
         <!-- define some build variables -->
         <finalName>${api-jar-name}</finalName>
@@ -67,12 +47,27 @@
 
         <!-- set up and use the following plugins -->
         <plugins>
+            <!-- kotlin maven -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- source and javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
             <!-- springboot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <!-- main class used as springboot entry point -->
                     <mainClass>com.gnirps.core.SpringBootEntryPoint</mainClass>
+                    <!-- make the project usable as a dependency in another project -->
+                    <classifier>exec</classifier>
                 </configuration>
             </plugin>
 
@@ -80,12 +75,6 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-            </plugin>
-
-            <!-- kotlin maven -->
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
