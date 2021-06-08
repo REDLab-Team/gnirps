@@ -1,6 +1,6 @@
 gnirps:
     database:
-        url: jdbc:mysql://${DATABASE_URL}/${DATABASE_NAME}?createDatabaseIfNotExist=true&useUnicode=true&character_set_server=utf8mb4
+        url: jdbc:mysql://${DATABASE_URL}/${DATABASE_NAME}?createDatabaseIfNotExist=true&useUnicode=true&character_set_server=utf8mb4&databaseTerm=SCHEMA
         driver-class-name: 'com.mysql.cj.jdbc.Driver'
         dialect: 'org.hibernate.dialect.MySQL8Dialect'
         hibernate-additional-properties:
