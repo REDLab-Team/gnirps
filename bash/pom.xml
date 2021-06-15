@@ -18,7 +18,7 @@
 
     <properties>
         <!-- versions -->
-        <gnirps-logging.version>0.1.0-RC</gnirps-logging.version>
+        <gnirps-logging.version>${project.parent.version}</gnirps-logging.version>
     </properties>
 
     <dependencies>

@@ -19,9 +19,9 @@
 
     <properties>
         <!-- versions -->
-        <gnirps-swagger.version>0.1.0-RC</gnirps-swagger.version>
-        <gnirps-utils.version>0.1.0-RC</gnirps-utils.version>
-        <gnirps-postgresql.version>0.1.0-RC</gnirps-postgresql.version>
+        <gnirps-swagger.version>${project.parent.version}</gnirps-swagger.version>
+        <gnirps-utils.version>${project.parent.version}</gnirps-utils.version>
+        <gnirps-postgresql.version>${project.parent.version}</gnirps-postgresql.version>
 
         <!-- docker -->
         <docker.image.prefix>pittinic</docker.image.prefix>

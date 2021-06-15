@@ -23,7 +23,7 @@
         <docker.image.tag>core</docker.image.tag>
 
         <!-- versions -->
-        <gnirps.version>0.1.0-RC</gnirps.version>
+        <gnirps.version>${project.parent.version}</gnirps.version>
     </properties>
 
     <dependencies>

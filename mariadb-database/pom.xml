@@ -18,7 +18,7 @@
 
     <properties>
         <!-- versions -->
-        <gnirps-database.version>0.1.0-RC</gnirps-database.version>
+        <gnirps-database.version>${project.parent.version}</gnirps-database.version>
     </properties>
 
     <dependencies>
