@@ -8,7 +8,7 @@
     <groupId>com.gnirps</groupId>
     <artifactId>gnirps-origin</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.0-RC</version>
+    <version>0.1.1-RC</version>
 
     <modules>
         <module>../utils</module>
@@ -725,6 +725,13 @@
                             </resource>
                         </resources>
                     </configuration>
+                </plugin>
+
+                <!-- manage the versions of artifacts in a project's POM -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.8.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>

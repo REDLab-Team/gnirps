@@ -31,10 +31,11 @@ This project can be seen as a framework, bringing together and expanding several
     3. [With Docker alone (local sources)](#with-docker-alone-local-sources)
     4. [With Docker-Compose (local or remote sources)](#with-docker--compose-local-or-remote-sources)
 4. [Standard project's (layered) architecture](#standard-projects-layered-architecture)
-5. [Nexus Repository](#nexus-repository)
+5. [Versioning](#versioning)
+6. [Nexus Repository](#nexus-repository)
     1. [Deployment](#deployment)
     2. [Nexus usage](#nexus-usage)
-6. [License](#license)
+7. [License](#license)
 
 ## Features
 
@@ -190,6 +191,15 @@ API through Maven or Docker.
     ├── pom.xml ......................................... dependencies, building and deployment management
     │
     └── README.md ....................................... if you're reading this, you should know what it is...
+
+## Versioning
+
+Use [versions:set](http://www.mojohaus.org/versions-maven-plugin/set-mojo.html) from the [versions-maven plugin](http://www.mojohaus.org/versions-maven-plugin/) to set the project version:
+
+Example:
+```
+mvn versions:set -DnewVersion=0.1.1-RC -DgenerateBackupPoms=false
+```
 
 ## Nexus Repository
 

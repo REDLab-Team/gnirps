@@ -12,13 +12,13 @@
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>0.1.0-RC</version>
+        <version>0.1.1-RC</version>
         <relativePath/>
     </parent>
 
     <properties>
         <!-- versions -->
-        <gnirps-database.version>0.1.0-RC</gnirps-database.version>
+        <gnirps-database.version>${project.parent.version}</gnirps-database.version>
     </properties>
 
     <dependencies>
