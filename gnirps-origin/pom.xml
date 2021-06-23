@@ -85,7 +85,7 @@
         <jaxb-core.version>2.3.0.1</jaxb-core.version>
 
         <!-- jetty version-->
-        <jetty.version>9.4.31.v20200723</jetty.version>
+        <jetty.version>9.4.41.v20210516</jetty.version>
 
         <!-- jjwt version -->
         <jjwt.version>0.9.1</jjwt.version>
