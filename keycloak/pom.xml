@@ -7,19 +7,19 @@
     <name>keycloak</name>
     <artifactId>keycloak</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.0-RC</version>
+    <version>0.1.1-RC</version>
 
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>0.1.0-RC</version>
+        <version>0.1.1-RC</version>
         <relativePath/>
     </parent>
 
     <properties>
         <!-- versions -->
-        <gnirps-core.version>0.1.0-RC</gnirps-core.version>
-        <gnirps-swagger.version>0.1.0-RC</gnirps-swagger.version>
+        <gnirps-core.version>${project.parent.version}</gnirps-core.version>
+        <gnirps-swagger.version>${project.parent.version}</gnirps-swagger.version>
     </properties>
 
     <dependencies>
