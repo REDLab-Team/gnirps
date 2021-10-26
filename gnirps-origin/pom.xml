@@ -64,6 +64,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
+        <kotlin-maven-plugin.version>1.6.0-RC</kotlin-maven-plugin.version>
 
         <!-- acme4j -->
         <acme4j.version>2.8</acme4j.version>
@@ -606,7 +607,7 @@
                 <plugin>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-maven-plugin</artifactId>
-                    <version>${kotlin.version}</version>
+                    <version>${kotlin-maven-plugin.version}</version>
                     <configuration>
                         <compilerPlugins>
                             <plugin>spring</plugin>
