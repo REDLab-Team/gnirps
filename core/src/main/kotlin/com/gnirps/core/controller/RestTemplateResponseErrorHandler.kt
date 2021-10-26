@@ -31,7 +31,7 @@ class RestTemplateResponseErrorHandler : ResponseErrorHandler {
 
     private fun formatMessage(response: ClientHttpResponse): String =
             "{" +
-                    "\"code\": ${response.statusCode}, " +
+                    "\"code\": ${response.statusCode.value()}, " +
                     "\"status\": \"${response.statusText}\", " +
                     "\"body\": \"" + response
                     .body
