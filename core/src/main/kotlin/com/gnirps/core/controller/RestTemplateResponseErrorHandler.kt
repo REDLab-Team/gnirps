@@ -33,10 +33,9 @@ class RestTemplateResponseErrorHandler : ResponseErrorHandler {
             "{" +
                     "\"code\": ${response.statusCode.value()}, " +
                     "\"status\": \"${response.statusText}\", " +
-                    "\"body\": \"" + response
+                    "\"body\": " + response
                     .body
                     .bufferedReader()
                     .use(BufferedReader::readText) +
-                    "\"" +
                     "}"
 }
