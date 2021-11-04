@@ -33,6 +33,11 @@
             <artifactId>logging</artifactId>
             <version>${gnirps.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>utils</artifactId>
+            <version>${gnirps.version}</version>
+        </dependency>
 
         <!-- docker -->
         <dependency>
