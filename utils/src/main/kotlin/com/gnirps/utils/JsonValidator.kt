@@ -1,16 +1,24 @@
 package com.gnirps.utils
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import java.io.IOException
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 
-class JsonValidator {
-    fun String.isValidJson(): Boolean {
-        return try {
-            val mapper = ObjectMapper()
-            mapper.readTree(this)
-            true
-        } catch (e: IOException) {
-            false
-        }
+fun String.isJsonObject(): Boolean =
+    try {
+        JSONObject(this)
+        true
+    } catch (je: JSONException) {
+        false
     }
-}
+
+fun String.isJsonArray(): Boolean =
+    try {
+        JSONArray(this)
+        true
+    } catch (je: JSONException) {
+        false
+    }
+
+fun String.isValidJson(): Boolean =
+    this.isJsonObject() || this.isJsonArray()
