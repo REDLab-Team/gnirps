@@ -1,18 +1,24 @@
 package com.gnirps.utils
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import java.io.IOException
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 
-/**
- * Whether a string is a valid JSON or not
- * @return [Boolean]
- */
-fun String.isValidJson(): Boolean {
-    return try {
-        val mapper = ObjectMapper()
-        mapper.readTree(this)
+fun String.isJsonObject(): Boolean =
+    try {
+        JSONObject(this)
         true
-    } catch (e: IOException) {
+    } catch (je: JSONException) {
         false
     }
-}
+
+fun String.isJsonArray(): Boolean =
+    try {
+        JSONArray(this)
+        true
+    } catch (je: JSONException) {
+        false
+    }
+
+fun String.isValidJson(): Boolean =
+    this.isJsonObject() || this.isJsonArray()
