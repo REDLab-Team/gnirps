@@ -7,12 +7,12 @@
     <name>core</name>
     <artifactId>core</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.1-RC</version>
+    <version>0.1.2-RC</version>
 
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>0.1.1-RC</version>
+        <version>0.1.2-RC</version>
         <relativePath/>
     </parent>
 
@@ -31,6 +31,11 @@
         <dependency>
             <groupId>com.gnirps</groupId>
             <artifactId>logging</artifactId>
+            <version>${gnirps.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>utils</artifactId>
             <version>${gnirps.version}</version>
         </dependency>
 

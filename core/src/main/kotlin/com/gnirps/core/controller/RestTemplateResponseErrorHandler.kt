@@ -1,6 +1,7 @@
 package com.gnirps.core.controller
 
 import com.gnirps.logging.exceptions.HttpException
+import com.gnirps.utils.isValidJson
 import org.springframework.http.HttpStatus.Series
 import org.springframework.http.client.ClientHttpResponse
 import org.springframework.stereotype.Component
@@ -11,7 +12,7 @@ import java.io.BufferedReader
 class RestTemplateResponseErrorHandler : ResponseErrorHandler {
     override fun hasError(httpResponse: ClientHttpResponse): Boolean {
         return httpResponse.statusCode.series() === Series.CLIENT_ERROR ||
-                httpResponse.statusCode.series() === Series.SERVER_ERROR
+            httpResponse.statusCode.series() === Series.SERVER_ERROR
     }
 
     override fun handleError(response: ClientHttpResponse) {
@@ -19,9 +20,9 @@ class RestTemplateResponseErrorHandler : ResponseErrorHandler {
             when (statusCodeSeries) {
                 Series.CLIENT_ERROR, Series.SERVER_ERROR -> {
                     throw HttpException(
-                            statusCodeSeries,
-                            response.statusCode,
-                            formatMessage(response)
+                        statusCodeSeries,
+                        response.statusCode,
+                        formatMessage(response)
                     )
                 }
                 else -> return
@@ -29,14 +30,21 @@ class RestTemplateResponseErrorHandler : ResponseErrorHandler {
         }
     }
 
-    private fun formatMessage(response: ClientHttpResponse): String =
-            "{" +
-                    "\"code\": ${response.statusCode}, " +
-                    "\"status\": \"${response.statusText}\", " +
-                    "\"body\": \"" + response
-                    .body
-                    .bufferedReader()
-                    .use(BufferedReader::readText) +
-                    "\"" +
-                    "}"
+    private fun formatMessage(response: ClientHttpResponse): String {
+        var body = response
+            .body
+            .bufferedReader()
+            .use(BufferedReader::readText)
+
+        // Surround with double quotes if the body is not a valid JSON
+        if (!body.isValidJson()) {
+            body = "\"$body\""
+        }
+
+        return "{" +
+            "\"code\": ${response.statusCode.value()}, " +
+            "\"status\": \"${response.statusText}\", " +
+            "\"body\": $body" +
+            "}"
+    }
 }
