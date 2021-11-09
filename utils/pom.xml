@@ -26,11 +26,10 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
-        <!-- Json -->
+        <!-- json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20180130</version>
         </dependency>
 
         <!-- spring-boot -->
