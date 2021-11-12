@@ -94,3 +94,22 @@ val executionTime: Long = measureTimeMillis {
     ...
 }
 ```
+
+## Error handling
+TODO introduce subject
+
+### Principles
+TODO describe process
+
+### Mail notifications
+TODO mention the need to either:
+- define the following environment variables
+  - GNIRPS.CORE.MAIL-SENDER.HOST
+  - GNIRPS.CORE.MAIL-SENDER.USERNAME
+  - GNIRPS.CORE.MAIL-SENDER.PASSWORD
+  - GNIRPS.CORE.MAIL-SENDER.RECIPIENTS
+- or overwrite the following properties in application.yml
+  - gnirps.core.mail-sender.host
+  - gnirps.core.mail-sender.username
+  - gnirps.core.mail-sender.password
+  - gnirps.core.mail-sender.recipients
