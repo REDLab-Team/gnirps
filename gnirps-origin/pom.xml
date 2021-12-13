@@ -99,6 +99,7 @@
 
         <!-- logging -->
         <logback.version>1.2.3</logback.version>
+        <log4j2.version>2.15.0</log4j2.version>
 
         <!-- persistence versions -->
         <mariadb.version>2.6.2</mariadb.version>
@@ -407,6 +408,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-log4j2</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
