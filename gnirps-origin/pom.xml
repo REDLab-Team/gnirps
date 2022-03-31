@@ -107,7 +107,7 @@
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
 
         <!-- spring versions -->
-        <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
+        <spring-boot.version>2.5.12</spring-boot.version>
         <spring-boot-security.version>2.3.0.RELEASE</spring-boot-security.version>
         <spring.version>5.2.7.RELEASE</spring.version>
         <spring-security.version>5.3.3.RELEASE</spring-security.version>
