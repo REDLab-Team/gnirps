@@ -38,7 +38,7 @@ class SwaggerConfiguration(val swaggerProperties: SwaggerProperties) {
         return Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(swaggerProperties.basePackage))
-                .paths(PathSelectors.any())
+                .paths(PathSelectors.ant("/"))
                 .build()
                 .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo())
@@ -48,7 +48,7 @@ class SwaggerConfiguration(val swaggerProperties: SwaggerProperties) {
 
     fun apiInfo(): ApiInfo {
         return ApiInfo(
-                swaggerProperties.api.title,
+                "coucouc",
                 swaggerProperties.api.description,
                 swaggerProperties.api.version,
                 swaggerProperties.api.termsOfService,
