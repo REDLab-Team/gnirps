@@ -1,6 +1,7 @@
 package com.gnirps.swagger.config
 
 import com.gnirps.swagger.config.properties.SwaggerProperties
+import com.google.common.base.Predicates
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -38,7 +39,9 @@ class SwaggerConfiguration(val swaggerProperties: SwaggerProperties) {
         return Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(swaggerProperties.basePackage))
-                .paths(PathSelectors.ant("/"))
+                .paths(Predicates.or(
+                    swaggerProperties.api.allowedPaths.map { PathSelectors.ant(it) }
+                ))
                 .build()
                 .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo())
@@ -48,7 +51,7 @@ class SwaggerConfiguration(val swaggerProperties: SwaggerProperties) {
 
     fun apiInfo(): ApiInfo {
         return ApiInfo(
-                "coucouc",
+                swaggerProperties.api.title,
                 swaggerProperties.api.description,
                 swaggerProperties.api.version,
                 swaggerProperties.api.termsOfService,

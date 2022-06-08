@@ -8,6 +8,8 @@ gnirps:
             license: ${SWAGGER_LICENSE:License:MIT}
             license-url: ${SWAGGER_LICENSE_URL:https://matias.ma/nsfw/}
             terms-of-service: ${SWAGGER_TITLE:https://matias.ma/nsfw/}
+            allowed-paths:
+              - ${SWAGGER_ALLOWED_PATHS:/**}
         maintainer:
             name: "REDLab"
             email: "nicolas.pittion@redlab.io"
