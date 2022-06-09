@@ -32,10 +32,13 @@ This project can be seen as a framework, bringing together and expanding several
     4. [With Docker-Compose (local or remote sources)](#with-docker--compose-local-or-remote-sources)
 4. [Standard project's (layered) architecture](#standard-projects-layered-architecture)
 5. [Versioning](#versioning)
-6. [Nexus Repository](#nexus-repository)
+6. [Apply modification on Gnirps](#apply-modification-on-gnirps)
+   1. [Setup on Gnirps](#setup-on-gnirps)
+   2. [Use the new version in your local project](#use-the-new-version-in-your-local-project)
+7. [Nexus Repository](#nexus-repository)
     1. [Deployment](#deployment)
     2. [Nexus usage](#nexus-usage)
-7. [License](#license)
+8. [License](#license)
 
 ## Features
 
@@ -199,6 +202,39 @@ Use [versions:set](http://www.mojohaus.org/versions-maven-plugin/set-mojo.html) 
 Example:
 ```
 mvn versions:set -DnewVersion=0.1.1-RC -DgenerateBackupPoms=false
+```
+## Apply modification on Gnirps
+The following steps will allow you to make changes and integrate them into the project using Gnirps.
+
+### Setup on Gnirps
+- First, you need to set up a [new version](#versioning) of Gnirps.
+- Make your modification.
+- Install the main package in your local repository with the following command:
+```
+mvn clean install -N
+```
+- Install all the sub package in your local repository with the following command:
+```
+mvn clean install
+```
+- Create a distributable format 
+```
+mvn package
+```
+- Make sure you have, in your `~/.m2/repository/com/gnirps` folder, the `<<NEW_GNIRPS_VERSION>>-RC` folder on each submodule folder.
+
+### Use the new version in your local project
+- Specify the new Gnirps version in your `pom.xml` of your local project.
+- In intellij, you need to reload all maven project then use the following command:
+```
+mvn clean install
+```
+**_NOTE:_**  If you have some trouble with maven trying to find the newest version online and not in your `.m2` folder, comment the following line in your pom.xml:
+```
+<repository>
+<id>gnirps</id>
+<url>{host-address}:9000/repository/gnirps/</url>
+</repository>
 ```
 
 ## Nexus Repository
