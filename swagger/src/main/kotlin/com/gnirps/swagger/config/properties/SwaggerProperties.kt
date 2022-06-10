@@ -21,7 +21,7 @@ data class SwaggerProperties(
             val license: String,
             val licenseUrl: String,
             val termsOfService: String,
-            val allowedPaths: Array<String>,
+            val allowedPaths: Array<String>
             )
 
     data class Maintainer(
