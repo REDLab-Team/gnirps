@@ -6,14 +6,11 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
-import springfox.documentation.service.ApiInfo
-import springfox.documentation.service.Contact
-import springfox.documentation.service.SecurityScheme
+import springfox.documentation.service.*
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spi.service.contexts.SecurityContext
 import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
-import java.util.*
 
 
 @Configuration("SwaggerConfiguration")
@@ -26,8 +23,29 @@ class SwaggerConfiguration(val swaggerProperties: SwaggerProperties) {
     }
 
     @Bean
-    fun securityContext(): List<SecurityContext> {
-        return emptyList()
+    fun securityContext(): SecurityContext? {
+        return SecurityContext.builder().securityReferences(defaultAuth())
+            .forPaths(PathSelectors.any()).build()
+    }
+
+    @Bean
+    fun defaultAuth(): List<SecurityReference?>? {
+        val authorizationScope = AuthorizationScope(
+            "global", "accessEverything"
+        )
+        val authorizationScopes = arrayOfNulls<AuthorizationScope>(1)
+        authorizationScopes[0] = authorizationScope
+        return listOf(
+            SecurityReference(
+                "Bearer",
+                authorizationScopes
+            )
+        )
+    }
+
+    @Bean
+    fun apiKey(): ApiKey? {
+        return ApiKey("Bearer", "Authorization", "header")
     }
 
     @Bean
@@ -42,8 +60,8 @@ class SwaggerConfiguration(val swaggerProperties: SwaggerProperties) {
                 .build()
                 .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo())
-                .securitySchemes(securitySchemes)
-                .securityContexts(securityContexts)
+                .securitySchemes(listOf(apiKey()))
+                .securityContexts(listOf(securityContext()))
     }
 
     fun apiInfo(): ApiInfo {
