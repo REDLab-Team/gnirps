@@ -40,7 +40,7 @@ class SwaggerConfiguration(val swaggerProperties: SwaggerProperties) {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(swaggerProperties.basePackage))
                 .paths(Predicates.or(
-                    swaggerProperties.api.allowedPaths.map { PathSelectors.ant(it) }
+                    swaggerProperties.api.exposedEndpoints.map { PathSelectors.ant(it) }
                 ))
                 .build()
                 .useDefaultResponseMessages(false)

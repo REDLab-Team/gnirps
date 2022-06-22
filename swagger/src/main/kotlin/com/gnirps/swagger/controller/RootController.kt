@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.servlet.ModelAndView
 import org.springframework.web.servlet.View
+import springfox.documentation.annotations.ApiIgnore
 import javax.servlet.http.HttpServletRequest
 
 @Api(
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest
 )
 @Controller
 @RequestMapping(RootController.ROOT_PATH)
+@ApiIgnore
 class RootController(
         private val swaggerProperties: SwaggerProperties
 ) {
