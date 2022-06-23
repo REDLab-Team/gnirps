@@ -22,7 +22,7 @@ data class SwaggerProperties(
             val licenseUrl: String,
             val termsOfService: String,
             val exposedEndpoints: Array<String>
-            )
+        )
 
     data class Maintainer(
             val name: String,
