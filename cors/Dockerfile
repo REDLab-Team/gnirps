@@ -1,5 +1,4 @@
-# use a mminimalist image as root
-FROM openjdk:15-jdk-alpine
+FROM eclipse-temurin:16-jdk
 
 # copy script to load docker-secrets as environment variables and project archive
 ADD src/main/resources/load_docker-secrets_as_env-var.sh load_secrets.sh

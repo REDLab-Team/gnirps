@@ -1,5 +1,8 @@
 #!/bin/bash
 
+MAVEN_HOME_LOCAL="${MAVEN_HOME_LOCAL:-$HOME/.m2}"
+MAVEN_HOME_DOCKER="${MAVEN_HOME_DOCKER:-/root/.m2}"
+
 source bin/util/toolbox.sh
 
 build_image() {
@@ -19,9 +22,16 @@ remove_image() {
 }
 
 main() {
+  cp ./bin/docker/Dockerfile . &&
   build_image &&
-    docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -e "ARGS=$*" tmp:build &&
+    docker run \
+      --rm \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      -v $MAVEN_HOME_LOCAL/repository:$MAVEN_HOME_DOCKER/repository \
+      -e "ARGS=$*" \
+      tmp:build &&
     remove_image
+  rm Dockerfile 2>/dev/null
 }
 
 main "$@"
