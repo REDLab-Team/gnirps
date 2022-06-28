@@ -7,13 +7,13 @@
     <name>cat-api-keycloak</name>
     <artifactId>cat-api-keycloak</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.3-RC</version>
+    <version>0.1.4-RC</version>
 
     <!-- inherit from our parent project -->
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>0.1.3-RC</version>
+        <version>0.1.4-RC</version>
         <relativePath/>
     </parent>
 
