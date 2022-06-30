@@ -6,4 +6,4 @@ RUN chmod +x load_secrets.sh
 ADD target/api.jar app.jar
 
 # deploy project
-CMD ["/bin/sh", "-c", ". load_secrets.sh && java -jar /app.jar"]
+CMD ["/bin/bash", "-c", ". load_secrets.sh && java -jar /app.jar"]
