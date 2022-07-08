@@ -25,7 +25,7 @@ find_docker() {
 deploy_root() {
   error_message="parent package failed to build."
   success_message="parent package built and deployed."
-  cmd="mvn clean deploy $1-N"
+  cmd="cd $1 && mvn clean deploy -N $2"
   INFO "deploy non-recursively the parent project on maven" &&
     eval_command -f "$error_message" -s "$success_message" "$cmd"
 }
@@ -73,13 +73,13 @@ build() {
       key="$1"
       case $key in
       -U)
-        update="-U "
+        update="-U"
         ;;
       --push)
         push="-p"
         ;;
-      gnirps | root | parent)
-        deploy_root "$update"
+      gnirps-origin | root | parent)
+        deploy_root gnirps-origin "$update"
         ;;
       -p | --package)
         var_name="packages"
