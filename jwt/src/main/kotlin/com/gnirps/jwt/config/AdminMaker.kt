@@ -9,6 +9,7 @@ import com.gnirps.logging.service.Logger
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.DependsOn
+import org.springframework.security.crypto.password.PasswordEncoder
 import java.util.*
 import javax.annotation.PostConstruct
 import kotlin.collections.HashSet
@@ -34,14 +35,14 @@ class AdminMaker(
             val admin = User(
                     id = UUID.randomUUID(),
                     email = jwtProperties.admin.email,
-                    password = WebSecurity.passwordEncoder.encode(jwtProperties.admin.password),
+                    password = SecurityConfiguration.passwordEncoder.encode(jwtProperties.admin.password),
                     roles = newRoles,
                     firstName = "",
                     lastName = "",
                     description = ""
             )
             userService.createUser(admin)
-            logger.info("user " + admin.toString() + " created")
+            logger.info("user $admin created")
         }
     }
 }

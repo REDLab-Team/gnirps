@@ -8,17 +8,29 @@ gnirps:
             license: ${SWAGGER_LICENSE:License:MIT}
             license-url: ${SWAGGER_LICENSE_URL:https://matias.ma/nsfw/}
             terms-of-service: ${SWAGGER_TERMS_OF_SERVICE:https://matias.ma/nsfw/}
-            exposed-endpoints: ${SWAGGER_EXPOSED_ENDPOINTS:/**}
+            exposed-endpoints: ${SWAGGER_EXPOSED_ENDPOINTS:/.*}
         maintainer:
             name: ${SWAGGER_MAINTAINER_NAME:REDLab}
             email: ${SWAGGER_MAINTAINER_EMAIL:nicolas.pittion@redlab.io}
             website: ${SWAGGER_MAINTAINER_WEBSITE:https://www.redlab.io/}
-        root-redirect: "swagger-ui.html"
+        root-redirect: ${springfox.documentation.swagger-ui.base-url}/swagger-ui/index.html
     core:
         mail-sender:
-            service-name: cat-api
             recipients: ${gnirps.swagger.maintainer.email}
 
 spring:
     autoconfigure:
         exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+    mvc:
+        pathmatch:
+            # the following property prevents a known bug in springfox 3.0.0 which does not support the new
+            # PathPattern-based PathMatchingStrategy for Spring MVC (the new default strategy from spring-boot 2.6.0)
+            # by reverting to the previous default strategy
+            # TODO remove when replacing springfox with springdoc-openapi further down the road
+            #      https://springdoc.org/#migrating-from-springfox
+            matching-strategy: ant-path-matcher
+
+springfox:
+    documentation:
+        swagger-ui:
+            base-url: "doc"

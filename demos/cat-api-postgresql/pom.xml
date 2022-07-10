@@ -4,8 +4,8 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>keycloak-api</name>
-    <artifactId>keycloak-api</artifactId>
+    <name>cat-api-postgresql</name>
+    <artifactId>cat-api-postgresql</artifactId>
     <packaging>jar</packaging>
     <version>0.2.0-RC</version>
 
@@ -19,14 +19,12 @@
 
     <properties>
         <!-- versions -->
-        <gnirps-swagger.version>${project.parent.version}</gnirps-swagger.version>
-        <gnirps-utils.version>${project.parent.version}</gnirps-utils.version>
-        <gnirps-postgresql.version>${project.parent.version}</gnirps-postgresql.version>
+        <gnirps.version>${project.parent.version}</gnirps.version>
 
         <!-- docker -->
         <docker.image.prefix>pittinic</docker.image.prefix>
         <docker.image.name>gnirps</docker.image.name>
-        <docker.image.tag>keycloak-api</docker.image.tag>
+        <docker.image.tag>cat-api-postgresql</docker.image.tag>
     </properties>
 
     <dependencies>
@@ -34,46 +32,30 @@
         <dependency>
             <groupId>com.gnirps</groupId>
             <artifactId>swagger</artifactId>
-            <version>${gnirps-swagger.version}</version>
+            <version>${gnirps.version}</version>
         </dependency>
         <dependency>
             <groupId>com.gnirps</groupId>
             <artifactId>utils</artifactId>
-            <version>${gnirps-utils.version}</version>
+            <version>${gnirps.version}</version>
         </dependency>
         <dependency>
             <groupId>com.gnirps</groupId>
             <artifactId>postgresql-database</artifactId>
-            <version>${gnirps-postgresql.version}</version>
-        </dependency>
-
-        <!-- Keycloak server -->
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-dependencies-server-all</artifactId>
-            <type>pom</type>
+            <version>${gnirps.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson2-provider</artifactId>
-        </dependency>
-
-        <!-- spring -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <groupId>com.gnirps</groupId>
+            <artifactId>cat-commons</artifactId>
+            <version>${gnirps.version}</version>
         </dependency>
     </dependencies>
 
     <build>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+
         <!-- define some build variables -->
         <finalName>${api-jar-name}</finalName>
-        <sourceDirectory>src/main/kotlin</sourceDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -82,12 +64,18 @@
 
         <!-- set up and use the following plugins -->
         <plugins>
+            <!-- kotlin maven -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+
             <!-- springboot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.gnirps.server.keycloak.SpringBootEntryPoint</mainClass>
+                    <mainClass>com.gnirps.core.SpringBootEntryPoint</mainClass>
                 </configuration>
             </plugin>
 
@@ -95,12 +83,6 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-            </plugin>
-
-            <!-- kotlin maven -->
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

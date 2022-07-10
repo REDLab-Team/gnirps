@@ -1,6 +1,6 @@
 package com.gnirps.jwt.mapper
 
-import com.gnirps.jwt.config.WebSecurity
+import com.gnirps.jwt.config.SecurityConfiguration
 import com.gnirps.jwt.dto.UserRequest
 import com.gnirps.jwt.dto.UserResponse
 import com.gnirps.jwt.model.User
@@ -14,7 +14,7 @@ class UserMapper {
         fun fromRequest(userRequest: UserRequest): User {
             return User(
                     id = UUID.randomUUID(),
-                    password = WebSecurity.passwordEncoder.encode(userRequest.password),
+                    password = SecurityConfiguration.passwordEncoder.encode(userRequest.password),
                     firstName = userRequest.firstName,
                     lastName = userRequest.lastName,
                     email = userRequest.email,
