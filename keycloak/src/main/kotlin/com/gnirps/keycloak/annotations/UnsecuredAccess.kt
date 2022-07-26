@@ -6,8 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
 @PreAuthorize("permitAll()")
-// TODO update message
-@RequiresOptIn("Experimental bro")
+@RequiresOptIn
 // Not functional yet:
 //      Keycloak is blocking unauthenticated access to any endpoint that has not
 //      been registered as open; hence, Spring Security annotations being only
