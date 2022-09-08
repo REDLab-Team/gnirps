@@ -102,7 +102,7 @@
 
         <!-- persistence versions -->
         <mariadb.version>2.6.2</mariadb.version>
-        <postgresql.version>42.2.5</postgresql.version>
+        <postgresql.version>42.4.1</postgresql.version>
         <spring-data-releasetrain.version>Hopper-SR10</spring-data-releasetrain.version>
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
 
