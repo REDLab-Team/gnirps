@@ -56,8 +56,8 @@
         <api-jar-name>api</api-jar-name>
 
         <!-- languages versions-->
-        <kotlin.version>1.7.10</kotlin.version>
-        <kotlin.coroutines.version>1.6.3</kotlin.coroutines.version>
+        <kotlin.version>1.7.20</kotlin.version>
+        <kotlin.coroutines.version>1.6.4</kotlin.coroutines.version>
         <java.version>11</java.version>
 
         <!-- maven -->
@@ -79,16 +79,16 @@
         <docker-maven-plugin.version>1.2.0</docker-maven-plugin.version>
 
         <!-- jackson and jaxb versions -->
-        <jackson.version>2.10.3</jackson.version>
+        <jackson.version>2.14.0-rc1</jackson.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <jaxb-impl.version>2.3.2</jaxb-impl.version>
         <jaxb-core.version>2.3.0.1</jaxb-core.version>
 
         <!-- json version -->
-        <json.version>20180130</json.version>
+        <json.version>20220924</json.version>
 
         <!-- jetty version-->
-        <jetty.version>9.4.48.v20220622</jetty.version>
+        <jetty.version>9.4.49.v20220914</jetty.version>
 
         <!-- jjwt version -->
         <jjwt.version>0.9.1</jjwt.version>
@@ -108,10 +108,10 @@
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
 
         <!-- spring versions -->
-        <spring-boot.version>2.7.1</spring-boot.version>
-        <spring-boot-security.version>2.7.1</spring-boot-security.version>
-        <spring.version>5.3.21</spring.version>
-        <spring-security.version>5.7.2</spring-security.version>
+        <spring-boot.version>2.7.4</spring-boot.version>
+        <spring-boot-security.version>2.7.4</spring-boot-security.version>
+        <spring.version>5.3.23</spring.version>
+        <spring-security.version>5.7.3</spring-security.version>
 
         <!-- swagger versions -->
         <springfox.boot.swagger.version>3.0.0</springfox.boot.swagger.version>
@@ -120,7 +120,7 @@
         <assertj.version>3.12.2</assertj.version>
         <junit-jupiter.version>5.7.0</junit-jupiter.version>
         <junit-platform.version>1.7.0</junit-platform.version>
-        <mockk.version>1.10.2</mockk.version>
+        <mockk.version>1.12.3</mockk.version>
     </properties>
 
     <!-- common dependencies for all children -->
