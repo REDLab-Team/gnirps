@@ -1,20 +1,20 @@
 package com.gnirps.jwt.config
 
+import io.swagger.v3.oas.models.security.SecurityScheme
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
-import springfox.documentation.service.ApiKey
-import springfox.documentation.service.SecurityScheme
-import java.util.*
 
 
 @Configuration
 class SwaggerConfigurationExtended {
     @Primary
     @Bean
-    fun securitySchemesExtended(): ArrayList<out SecurityScheme> {
-        val apiKeys: ArrayList<ApiKey> = ArrayList<ApiKey>()
-        apiKeys.add(ApiKey("Bearer", "Authorization", "header"))
-        return apiKeys
+    fun securitySchemesExtended(): Map<String, SecurityScheme> {
+        val securityScheme: SecurityScheme = SecurityScheme()
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("JWT")
+        return mapOf("Authorization" to securityScheme)
     }
 }
