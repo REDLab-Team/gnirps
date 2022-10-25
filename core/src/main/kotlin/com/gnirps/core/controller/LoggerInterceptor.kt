@@ -14,9 +14,9 @@ class LoggerInterceptor(private val logger: Logger) : HandlerInterceptor {
         // TODO Relocate to application.yml
         val filteredURI: List<String> = listOf(
                 "/oauth/check_token",
-                "/webjars/springfox-swagger-ui/",
+                "/webjars",
                 "/doc",
-                "/v2",
+                "/v3",
                 "/error",
                 "/csrf"
         )

@@ -21,14 +21,6 @@ gnirps:
 spring:
     autoconfigure:
         exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
-    mvc:
-        pathmatch:
-            # the following property prevents a known bug in springfox 3.0.0 which does not support the new
-            # PathPattern-based PathMatchingStrategy for Spring MVC (the new default strategy from spring-boot 2.6.0)
-            # by reverting to the previous default strategy
-            # TODO remove when replacing springfox with springdoc-openapi further down the road
-            #      https://springdoc.org/#migrating-from-springfox
-            matching-strategy: ant-path-matcher
 
 springfox:
     documentation:

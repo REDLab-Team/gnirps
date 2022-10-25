@@ -8,7 +8,7 @@ gnirps:
             unsecure-get: ""
             unsecure-put: ""
             unsecure-delete: ""
-        resources: /, /error, /csrf, /swagger**, /swagger-resources/**, /springfox**, /webjars/springfox-swagger-ui/**, /v2/api-docs**
+        resources: /, /error, /csrf, /swagger/**, /swagger-ui/**, /swagger-ui.html, /webjars/**, /swagger-resources/**, /configuration/**, /v3/api-docs/**
 
 keycloak:
     auth-server-url: "missing:keycloak.auth-server-url"
