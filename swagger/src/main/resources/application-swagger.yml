@@ -13,7 +13,7 @@ gnirps:
             name: ${SWAGGER_MAINTAINER_NAME:REDLab}
             email: ${SWAGGER_MAINTAINER_EMAIL:nicolas.pittion@redlab.io}
             website: ${SWAGGER_MAINTAINER_WEBSITE:https://www.redlab.io/}
-        root-redirect: ${springfox.documentation.swagger-ui.base-url}/swagger-ui/index.html
+        root-redirect: "swagger-ui.html"
     core:
         mail-sender:
             recipients: ${gnirps.swagger.maintainer.email}
@@ -21,8 +21,3 @@ gnirps:
 spring:
     autoconfigure:
         exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
-
-springfox:
-    documentation:
-        swagger-ui:
-            base-url: "doc"
