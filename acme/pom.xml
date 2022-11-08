@@ -26,6 +26,10 @@
     <dependencies>
         <!-- gnirps -->
         <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.gnirps</groupId>
             <artifactId>core</artifactId>
             <version>${gnirps-core.version}</version>
