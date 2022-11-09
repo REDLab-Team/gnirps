@@ -100,19 +100,19 @@ The error handling aimed at emailing the raised errors to follow them.
 
 ### Principles
 If an error occurred, the mailing configuration is checked and the mail is sent only with the folowing configuration : 
-* the mail sending is enabled : param gnirps.core.mail-sender.enable=true
-* all the hosts, user/password, and recipients are valid
+* the send mail feature is enabled: set param 'gnirps.core.mail-sender.enable=true' into 'application.yml'
+* hosts, credentials and recipients are valid
 
 ### Mail notifications
-The google SMTP is no longer available.
-We have to configure the mailing information. We have two way to do this :
-- define the following environment variables
-  - GNIRPS.CORE.MAIL-SENDER.HOST
-  - GNIRPS.CORE.MAIL-SENDER.USERNAME
-  - GNIRPS.CORE.MAIL-SENDER.PASSWORD
-  - GNIRPS.CORE.MAIL-SENDER.RECIPIENTS
-- or overwrite the following properties in application.yml
-  - gnirps.core.mail-sender.host
-  - gnirps.core.mail-sender.username
-  - gnirps.core.mail-sender.password
-  - gnirps.core.mail-sender.recipients
+The Google SMTP is no longer available.
+We have to configure the mailing information. We have two ways to do this :
+- define the following environment variables :
+  - 'GNIRPS.CORE.MAIL-SENDER.HOST'
+  - 'GNIRPS.CORE.MAIL-SENDER.USERNAME'
+  - 'GNIRPS.CORE.MAIL-SENDER.PASSWORD'
+  - 'GNIRPS.CORE.MAIL-SENDER.RECIPIENTS'
+- or overwrite the following properties in 'application.yml'
+  - 'gnirps.core.mail-sender.host'
+  - 'gnirps.core.mail-sender.username'
+  - 'gnirps.core.mail-sender.password'
+  - 'gnirps.core.mail-sender.recipients'
