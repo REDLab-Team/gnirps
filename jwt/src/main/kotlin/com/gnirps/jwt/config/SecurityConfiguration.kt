@@ -22,26 +22,16 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 /**
  * Implements a security layer on incoming http requests by determining the protected routes and filters to be applied.
- * TODO https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
  */
 @Configuration
 class SecurityConfiguration(
         private val jwtProperties: JWTProperties,
         private val userDetailsService: UserDetailsService,
         private val tokenManager: TokenManager,
-        private val authenticationManager: AuthenticationManager
+        private val authenticationManager: CustomAuthenticationManager
 ) {
     companion object {
         val passwordEncoder: PasswordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
-    }
-
-    @Bean
-    fun passwordEncoder(): PasswordEncoder = passwordEncoder
-
-    @Bean
-    @Throws(java.lang.Exception::class)
-    fun authenticationManager(builder: AuthenticationManagerBuilder, encoder: PasswordEncoder): AuthenticationManager {
-        return builder.userDetailsService(userDetailsService).passwordEncoder(encoder).and().build()
     }
 
     @Bean
