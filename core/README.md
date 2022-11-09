@@ -96,13 +96,16 @@ val executionTime: Long = measureTimeMillis {
 ```
 
 ## Error handling
-TODO introduce subject
+The error handling aimed at emailing the raised errors to follow them.
 
 ### Principles
-TODO describe process
+If an error occurred, the mailing configuration is checked and the mail is sent only with the folowing configuration : 
+* the mail sending is enabled : param gnirps.core.mail-sender.enable=true
+* all the hosts, user/password, and recipients are valid
 
 ### Mail notifications
-TODO mention the need to either:
+The google SMTP is no longer available.
+We have to configure the mailing information. We have two way to do this :
 - define the following environment variables
   - GNIRPS.CORE.MAIL-SENDER.HOST
   - GNIRPS.CORE.MAIL-SENDER.USERNAME
