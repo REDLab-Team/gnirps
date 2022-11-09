@@ -4,10 +4,6 @@ spring:
         enabled: false
 
 gnirps:
-    core:
-        mail-sender:
-            service-name: keycloak-server
-            recipients: ${gnirps.swagger.maintainer.email}
     swagger:
         api:
             title: "Keycloak-Server"
