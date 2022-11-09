@@ -76,7 +76,7 @@
         </dependency>
         <dependency>
             <groupId>com.spotify</groupId>
-            <artifactId>dockerfile-maven-plugin</artifactId>
+            <artifactId>docker-maven-plugin</artifactId>
         </dependency>
 
         <!-- jetty -->
@@ -113,6 +113,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
         </dependency>
     </dependencies>
 
