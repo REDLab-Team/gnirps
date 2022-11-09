@@ -116,4 +116,9 @@ class CatController(
         logger.info("cat $id removed", Logger.EventType.OPERATION)
         return CatMapper.toResponse(catService.deleteById(id))
     }
+
+    @GetMapping("/500")
+    fun throw500(): Nothing {
+        throw RuntimeException("this is fine")
+    }
 }
