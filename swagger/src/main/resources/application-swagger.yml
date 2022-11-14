@@ -16,6 +16,7 @@ gnirps:
         root-redirect: "swagger-ui.html"
     core:
         mail-sender:
+            service-name: cat-api
             recipients: ${gnirps.swagger.maintainer.email}
 
 spring:

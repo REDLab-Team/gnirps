@@ -41,7 +41,7 @@ class ExceptionHandlerController(
         private val javaMailSender: JavaMailSender,
         private val mailSenderProperties: MailSenderProperties
 ) : ResponseEntityExceptionHandler() {
-    private final val internalServerErrorMessage =
+    private val internalServerErrorMessage =
             "The maintainer has been notified of your error and shall intervene promptly. Hopefully. Maybe."
 
     @ExceptionHandler(Exception::class)
@@ -56,24 +56,24 @@ class ExceptionHandlerController(
         }
 
         val status: HttpStatus = getStatus(exception)
-        if (status.is5xxServerError) log.printCleanStack(exception)
-
         val message: String = when (status) {
             HttpStatus.INTERNAL_SERVER_ERROR -> internalServerErrorMessage
             else -> exception.localizedMessage
         }.lines().joinToString(" ")
 
-        notifyMaintainerByMail(exception, status)
+        if (status.is5xxServerError) {
+            log.printCleanStack(exception)
+            if(isValidAndEnabled(mailSenderProperties)) notifyMaintainerByMail(exception, status)
+        }
+
         return ResponseEntity(message, HttpHeaders(), status)
     }
 
     private fun notifyMaintainerByMail(exception: Throwable, status: HttpStatus) {
-        if (mailSenderProperties.recipients.isEmpty() || status.value() < 500) {
-            return
-        }
         try {
             SimpleMailMessage().let {
                 it.setTo(*mailSenderProperties.recipients.toTypedArray())
+                it.from = mailSenderProperties.username
                 it.subject = "[${mailSenderProperties.serviceName}]: $status"
                 it.text = "[${exception.javaClass.simpleName}] ${exception.localizedMessage}" +
                         "\n\n" + "_".repeat(25) + "\n\n" +
@@ -123,5 +123,20 @@ class ExceptionHandlerController(
             nestedMsg.isNotEmpty() -> nestedMsg
             else -> rawMsg
         }
+    }
+
+    private fun isValidAndEnabled(mailSenderProperties: MailSenderProperties): Boolean {
+        if (!mailSenderProperties.enable) {
+            return false
+        }
+        if (mailSenderProperties.host.isBlank() ||
+            mailSenderProperties.username.isBlank() ||
+            mailSenderProperties.password.isBlank() ||
+            mailSenderProperties.recipients.isEmpty()
+        ) {
+            log.error("invalid mail sender properties")
+            return false
+        }
+        return true
     }
 }
