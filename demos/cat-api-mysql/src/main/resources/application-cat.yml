@@ -1,7 +1,7 @@
-spring:
-    profiles: cat
-
 gnirps:
+    core:
+        mail-sender:
+            service-name: cat-api-mysql
     swagger:
         api:
             title: "Cats-API"
@@ -10,8 +10,3 @@ gnirps:
     database:
         hbm2ddl-auto: create
 
----
-
-spring:
-    profiles:
-        include: logging, core, swagger, utils, database, postgresql, cat

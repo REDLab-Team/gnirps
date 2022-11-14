@@ -1,0 +1,11 @@
+gnirps:
+    core:
+        mail-sending:
+            service-name: template-gnirps
+    swagger:
+        api:
+            title: "Kotlin template for REST APIs"
+            description: "An empty API generated using Gnirps's template for SpringBoot APIs."
+            version: 1.2.0-SNAPSHOT
+        maintainer:
+            email: "nicolas.pittion@redlab.io"

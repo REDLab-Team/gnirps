@@ -1,17 +1,3 @@
 spring:
-    profiles: cat
-
-gnirps:
-    swagger:
-        api:
-            title: "Cats-API"
-            description: "Just your average example of API using cats"
-            version: 1.2.0-SNAPSHOT
-    database:
-        hbm2ddl-auto: update
-
----
-
-spring:
     profiles:
         include: logging, core, swagger, jwt, utils, database, postgresql, cat

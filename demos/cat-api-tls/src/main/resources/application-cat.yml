@@ -1,0 +1,11 @@
+gnirps:
+    core:
+        mail-sender:
+            service-name: cat-api-tls
+    swagger:
+        api:
+            title: "Cats-API-TLS"
+            description: "Just your average example of API using cats"
+            version: 1.2.0-SNAPSHOT
+    database:
+        hbm2ddl-auto: update

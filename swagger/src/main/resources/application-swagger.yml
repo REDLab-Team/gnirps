@@ -1,4 +1,7 @@
 gnirps:
+    core:
+        mail-sender:
+            service-name: swagger
     swagger:
         base-package: com.gnirps
         api:
@@ -14,6 +17,10 @@ gnirps:
             email: ${SWAGGER_MAINTAINER_EMAIL:nicolas.pittion@redlab.io}
             website: ${SWAGGER_MAINTAINER_WEBSITE:https://www.redlab.io/}
         root-redirect: "swagger-ui.html"
+    core:
+        mail-sender:
+            service-name: cat-api
+            recipients: ${gnirps.swagger.maintainer.email}
 
 spring:
     autoconfigure:

@@ -19,7 +19,7 @@ services:
             - "cat-volume:/var/lib/postgresql/data"
 
     api:
-        image: pittinic/gnirps:cat-api
+        image: pittinic/gnirps:cat-api-postgresql
         ports:
             - 8080:8080
         environment:

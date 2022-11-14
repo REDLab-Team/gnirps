@@ -10,4 +10,4 @@ gnirps:
         admin:
             email: admin@b.c
             password: admin
-        resources: /error, /swagger**, /swagger-resources/**, /springfox**, /webjars/springfox-swagger-ui/**, /v2/api-docs**
+        resources: /error, /swagger/**, /swagger-ui/**, /swagger-ui.html, /webjars/**, /swagger-resources/**, /configuration/**, /v3/api-docs/**

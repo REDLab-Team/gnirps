@@ -7,12 +7,12 @@
     <name>acme</name>
     <artifactId>acme</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.4-RC</version>
+    <version>0.2.0-RC</version>
 
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>0.1.4-RC</version>
+        <version>0.2.0-RC</version>
         <relativePath/>
     </parent>
 
@@ -25,6 +25,10 @@
 
     <dependencies>
         <!-- gnirps -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.gnirps</groupId>
             <artifactId>core</artifactId>

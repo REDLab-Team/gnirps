@@ -107,12 +107,12 @@ If an error occurred, the mailing configuration is checked and the mail is sent 
 The Google SMTP is no longer available.
 We have to configure the mailing information. We have two ways to do this :
 - define the following environment variables :
-  - 'GNIRPS.CORE.MAIL-SENDER.HOST'
-  - 'GNIRPS.CORE.MAIL-SENDER.USERNAME'
-  - 'GNIRPS.CORE.MAIL-SENDER.PASSWORD'
-  - 'GNIRPS.CORE.MAIL-SENDER.RECIPIENTS'
+  - 'GNIRPS.CORE.MAIL.SENDER.HOST'
+  - 'GNIRPS.CORE.MAIL.SENDER.USERNAME'
+  - 'GNIRPS.CORE.MAIL.SENDER.PASSWORD'
+  - 'GNIRPS.CORE.MAIL.SENDER.RECIPIENTS'
 - or overwrite the following properties in 'application.yml'
-  - 'gnirps.core.mail-sender.host'
-  - 'gnirps.core.mail-sender.username'
-  - 'gnirps.core.mail-sender.password'
-  - 'gnirps.core.mail-sender.recipients'
+  - 'gnirps.core.mail.sender.host'
+  - 'gnirps.core.mail.sender.username'
+  - 'gnirps.core.mail.sender.password'
+  - 'gnirps.core.mail.sender.recipients'

@@ -7,12 +7,12 @@
     <name>keycloak</name>
     <artifactId>keycloak</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.4-RC</version>
+    <version>0.2.0-RC</version>
 
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>0.1.4-RC</version>
+        <version>0.2.0-RC</version>
         <relativePath/>
     </parent>
 
