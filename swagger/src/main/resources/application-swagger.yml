@@ -1,4 +1,7 @@
 gnirps:
+    core:
+        mail-sender:
+            service-name: swagger
     swagger:
         base-package: com.gnirps
         api:

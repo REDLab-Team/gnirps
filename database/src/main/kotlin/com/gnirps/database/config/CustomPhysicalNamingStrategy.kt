@@ -3,7 +3,6 @@ package com.gnirps.database.config
 import org.hibernate.boot.model.naming.Identifier
 import org.hibernate.boot.model.naming.PhysicalNamingStrategy
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment
-import java.util.Locale
 
 
 class CustomPhysicalNamingStrategy : PhysicalNamingStrategy {
@@ -48,7 +47,7 @@ class CustomPhysicalNamingStrategy : PhysicalNamingStrategy {
         val newName = identifier
             .text
             .replace(regex, replacement)
-            .lowercase(Locale.getDefault())
+            .lowercase()
         return Identifier.toIdentifier(newName)
     }
 }

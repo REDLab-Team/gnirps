@@ -3,6 +3,9 @@ spring:
         enabled: false
 
 gnirps:
+    core:
+        mail-sender:
+            service-name: keycloak-server
     swagger:
         api:
             title: "Keycloak-Server"

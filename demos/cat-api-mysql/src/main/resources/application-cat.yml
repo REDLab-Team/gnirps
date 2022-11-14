@@ -1,4 +1,7 @@
 gnirps:
+    core:
+        mail-sender:
+            service-name: cat-api-mysql
     swagger:
         api:
             title: "Cats-API"
