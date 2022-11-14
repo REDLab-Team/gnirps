@@ -65,8 +65,12 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
+        <maven-shared-utils.version>3.3.4</maven-shared-utils.version>
         <!-- acme4j -->
         <acme4j.version>2.11</acme4j.version>
+
+        <!-- bcprov-jdk15on -->
+        <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
 
         <!-- commons -->
         <commons-compress.version>1.22</commons-compress.version>
@@ -78,6 +82,9 @@
         <docker.image.name>gnirps</docker.image.name>
         <docker.image.tag>missing</docker.image.tag>
         <docker-maven-plugin.version>1.2.2</docker-maven-plugin.version>
+
+        <!-- guava -->
+        <guava.version>31.1-jre</guava.version>
 
         <!-- jackson and jaxb versions -->
         <jackson.version>2.14.0-rc1</jackson.version>
@@ -102,11 +109,17 @@
         <!-- logging -->
         <logback.version>1.2.3</logback.version>
 
+        <!-- plexus-archiver -->
+        <plexus-archiver.version>4.5.0</plexus-archiver.version>
+
         <!-- persistence versions -->
         <mariadb.version>2.6.2</mariadb.version>
         <postgresql.version>42.5.0</postgresql.version>
         <spring-data-releasetrain.version>Hopper-SR10</spring-data-releasetrain.version>
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+
+        <!-- snakeyaml -->
+        <snakeyaml.version>1.33</snakeyaml.version>
 
         <!-- spring versions -->
         <spring-boot.version>2.7.5</spring-boot.version>
@@ -180,14 +193,15 @@
                 <version>${acme4j.version}</version>
             </dependency>
 
-            <!-- bcprov-jdk15on -->
+            <!-- bcprov-jdk15on for keycloak and docker-maven -->
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-jdk15on</artifactId>
-                <version>1.70</version>
+                <version>${bcprov-jdk15on.version}</version>
             </dependency>
 
             <!-- commons -->
+           <!-- commons-compress needed in apache-poi -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
@@ -198,6 +212,7 @@
                 <artifactId>commons-csv</artifactId>
                 <version>${commons-csv.version}</version>
             </dependency>
+            <!-- commons-compress needed in apache-poi -->
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
@@ -212,11 +227,11 @@
                 <version>${docker-maven-plugin.version}</version>
             </dependency>
 
-            <!--guava-->
+            <!-- guava for docker-maven-plugin -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>31.1-jre</version>
+                <version>${guava.version}</version>
             </dependency>
 
             <!-- jackson (required by spring-boot) -->
@@ -334,18 +349,18 @@
                 <version>${mariadb.version}</version>
             </dependency>
 
-            <!-- maven-shared-utils -->
+            <!-- maven-shared-utils for docker-maven-plugin -->
             <dependency>
                 <groupId>org.apache.maven.shared</groupId>
                 <artifactId>maven-shared-utils</artifactId>
-                <version>3.3.4</version>
+                <version>${maven-shared-utils.version}</version>
             </dependency>
 
-            <!-- plexus-archiver -->
+            <!-- plexus-archiver for docker-maven-plugin -->
             <dependency>
                 <groupId>org.codehaus.plexus</groupId>
                 <artifactId>plexus-archiver</artifactId>
-                <version>4.5.0</version>
+                <version>${plexus-archiver.version}</version>
             </dependency>
 
             <!-- postgresql -->
@@ -408,6 +423,7 @@
                 <artifactId>spring-security-core</artifactId>
                 <version>${spring-security.version}</version>
             </dependency>
+            <!-- spring-security-web for spring-boot-starter-security -->
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-web</artifactId>
@@ -547,11 +563,11 @@
                 </exclusions>
             </dependency>
 
-            <!--skakeyaml-->
+            <!-- skakeyaml for spring-boot-starter -->
             <dependency>
                 <groupId>org.yaml</groupId>
                 <artifactId>snakeyaml</artifactId>
-                <version>1.33</version>
+                <version>${snakeyaml.version}</version>
             </dependency>
 
             <!-- swagger -->

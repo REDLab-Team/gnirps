@@ -60,9 +60,9 @@ class KeycloakConfigurerAdapter(
     }
 
     /**
-     * Spring-security déconseille d'utiliser le WebSecurity.ignoring pour échapper la sécurité sur certains URL, car
-     * cela ne les fait pas passer dans Spring-security. Il vaut mieux utiliser HttpSecurity.anyMatcher().permitAll()
-     * qui est un laissez-passer a posteriori et donc passe quand même dans les Spring-security
+     * Spring-security not recommended to use WebSecurity.ignoring() to ignore some URL, because that prevents
+     * Spring-security to analyse these URLs. It is recommended to use HttpSecurity.anyMatcher().permitAll() that
+     * analyse the given URLS but lets them pass anyway.
      */
 
     /**
