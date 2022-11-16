@@ -78,7 +78,7 @@
         <docker-maven-plugin.version>1.2.0</docker-maven-plugin.version>
 
         <!-- jackson and jaxb versions -->
-        <jackson.version>2.10.3</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <jaxb-impl.version>2.3.2</jaxb-impl.version>
         <jaxb-core.version>2.3.0.1</jaxb-core.version>
