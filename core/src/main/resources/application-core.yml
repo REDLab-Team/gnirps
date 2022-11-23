@@ -11,7 +11,7 @@ gnirps:
             host: ${GNIRPS.CORE.MAIL.SENDER.HOST}
             username: ${GNIRPS.CORE.MAIL.SENDER.USERNAME}
             password: ${GNIRPS.CORE.MAIL.SENDER.PASSWORD}
-            recipients: ${GNIRPS.CORE.MAIL.SENDER.RECIPIENTS:nicolas.pittion@redlab.io}
+            recipients: ${GNIRPS.CORE.MAIL.SENDER.RECIPIENTS:}
             transport:
                 protocol: smtp
             smtp:
