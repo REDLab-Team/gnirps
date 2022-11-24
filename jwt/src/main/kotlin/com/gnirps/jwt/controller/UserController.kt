@@ -8,8 +8,8 @@ import com.gnirps.jwt.mapper.UserMapper
 import com.gnirps.jwt.model.User
 import com.gnirps.jwt.service.UserService
 import com.gnirps.logging.service.Logger
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.Authorization
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
@@ -28,7 +28,7 @@ class UserController(
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     @PreAuthorize("hasRole('" + SecurityConstants.ADMIN + "')")
-    @ApiOperation(value = "Get all users.", authorizations = [Authorization(value = "Bearer")])
+    @Operation(summary = "Get all users.", security = [SecurityRequirement(name = "Bearer")])
     fun findAll(): List<UserResponse>? {
         return userService.findAll().map { UserMapper.toResponse(it) }
     }
@@ -37,7 +37,7 @@ class UserController(
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @PreAuthorize("hasRole('" + SecurityConstants.ADMIN + "')")
-    @ApiOperation(value = "Create a new user.", authorizations = [Authorization(value = "Bearer")])
+    @Operation(summary = "Create a new user.", security = [SecurityRequirement(name = "Bearer")])
     fun create(@RequestBody userRequest: UserRequest): UserResponse {
         val user: User = userService.createUser(UserMapper.fromRequest(userRequest))
         logger.info("$user created")
@@ -48,7 +48,7 @@ class UserController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = ["/{id}"])
     @PreAuthorize("hasRole('" + SecurityConstants.ADMIN + "')")
-    @ApiOperation(value = "Delete matching user.", authorizations = [Authorization(value = "Bearer")])
+    @Operation(summary = "Delete matching user.", security = [SecurityRequirement(name = "Bearer")])
     fun delete(@PathVariable id: String) {
         userService.deleteUser(UUID.fromString(id))
         logger.info("user $id deleted")

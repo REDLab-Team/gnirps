@@ -5,12 +5,13 @@ gnirps:
         time-zone:
             name: "Europe/Paris"
         mail-sender:
+            enable: false
             debug: false
             service-name: "missing-property:gnirps.core.mail-sender.service-name"
-            host: smtp.gmail.com
-            username: gnirps.noreply@gmail.com  # TODO remove from code
-            password: Gnirp$n0reply             # TODO remove from code
-            recipients:
+            host: ${GNIRPS.CORE.MAIL.SENDER.HOST}
+            username: ${GNIRPS.CORE.MAIL.SENDER.USERNAME}
+            password: ${GNIRPS.CORE.MAIL.SENDER.PASSWORD}
+            recipients: ${GNIRPS.CORE.MAIL.SENDER.RECIPIENTS:}
             transport:
                 protocol: smtp
             smtp:

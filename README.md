@@ -201,6 +201,18 @@ Example:
 mvn versions:set -DnewVersion=0.1.1-RC -DgenerateBackupPoms=false
 ```
 
+You can also use the utility script `bin/update-version.sh` as follows:
+
+```
+./bin/update-version.sh --from=A.B.C-RC --to=A.B.D-RC
+./bin/update-version.sh --from A.B.C-RC --to A.B.D-RC
+./bin/update-version.sh --from=A.B.C-RC --to=A.B.D-RC --rm
+./bin/update-version.sh --from A.B.C-RC --to A.B.D-RC --rm
+./bin/update-version.sh --rm
+```
+
+It will update each module's pom accordingly (both the module and its parent at once), and generate backup files (pom.xml.bak) which can be deleted with the `--rm` option.
+
 ## Nexus Repository
 
 A Nexus Repository shall be used to store and retrieve internal dependencies, as well as persist locally external 

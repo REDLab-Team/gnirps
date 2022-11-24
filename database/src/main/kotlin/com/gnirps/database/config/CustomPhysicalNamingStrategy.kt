@@ -45,9 +45,9 @@ class CustomPhysicalNamingStrategy : PhysicalNamingStrategy {
         val regex = "([a-z])([A-Z])"
         val replacement = "$1_$2"
         val newName = identifier
-                .text
-                .replace(regex, replacement)
-                .toLowerCase()
+            .text
+            .replace(regex, replacement)
+            .lowercase()
         return Identifier.toIdentifier(newName)
     }
 }

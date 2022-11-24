@@ -1,0 +1,89 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>cat-api-mysql</name>
+    <artifactId>cat-api-mysql</artifactId>
+    <packaging>jar</packaging>
+    <version>0.2.0-RC</version>
+
+    <!-- inherit from our parent project -->
+    <parent>
+        <groupId>com.gnirps</groupId>
+        <artifactId>gnirps-origin</artifactId>
+        <version>0.2.0-RC</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <!-- versions -->
+        <gnirps.version>${project.parent.version}</gnirps.version>
+
+        <!-- docker -->
+        <docker.image.prefix>pittinic</docker.image.prefix>
+        <docker.image.name>gnirps</docker.image.name>
+        <docker.image.tag>cat-api-mysql</docker.image.tag>
+    </properties>
+
+    <dependencies>
+        <!-- gnirps -->
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>swagger</artifactId>
+            <version>${gnirps.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>utils</artifactId>
+            <version>${gnirps.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>mysql-database</artifactId>
+            <version>${gnirps.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gnirps</groupId>
+            <artifactId>cat-commons</artifactId>
+            <version>${gnirps.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+
+        <!-- define some build variables -->
+        <finalName>${api-jar-name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <!-- set up and use the following plugins -->
+        <plugins>
+            <!-- kotlin maven -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- springboot -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.gnirps.core.SpringBootEntryPoint</mainClass>
+                </configuration>
+            </plugin>
+
+            <!-- docker image -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

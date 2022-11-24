@@ -18,7 +18,6 @@ import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.core.session.SessionRegistryImpl
@@ -61,40 +60,13 @@ class KeycloakConfigurerAdapter(
     }
 
     /**
-     * Ignore authentication for some urls at the "Spring Security" level
-     * @param web
+     * Spring-security not recommended to use WebSecurity.ignoring() to ignore some URL, because that prevents
+     * Spring-security to analyse these URLs. It is recommended to use HttpSecurity.anyMatcher().permitAll() that
+     * analyse the given URLS but lets them pass anyway.
      */
-    @Throws(Exception::class)
-    override fun configure(web: WebSecurity) {
-        web.ignoring().antMatchers(
-            HttpMethod.GET,
-            *keycloakProperties.resources.toTypedArray()
-        )
-
-        web.ignoring().antMatchers(
-            HttpMethod.GET,
-            *keycloakProperties.endpoints.unsecureGet.toTypedArray()
-        )
-
-        web.ignoring().antMatchers(
-            HttpMethod.POST,
-            *keycloakProperties.endpoints.unsecurePost.toTypedArray()
-        )
-
-        web.ignoring().antMatchers(
-            HttpMethod.PUT,
-            *keycloakProperties.endpoints.unsecurePut.toTypedArray()
-        )
-
-        web.ignoring().antMatchers(
-            HttpMethod.DELETE,
-            *keycloakProperties.endpoints.unsecureDelete.toTypedArray()
-        )
-    }
 
     /**
      * Ignore authentication for some urls at the "Keycloak" level
-     * @param web
      */
     @Bean
     @Throws(java.lang.Exception::class)
@@ -138,6 +110,11 @@ class KeycloakConfigurerAdapter(
             .and().csrf().disable()
             .authorizeRequests()
             .antMatchers(HttpMethod.OPTIONS).permitAll()
+            .antMatchers(*keycloakProperties.resources.toTypedArray()).permitAll()
+            .antMatchers(*keycloakProperties.endpoints.unsecureGet.toTypedArray()).permitAll()
+            .antMatchers(*keycloakProperties.endpoints.unsecurePost.toTypedArray()).permitAll()
+            .antMatchers(*keycloakProperties.endpoints.unsecurePut.toTypedArray()).permitAll()
+            .antMatchers(*keycloakProperties.endpoints.unsecureDelete.toTypedArray()).permitAll()
             .anyRequest().authenticated()
             .and().formLogin().failureHandler(authenticationFailureHandler)
     }

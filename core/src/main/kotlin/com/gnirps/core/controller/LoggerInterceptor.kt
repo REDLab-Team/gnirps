@@ -2,27 +2,28 @@ package com.gnirps.core.controller
 
 import com.gnirps.logging.service.Logger
 import org.springframework.stereotype.Component
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter
-import org.springframework.web.util.ContentCachingRequestWrapper
-import java.io.BufferedReader
+import org.springframework.web.servlet.HandlerInterceptor
 import java.util.*
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 
 @Component
-class LoggerInterceptor(private val logger: Logger) : HandlerInterceptorAdapter() {
+class LoggerInterceptor(private val logger: Logger) : HandlerInterceptor {
     companion object {
+        // TODO Relocate to application.yml
         val filteredURI: List<String> = listOf(
                 "/oauth/check_token",
-                "/webjars/springfox-swagger-ui/",
-                "/swagger",
+                "/webjars",
+                "/doc",
+                "/v3",
                 "/error",
                 "/csrf"
         )
     }
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
+        // TODO Choose a strategy and clean the mess
 //        val requestCacheWrapperObject: HttpServletRequest = ContentCachingRequestWrapper(request)
 //        requestCacheWrapperObject.parameterMap
 //        val inputString: String = requestCacheWrapperObject

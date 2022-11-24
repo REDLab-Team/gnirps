@@ -18,7 +18,7 @@ class MailSenderConfiguration(private val mailSenderProperties: MailSenderProper
 
         val props: Properties = mailSender.javaMailProperties
         props["mail.transport.protocol"] = mailSenderProperties.transport.protocol
-        if (mailSenderProperties.transport.protocol.equals("smtp")) {
+        if (mailSenderProperties.transport.protocol == "smtp") {
             props["mail.smtp.auth"] = mailSenderProperties.smtp.auth
             props["mail.smtp.starttls.enable"] = mailSenderProperties.smtp.startTls.enable
         }
