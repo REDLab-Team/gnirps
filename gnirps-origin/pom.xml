@@ -87,7 +87,7 @@
         <docker-maven-plugin.jgit.version>6.9.0.202403050737-r</docker-maven-plugin.jgit.version>
 
         <!-- guava -->
-        <guava.version>31.1-jre</guava.version>
+        <guava.version>32.0.0-android</guava.version>
 
         <!-- jackson and jaxb versions -->
         <jackson.version>2.14.0-rc1</jackson.version>
