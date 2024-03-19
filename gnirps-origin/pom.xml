@@ -73,7 +73,7 @@
         <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
 
         <!-- commons -->
-        <commons-compress.version>1.22</commons-compress.version>
+        <commons-compress.version>1.26.1</commons-compress.version>
         <commons-csv.version>1.8</commons-csv.version>
         <commons-io.version>2.11.0</commons-io.version>
 
@@ -201,7 +201,7 @@
             </dependency>
 
             <!-- commons -->
-           <!-- commons-compress needed in apache-poi -->
+            <!-- commons-compress needed in apache-poi -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
