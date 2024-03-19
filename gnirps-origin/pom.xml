@@ -113,7 +113,7 @@
         <logback.version>1.2.3</logback.version>
 
         <!-- plexus-archiver -->
-        <plexus-archiver.version>4.5.0</plexus-archiver.version>
+        <plexus-archiver.version>4.9.2</plexus-archiver.version>
 
         <!-- persistence versions -->
         <mariadb.version>2.6.2</mariadb.version>
