@@ -96,7 +96,7 @@
         <jaxb-core.version>2.3.0.1</jaxb-core.version>
 
         <!-- json version -->
-        <json.version>20220924</json.version>
+        <json.version>20231013</json.version>
 
         <!-- jetty version-->
         <jetty.version>9.4.49.v20220914</jetty.version>
