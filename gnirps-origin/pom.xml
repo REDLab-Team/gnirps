@@ -99,7 +99,7 @@
         <json.version>20231013</json.version>
 
         <!-- jetty version-->
-        <jetty.version>9.4.49.v20220914</jetty.version>
+        <jetty.version>9.4.54.v20240208</jetty.version>
 
         <!-- jjwt version -->
         <jjwt.version>0.9.1</jjwt.version>
