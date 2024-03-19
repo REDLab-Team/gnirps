@@ -82,6 +82,8 @@
         <docker.image.name>gnirps</docker.image.name>
         <docker.image.tag>missing</docker.image.tag>
         <docker-maven-plugin.version>1.2.2</docker-maven-plugin.version>
+        <docker-maven-plugin.maven-core.version>3.9.6</docker-maven-plugin.maven-core.version>
+        <docker-maven-plugin.maven-artifact.version>3.9.6</docker-maven-plugin.maven-artifact.version>
 
         <!-- guava -->
         <guava.version>31.1-jre</guava.version>
@@ -225,6 +227,16 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>${docker-maven-plugin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-core</artifactId>
+                <version>${docker-maven-plugin.maven-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-artifact</artifactId>
+                <version>${docker-maven-plugin.maven-artifact.version}</version>
             </dependency>
 
             <!-- guava for docker-maven-plugin -->
