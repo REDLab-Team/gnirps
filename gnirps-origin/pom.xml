@@ -8,7 +8,7 @@
     <groupId>com.gnirps</groupId>
     <artifactId>gnirps-origin</artifactId>
     <packaging>pom</packaging>
-    <version>0.2.0-RC</version>
+    <version>0.3.0-RC</version>
 
     <modules>
         <module>../utils</module>
@@ -73,18 +73,21 @@
         <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
 
         <!-- commons -->
-        <commons-compress.version>1.22</commons-compress.version>
+        <commons-compress.version>1.26.1</commons-compress.version>
         <commons-csv.version>1.8</commons-csv.version>
-        <commons-io.version>2.11.0</commons-io.version>
+        <commons-io.version>2.15.1</commons-io.version>
 
         <!-- docker -->
         <docker.image.prefix>pittinic</docker.image.prefix>
         <docker.image.name>gnirps</docker.image.name>
         <docker.image.tag>missing</docker.image.tag>
         <docker-maven-plugin.version>1.2.2</docker-maven-plugin.version>
+        <docker-maven-plugin.maven-core.version>3.9.6</docker-maven-plugin.maven-core.version>
+        <docker-maven-plugin.maven-artifact.version>3.9.6</docker-maven-plugin.maven-artifact.version>
+        <docker-maven-plugin.jgit.version>6.9.0.202403050737-r</docker-maven-plugin.jgit.version>
 
         <!-- guava -->
-        <guava.version>31.1-jre</guava.version>
+        <guava.version>32.0.0-android</guava.version>
 
         <!-- jackson and jaxb versions -->
         <jackson.version>2.14.0-rc1</jackson.version>
@@ -93,10 +96,10 @@
         <jaxb-core.version>2.3.0.1</jaxb-core.version>
 
         <!-- json version -->
-        <json.version>20220924</json.version>
+        <json.version>20231013</json.version>
 
         <!-- jetty version-->
-        <jetty.version>9.4.49.v20220914</jetty.version>
+        <jetty.version>9.4.54.v20240208</jetty.version>
 
         <!-- jjwt version -->
         <jjwt.version>0.9.1</jjwt.version>
@@ -110,7 +113,7 @@
         <logback.version>1.2.3</logback.version>
 
         <!-- plexus-archiver -->
-        <plexus-archiver.version>4.5.0</plexus-archiver.version>
+        <plexus-archiver.version>4.9.2</plexus-archiver.version>
 
         <!-- persistence versions -->
         <mariadb.version>2.6.2</mariadb.version>
@@ -201,7 +204,7 @@
             </dependency>
 
             <!-- commons -->
-           <!-- commons-compress needed in apache-poi -->
+            <!-- commons-compress needed in apache-poi -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
@@ -225,6 +228,21 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>${docker-maven-plugin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-core</artifactId>
+                <version>${docker-maven-plugin.maven-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-artifact</artifactId>
+                <version>${docker-maven-plugin.maven-artifact.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit</artifactId>
+                <version>${docker-maven-plugin.jgit.version}</version>
             </dependency>
 
             <!-- guava for docker-maven-plugin -->
