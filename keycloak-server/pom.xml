@@ -7,13 +7,13 @@
     <name>keycloak-api</name>
     <artifactId>keycloak-api</artifactId>
     <packaging>jar</packaging>
-    <version>0.2.0-RC</version>
+    <version>0.3.0-RC</version>
 
     <!-- inherit from our parent project -->
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>0.2.0-RC</version>
+        <version>0.3.0-RC</version>
         <relativePath/>
     </parent>
 
