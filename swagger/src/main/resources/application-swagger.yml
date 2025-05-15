@@ -17,6 +17,7 @@ gnirps:
             email: ${SWAGGER_MAINTAINER_EMAIL:nicolas.pittion@redlab.io}
             website: ${SWAGGER_MAINTAINER_WEBSITE:https://www.redlab.io/}
         root-redirect: "swagger-ui.html"
+        security-schemes: {}
 spring:
     autoconfigure:
         exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration

@@ -7,12 +7,12 @@
     <name>ssl-tls</name>
     <artifactId>ssl-tls</artifactId>
     <packaging>jar</packaging>
-    <version>0.3.0-RC</version>
+    <version>0.3.1-RC</version>
 
     <parent>
         <groupId>com.gnirps</groupId>
         <artifactId>gnirps-origin</artifactId>
-        <version>0.3.0-RC</version>
+        <version>0.3.1-RC</version>
         <relativePath/>
     </parent>
 
